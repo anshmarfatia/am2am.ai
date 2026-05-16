@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/anshm/.claude/**)",
+      "Read(//c/Users/anshm/.claude/plugins/**)",
+      "Read(//c/Users/anshm/.claude/skills/**)"
+    ]
+  }
+}

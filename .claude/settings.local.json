@@ -3,7 +3,9 @@
     "allow": [
       "Read(//c/Users/anshm/.claude/**)",
       "Read(//c/Users/anshm/.claude/plugins/**)",
-      "Read(//c/Users/anshm/.claude/skills/**)"
+      "Read(//c/Users/anshm/.claude/skills/**)",
+      "WebFetch(domain:www.ausdata.ai)",
+      "PowerShell(Copy-Item *)"
     ]
   }
 }

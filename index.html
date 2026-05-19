@@ -5,43 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>am2am.ai — AI agents that run your workflow</title>
 <meta name="description" content="am2am.ai builds AI agents that run your workflow. The first runs your projects from WhatsApp — updates written to your ERP, every action logged and reversible." />
+<meta name="theme-color" content="#FFF7ED" />
+<meta name="color-scheme" content="light" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://am2am.ai" />
 <meta property="og:title" content="am2am.ai — AI agents that run your workflow" />
 <meta property="og:description" content="The first agent runs your projects from inside WhatsApp. Updates written to your ERP, context kept across days, every action logged." />
 <meta property="og:image" content="https://am2am.ai/og-image.png" />
 <meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" href="logo-mark.png" type="image/png" />
-<link rel="apple-touch-icon" href="logo-mark.png" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <script>document.documentElement.className += ' js';</script>
-<script>
-  (function () {
-    try {
-      var t = localStorage.getItem('am2am-theme');
-      // Obsidian theme is the default — single dark surface.
-      document.documentElement.classList.add('dark');
-    } catch (e) { document.documentElement.classList.add('dark'); }
-  })();
-</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         colors: {
-          obsidian: '#050505',
-          surface: '#0a0a0a',
-          card: '#101010',
-          line: '#1e1e1e',
-          fg: '#f2f2f2',
-          muted: '#b8b8b8',
-          ghost: '#909090',
-          violet: { DEFAULT: '#4f46e5', light: '#818cf8' },
+          linen: '#FFF7ED',
+          cream: '#FFFBF5',
+          paper: '#FFFFFF',
+          ink: '#2A1505',
+          inksoft: '#5C3318',
+          muted: '#8C7A6B',
+          ghost: '#9CA3AF',
+          rust: '#C2410C',
+          line: '#EAE0D0',
+          sun: { light: '#FCD34D', DEFAULT: '#F97316', deep: '#DC2626' },
         },
         fontFamily: {
           sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
-          serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-          mono: ['"Space Mono"', '"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
         },
         maxWidth: { content: '1240px' },
       }
@@ -50,143 +43,215 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --obsidian: #050505;
-    --obsidian-surface: #0a0a0a;
-    --obsidian-card: #101010;
-    --border-line: #1e1e1e;
-    --gallery-fg: #f2f2f2;
-    --gallery-muted: #b8b8b8;
-    --gallery-ghost: #909090;
-    --violet-pure: #4f46e5;
-    --violet-light: #818cf8;
-    --nav-bg: rgba(12,12,14,0.72);
-    --nav-border: rgba(255,255,255,0.07);
-    --nav-shadow: 0 14px 44px rgba(0,0,0,0.6);
-    --fs-display: clamp(2.6rem, 5.4vw, 4.7rem);
-    --fs-h2: clamp(1.95rem, 3.4vw, 3rem);
-    --fs-h3: clamp(1.15rem, 1.7vw, 1.5rem);
-    --fs-body-lg: clamp(1.0625rem, 1.25vw, 1.2rem);
+    --ink: #2A1505;
+    --ink-soft: #5C3318;
+    --muted: #8C7A6B;
+    --tech-gray: #9CA3AF;
+    --linen: #FFF7ED;
+    --cream: #FFFBF5;
+    --paper: #FFFFFF;
+    --coal: #1A0B05;
+    --cream-warm: #FFEAD2;
+    --sun-light: #FCD34D;
+    --sun: #F97316;
+    --sun-deep: #DC2626;
+    --rust: #C2410C;
+    --line: #EAE0D0;
+    --rule: rgba(42,21,5,0.08);
+    --rule-strong: rgba(42,21,5,0.15);
+    --grad: linear-gradient(180deg, #FCD34D 0%, #F97316 50%, #DC2626 100%);
+    --nav-bg: rgba(255,251,245,0.82);
+    --nav-border: rgba(42,21,5,0.10);
+    --nav-shadow: 0 12px 36px -16px rgba(42,21,5,0.32);
+    --fs-display: clamp(2.6rem, 5.6vw, 4.6rem);
+    --fs-h2: clamp(1.9rem, 3.4vw, 2.9rem);
+    --fs-h3: clamp(1.15rem, 1.7vw, 1.45rem);
+    --fs-body-lg: clamp(1.05rem, 1.2vw, 1.18rem);
     --fs-label: 0.6875rem;
     --ease: cubic-bezier(.16, 1, .3, 1);
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --font-code: 'Space Mono', 'JetBrains Mono', ui-monospace, monospace;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
   }
 
   html { scroll-behavior: smooth; }
   body {
     font-family: var(--font-body);
-    background: var(--obsidian);
-    color: var(--gallery-fg);
+    background: var(--linen);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
-    letter-spacing: .005em;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.011em;
+    background-image:
+      radial-gradient(1100px 460px at 90% -8%, rgba(252,211,77,0.30), transparent 62%),
+      radial-gradient(820px 440px at -8% 104%, rgba(220,38,38,0.07), transparent 66%);
+    background-repeat: no-repeat;
   }
   section[id] { scroll-margin-top: 6.5rem; }
 
-  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(79,70,229,.4); border-radius: 9999px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(79,70,229,.7); }
+  ::-webkit-scrollbar-thumb { background: rgba(249,115,22,.45); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(249,115,22,.75); }
+
+  ::selection { background: rgba(249,115,22,.22); color: var(--ink); }
 
   a:focus-visible, button:focus-visible, summary:focus-visible {
-    outline: 1px solid var(--violet-light);
+    outline: 2px solid var(--sun);
     outline-offset: 3px;
+    border-radius: 2px;
   }
 
-  /* Mono label — per reference design system */
-  .label-mono {
-    font-family: var(--font-code);
+  /* ---- Brand type ---- */
+  .head {
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .sun-text {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Mono label */
+  .label {
+    font-family: var(--font-mono);
     text-transform: uppercase;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     font-size: var(--fs-label);
+    font-weight: 500;
   }
-  .font-serif { font-family: var(--font-serif); }
+  /* Section eyebrow — mono label with a sunrise tick */
+  .eyebrow {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: var(--fs-label);
+    font-weight: 500;
+    color: var(--rust);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 18px; height: 3px; border-radius: 2px;
+    background: var(--grad);
+    flex: 0 0 auto;
+  }
 
-  /* Faint film grain over the whole surface */
-  #grain {
-    position: fixed; inset: 0; z-index: 40; pointer-events: none;
-    opacity: 0.045;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  /* Wordmark — am2am.ai per brand spec */
+  .wordmark {
+    font-family: var(--font-body);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    white-space: nowrap;
+    display: inline-block;
   }
+  .wm-am { color: var(--ink); font-weight: 600; }
+  .wm-2  { font-weight: 700; }
+  .wm-ai { color: var(--tech-gray); font-weight: 300; }
 
   /* Floating nav pill */
   .nav-pill {
     display: flex; align-items: center; gap: 0.4rem;
     padding: 0.5rem 0.6rem;
-    border-radius: 4px;
+    border-radius: 6px;
     background: var(--nav-bg);
     border: 1px solid var(--nav-border);
-    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     box-shadow: var(--nav-shadow);
     transition: box-shadow .35s var(--ease);
   }
-  .nav-scrolled .nav-pill { box-shadow: 0 18px 52px rgba(0,0,0,.72); }
+  .nav-scrolled .nav-pill { box-shadow: 0 18px 48px -18px rgba(42,21,5,.42); }
   .nav-link {
-    font-family: var(--font-code);
-    font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--gallery-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500;
+    color: var(--muted);
     padding: 0.55rem 0.7rem;
     transition: color .25s var(--ease);
     white-space: nowrap;
   }
-  .nav-link:hover { color: var(--gallery-fg); }
+  .nav-link:hover { color: var(--ink); }
 
   /* Buttons */
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.7rem;
-    font-family: var(--font-code);
-    font-size: 0.72rem; letter-spacing: 0.13em; text-transform: uppercase;
-    padding: 0.85rem 1.25rem;
-    transition: border-color .4s var(--ease), box-shadow .4s var(--ease), color .3s var(--ease), background .3s var(--ease);
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.85rem 1.3rem;
+    border-radius: 4px;
+    transition: background .3s var(--ease), border-color .3s var(--ease), box-shadow .35s var(--ease), color .25s var(--ease), transform .25s var(--ease);
   }
   .btn-primary {
-    color: rgba(248,250,252,0.96);
-    border: 1px solid rgba(129,140,248,0.3);
-    background: linear-gradient(180deg, rgba(22,22,30,0.85) 0%, rgba(10,10,16,0.95) 100%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    color: var(--cream-warm);
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    box-shadow: 0 2px 6px -2px rgba(42,21,5,.30);
   }
   .btn-primary:hover {
-    border-color: rgba(129,140,248,0.65);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 0 26px rgba(79,70,229,0.28);
+    background: #3c2109;
+    box-shadow: 0 16px 32px -14px rgba(249,115,22,.6), 0 3px 8px -2px rgba(42,21,5,.25);
+    transform: translateY(-1px);
   }
   .btn-ghost {
-    color: var(--gallery-muted);
-    border: 1px solid var(--border-line);
-    background: rgba(14,14,18,0.5);
+    color: var(--ink-soft);
+    border: 1px solid var(--rule-strong);
+    background: var(--paper);
   }
-  .btn-ghost:hover { color: var(--gallery-fg); border-color: var(--gallery-ghost); }
+  .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
   .btn-sm { padding: 0.6rem 1rem; font-size: 0.66rem; }
 
-  /* Status dot — per reference */
+  /* Status dot */
   .status-ping {
     position: absolute; width: 9px; height: 9px; border-radius: 50%;
-    background: rgba(34,197,94,0.35);
+    background: rgba(249,115,22,0.38);
     animation: pingOnce 1.9s ease-out infinite;
   }
   @keyframes pingOnce { 70%, 100% { transform: scale(2.4); opacity: 0; } }
 
-  /* Scroll reveal — engages only with JS */
+  /* Scroll reveal */
   .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
   .js .reveal.in { opacity: 1; transform: none; }
   .js .reveal-d1 { transition-delay: .09s; }
   .js .reveal-d2 { transition-delay: .18s; }
   .js .reveal-d3 { transition-delay: .27s; }
 
-  /* Hairline divider */
-  .rule { height: 1px; background: var(--border-line); }
+  /* Hairline dividers */
+  .rule { height: 1px; background: var(--line); }
   .rule-glow {
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border-line) 18%, rgba(79,70,229,.5) 50%, var(--border-line) 82%, transparent);
+    background: linear-gradient(90deg, transparent, var(--line) 18%, rgba(249,115,22,.55) 50%, var(--line) 82%, transparent);
   }
+  .grad-bar { width: 34px; height: 3px; border-radius: 2px; background: var(--grad); }
+
+  /* Cards */
+  .card-grid { background: var(--line); }
+  .cell {
+    background: var(--paper);
+    transition: background .3s var(--ease);
+  }
+  .cell-hover:hover { background: #FFFCF7; }
+  .icon-chip {
+    background: linear-gradient(165deg, rgba(252,211,77,0.22), rgba(220,38,38,0.12));
+    color: var(--rust);
+    transition: box-shadow .5s var(--ease);
+  }
+  .group:hover .icon-chip { box-shadow: 0 0 0 1px rgba(249,115,22,.28), 0 10px 26px -10px rgba(249,115,22,.5); }
 
   /* Chat mockup */
   .chat-bubble { line-height: 1.55; }
   .typing-dots span {
     display: inline-block; width: 6px; height: 6px; margin: 0 1.5px;
-    background: var(--gallery-ghost); border-radius: 50%;
+    background: var(--muted); border-radius: 50%;
     animation: blink 1.3s infinite ease-in-out both;
   }
   .typing-dots span:nth-child(2) { animation-delay: .2s; }
@@ -200,51 +265,83 @@
 
   /* FAQ accordion */
   details {
-    border: 1px solid var(--border-line);
-    background: var(--obsidian-surface);
+    border: 1px solid var(--rule-strong);
+    background: var(--paper);
+    border-radius: 4px;
     transition: background .2s ease, border-color .2s ease;
   }
-  details[open] { background: var(--obsidian-card); border-color: rgba(79,70,229,.28); }
+  details[open] {
+    border-color: rgba(249,115,22,.34);
+    background: linear-gradient(180deg, rgba(249,115,22,.045), transparent 60%), var(--paper);
+  }
   details > summary { list-style: none; cursor: pointer; }
   details > summary::-webkit-details-marker { display: none; }
-  details[open] .faq-chevron { transform: rotate(180deg); }
-  .faq-chevron { transition: transform .2s ease; }
+  details[open] .faq-chevron { transform: rotate(180deg); color: var(--rust); }
+  .faq-chevron { transition: transform .2s ease, color .2s ease; }
 
   /* Underline-grow footer links */
   .ulink { position: relative; transition: color .4s var(--ease); }
   .ulink::after {
     content: ''; position: absolute; left: 0; bottom: -2px; height: 1px; width: 100%;
-    background: var(--gallery-fg); transform: scaleX(0); transform-origin: right;
+    background: var(--ink); transform: scaleX(0); transform-origin: right;
     transition: transform .45s var(--ease);
   }
-  .ulink:hover { color: var(--gallery-fg); }
+  .ulink:hover { color: var(--ink); }
   .ulink:hover::after { transform: scaleX(1); transform-origin: left; }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .js .reveal { opacity: 1 !important; transform: none !important; transition: none; }
     .typing-dots span, .status-ping { animation: none; }
+    .btn-primary:hover { transform: none; }
     *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   }
 </style>
 </head>
 
-<body class="bg-obsidian text-fg antialiased overflow-x-hidden">
+<body class="bg-linen text-ink antialiased overflow-x-hidden">
 
-<div id="grain" aria-hidden="true"></div>
+<!-- ============ SHARED BRAND DEFS — Clock mark ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g-sun" x1="0" y1="-100" x2="0" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="50%" stop-color="#F97316" />
+      <stop offset="100%" stop-color="#DC2626" />
+    </linearGradient>
+    <!-- The Clock — charcoal "am" centered, sunrise arc-arrow running 3 → 2 -->
+    <symbol id="logo-mark" viewBox="0 0 240 240">
+      <g transform="translate(120 120)">
+        <circle cx="0" cy="0" r="85" fill="none" stroke="url(#g-sun)" stroke-width="10" stroke-dasharray="1.5 7.401" stroke-dashoffset="-0.75" />
+        <g stroke="url(#g-sun)" stroke-width="3" stroke-linecap="round">
+          <line x1="0" y1="-94" x2="0" y2="-76" />
+          <line x1="94" y1="0" x2="76" y2="0" />
+          <line x1="0" y1="94" x2="0" y2="76" />
+          <line x1="-94" y1="0" x2="-76" y2="0" />
+        </g>
+        <path d="M 94 0 A 94 94 0 1 1 81.4 -47.0" fill="none" stroke="url(#g-sun)" stroke-width="8" stroke-linecap="round" />
+        <path d="M 88.4 -34.9 L 88.3 -51.0 L 74.5 -43.0 Z" fill="url(#g-sun)" />
+        <text x="0" y="0" text-anchor="middle" dominant-baseline="central" font-family="Inter, sans-serif" font-size="62" font-weight="600" fill="#2A1505" letter-spacing="-2.4">am</text>
+      </g>
+    </symbol>
+  </defs>
+</svg>
 
-<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:left-4 focus:top-4 focus:bg-violet focus:px-4 focus:py-2 focus:text-sm focus:text-white">Skip to content</a>
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:left-4 focus:top-4 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-cream">Skip to content</a>
 
 <!-- ============ NAV ============ -->
 <div id="navWrap" class="fixed left-1/2 top-[18px] z-50 w-[calc(100%-1.5rem)] max-w-[960px] -translate-x-1/2">
   <nav class="nav-pill" aria-label="Primary">
-    <a href="#main" aria-label="am2am.ai home" class="flex shrink-0 items-center">
-      <img src="logo.png" alt="am2am.ai" class="h-9 w-auto rounded-[6px]" />
+    <a href="#main" aria-label="am2am.ai home" class="flex shrink-0 items-center gap-2.5 pl-1">
+      <svg viewBox="0 0 240 240" class="h-8 w-8" role="img" aria-label="am2am.ai clock mark"><use href="#logo-mark" /></svg>
+      <span class="wordmark text-[1.16rem]" aria-hidden="true">
+        <span class="wm-am">am</span><span class="wm-2 sun-text">2</span><span class="wm-am">am</span><span class="wm-ai">.ai</span>
+      </span>
     </a>
 
     <span role="status" aria-label="Agent operational" class="relative ml-1 flex shrink-0 items-center justify-center">
       <span class="status-ping"></span>
-      <span class="relative z-[1] h-[5px] w-[5px] rounded-full" style="background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,.7)"></span>
+      <span class="relative z-[1] h-[5px] w-[5px] rounded-full" style="background:#F97316;box-shadow:0 0 6px rgba(249,115,22,.75)"></span>
     </span>
 
     <div class="ml-1 hidden items-center lg:flex">
@@ -257,13 +354,13 @@
     <div class="ml-auto flex items-center gap-2">
       <a href="https://cal.com/am2am-demo" class="btn btn-primary btn-sm hidden sm:inline-flex">Book a demo</a>
       <button id="menuBtn" aria-label="Open menu" aria-expanded="false"
-        class="flex h-[38px] w-[38px] items-center justify-center rounded-[4px] border border-line bg-transparent text-muted transition-colors hover:text-fg lg:hidden">
+        class="flex h-[38px] w-[38px] items-center justify-center rounded-[4px] border border-line bg-paper text-inksoft transition-colors hover:text-ink lg:hidden">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
     </div>
   </nav>
 
-  <div id="mobileMenu" class="mt-2 hidden rounded-[4px] border lg:hidden" style="border-color:var(--nav-border);background:rgba(10,10,10,0.96);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)">
+  <div id="mobileMenu" class="mt-2 hidden rounded-[6px] border lg:hidden" style="border-color:var(--nav-border);background:rgba(255,251,245,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)">
     <nav aria-label="Mobile" class="flex flex-col p-2">
       <a href="#how-it-works" class="nav-link !text-[0.74rem] px-3 py-3">How it works</a>
       <a href="#features" class="nav-link !text-[0.74rem] px-3 py-3">What it does</a>
@@ -279,91 +376,97 @@
 <!-- ============ HERO ============ -->
 <section class="relative flex min-h-[100svh] items-center overflow-hidden">
   <div class="pointer-events-none absolute inset-0" aria-hidden="true"
-       style="background:radial-gradient(70% 55% at 50% 38%, rgba(79,70,229,0.16) 0%, rgba(30,27,75,0.07) 52%, transparent 100%)"></div>
+       style="background:radial-gradient(70% 55% at 50% 38%, rgba(252,211,77,0.22) 0%, rgba(249,115,22,0.07) 50%, transparent 100%)"></div>
 
   <div class="relative z-10 mx-auto w-full max-w-content px-5 pt-32 pb-20 sm:px-8 sm:pt-36 lg:px-12">
     <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_1px_minmax(0,1fr)] lg:gap-16">
 
       <!-- Left: copy -->
       <div class="flex flex-col items-center gap-7 text-center lg:items-end lg:text-right">
-        <p class="reveal label-mono text-ghost">am2am.ai &nbsp;·&nbsp; agent operational</p>
+        <p class="reveal label flex items-center gap-2 text-muted">
+          <span class="relative flex h-[7px] w-[7px] items-center justify-center">
+            <span class="status-ping"></span>
+            <span class="relative z-[1] h-[5px] w-[5px] rounded-full" style="background:#F97316;box-shadow:0 0 6px rgba(249,115,22,.7)"></span>
+          </span>
+          am2am.ai &nbsp;·&nbsp; agent operational
+        </p>
 
-        <h1 class="reveal reveal-d1 font-serif">
-          <span class="block font-light italic leading-[0.95]" style="font-size:var(--fs-display);letter-spacing:-0.02em">Your workflow,</span>
-          <span class="block font-semibold leading-[0.95]" style="font-size:var(--fs-display);letter-spacing:-0.03em;opacity:0.4">run by agents.</span>
+        <h1 class="reveal reveal-d1 head">
+          <span class="block leading-[0.98]" style="font-size:var(--fs-display);letter-spacing:-0.03em">Your workflow,</span>
+          <span class="block sun-text leading-[0.98]" style="font-size:var(--fs-display);letter-spacing:-0.035em;font-weight:700">run by agents.</span>
         </h1>
 
-        <p class="reveal reveal-d2 flex max-w-[42ch] flex-col gap-1 text-muted" style="font-size:var(--fs-body-lg);font-weight:500;line-height:1.6">
-          <span>&gt; The first agent runs your projects, from WhatsApp.</span>
+        <p class="reveal reveal-d2 flex max-w-[44ch] flex-col gap-1 text-inksoft" style="font-size:var(--fs-body-lg);font-weight:500;line-height:1.6">
+          <span><span class="font-mono text-rust">&gt;</span> The first agent runs your projects, from WhatsApp.</span>
           <span>Your team sends updates the way they already do.</span>
           <span>The agent writes them to your ERP. More agents follow.</span>
         </p>
 
         <div class="reveal reveal-d2 flex flex-wrap items-center justify-center gap-3 lg:justify-end">
-          <span class="label-mono text-ghost">Logged</span>
-          <span class="inline-block h-1 w-1 rounded-full" style="border:1px solid var(--violet-pure);opacity:.5"></span>
-          <span class="label-mono text-ghost">Reversible</span>
-          <span class="inline-block h-1 w-1 rounded-full" style="border:1px solid var(--violet-pure);opacity:.5"></span>
-          <span class="label-mono text-ghost">Multilingual</span>
+          <span class="label text-muted">Logged</span>
+          <span class="inline-block h-1 w-1 rounded-full" style="border:1px solid var(--sun);opacity:.7"></span>
+          <span class="label text-muted">Reversible</span>
+          <span class="inline-block h-1 w-1 rounded-full" style="border:1px solid var(--sun);opacity:.7"></span>
+          <span class="label text-muted">Multilingual</span>
         </div>
 
         <div class="reveal reveal-d3 mt-1 flex w-full flex-col gap-3 sm:w-auto sm:flex-row lg:justify-end">
           <a href="https://cal.com/am2am-demo" class="btn btn-primary group">
             Book a 20-min demo
-            <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--violet-pure)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sun-light)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
           <a href="#how-it-works" class="btn btn-ghost group">
             See how it works
-            <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--violet-light)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
         </div>
 
-        <p class="reveal reveal-d3 label-mono text-ghost">PM agent &nbsp;·&nbsp; v1 &nbsp;·&nbsp; 2026</p>
+        <p class="reveal reveal-d3 label text-ghost">PM agent &nbsp;·&nbsp; v1 &nbsp;·&nbsp; 2026</p>
       </div>
 
       <!-- Center divider -->
       <div class="hidden h-full min-h-[460px] w-px justify-self-center lg:block" aria-hidden="true"
-           style="background:linear-gradient(180deg, transparent 0%, var(--border-line) 12%, var(--violet-pure) 50%, var(--border-line) 88%, transparent 100%)"></div>
+           style="background:linear-gradient(180deg, transparent 0%, var(--line) 12%, var(--sun) 50%, var(--line) 88%, transparent 100%)"></div>
 
       <!-- Right: chat mockup -->
       <div class="reveal reveal-d1 relative w-full lg:justify-self-start">
         <div class="pointer-events-none absolute left-1/2 top-1/2 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true"
-             style="border:1px dashed rgba(129,140,248,0.16)"></div>
+             style="border:1px dashed rgba(249,115,22,0.26)"></div>
         <div class="pointer-events-none absolute left-1/2 top-1/2 h-[150%] w-[150%] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true"
-             style="background:radial-gradient(circle, rgba(79,70,229,0.16), transparent 62%)"></div>
+             style="background:radial-gradient(circle, rgba(252,211,77,0.22), transparent 62%)"></div>
 
-        <div class="chat relative mx-auto w-full max-w-[440px] overflow-hidden rounded-[6px] border border-line text-left"
-             style="background:var(--obsidian-surface);box-shadow:0 36px 90px -34px rgba(79,70,229,0.5)">
-          <div class="flex items-center gap-3 border-b border-line px-4 py-3" style="background:rgba(255,255,255,0.015)">
-            <span class="flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold text-white" style="background:var(--violet-pure)">OB</span>
+        <div class="chat relative mx-auto w-full max-w-[440px] overflow-hidden rounded-[8px] border text-left"
+             style="background:var(--paper);border-color:var(--rule-strong);box-shadow:0 40px 80px -42px rgba(249,115,22,0.5), 0 4px 16px -6px rgba(42,21,5,0.12)">
+          <div class="flex items-center gap-3 border-b px-4 py-3" style="border-color:var(--rule);background:rgba(42,21,5,0.015)">
+            <span class="flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold" style="background:var(--ink);color:var(--cream-warm)">OB</span>
             <div class="leading-tight">
-              <p class="text-sm font-semibold text-fg">Operations — Site B</p>
-              <p class="label-mono mt-0.5 text-ghost" style="letter-spacing:.14em">am2am agent in thread</p>
+              <p class="text-sm font-semibold text-ink">Operations — Site B</p>
+              <p class="label mt-0.5 text-muted" style="letter-spacing:.13em">am2am agent in thread</p>
             </div>
-            <span class="ml-auto h-[6px] w-[6px] rounded-full" style="background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,.7)" aria-hidden="true"></span>
+            <span class="ml-auto h-[6px] w-[6px] rounded-full" style="background:#F97316;box-shadow:0 0 6px rgba(249,115,22,.7)" aria-hidden="true"></span>
           </div>
 
           <div class="space-y-3 px-4 py-5" id="chatBody">
             <div class="msg flex flex-col items-end" data-step="1">
-              <span class="label-mono mb-1 pr-1 text-ghost" style="font-size:.6rem">Maria · Ops &nbsp;·&nbsp; 09:14</span>
-              <p class="chat-bubble max-w-[84%] rounded-[10px] rounded-br-[3px] px-3.5 py-2.5 text-sm text-white" style="background:#1f7350">
+              <span class="label mb-1 pr-1 text-muted" style="font-size:.6rem">Maria · Ops &nbsp;·&nbsp; 09:14</span>
+              <p class="chat-bubble max-w-[84%] rounded-[10px] rounded-br-[3px] px-3.5 py-2.5 text-sm" style="background:var(--ink);color:var(--cream-warm)">
                 Warehouse shipment slipped, won't make Wednesday. Pushing to Thursday 10am. 📦
               </p>
             </div>
             <div class="msg msg-typing items-start" data-step="2" aria-hidden="true">
-              <p class="rounded-[10px] rounded-bl-[3px] border border-line px-4 py-3" style="background:var(--obsidian-card)">
+              <p class="rounded-[10px] rounded-bl-[3px] border px-4 py-3" style="background:var(--linen);border-color:var(--rule-strong)">
                 <span class="typing-dots"><span></span><span></span><span></span></span>
               </p>
             </div>
             <div class="msg flex flex-col items-start" data-step="3">
-              <span class="label-mono mb-1 pl-1 text-ghost" style="font-size:.6rem">am2am &nbsp;·&nbsp; 09:14</span>
-              <p class="chat-bubble max-w-[90%] rounded-[10px] rounded-bl-[3px] border border-line px-3.5 py-2.5 text-sm text-fg" style="background:var(--obsidian-card)">
+              <span class="label mb-1 pl-1 text-muted" style="font-size:.6rem">am2am &nbsp;·&nbsp; 09:14</span>
+              <p class="chat-bubble max-w-[90%] rounded-[10px] rounded-bl-[3px] border px-3.5 py-2.5 text-sm text-ink" style="background:var(--linen);border-color:var(--rule-strong)">
                 Updated. Shifted the "Q4 Warehouse Reorg" milestone by 1 day, flagged risk on dependent tasks, and notified @James and @procurement. Want me to send the client a heads-up too?
               </p>
             </div>
           </div>
         </div>
-        <p class="label-mono mt-3 text-center text-ghost" style="font-size:.6rem">Illustration of a real exchange · not a live widget</p>
+        <p class="label mt-3 text-center text-ghost" style="font-size:.6rem">Illustration of a real exchange · not a live widget</p>
       </div>
 
     </div>
@@ -371,36 +474,36 @@
 
   <!-- Scroll indicator -->
   <div class="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex" aria-hidden="true">
-    <span class="label-mono text-ghost" style="font-size:.6rem">scroll</span>
-    <div class="h-[52px] w-px" style="background:linear-gradient(180deg, rgba(129,140,248,.7), transparent)"></div>
+    <span class="label text-ghost" style="font-size:.6rem">scroll</span>
+    <div class="h-[52px] w-px" style="background:linear-gradient(180deg, rgba(249,115,22,.7), transparent)"></div>
   </div>
 </section>
 
 <!-- ============ PROBLEM ============ -->
-<section class="border-t border-line py-20 md:py-28" style="background:var(--obsidian-surface)">
+<section class="border-t border-line py-20 md:py-28" style="background:var(--cream)">
   <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
     <div class="rule mb-12 sm:mb-16"></div>
     <div class="reveal mb-12 flex flex-col items-center text-center sm:mb-16">
-      <span class="label-mono mb-4 text-violet-light">The problem</span>
-      <h2 class="font-serif leading-[1.05]" style="font-size:var(--fs-h2)">
-        <span class="font-light italic">Work happens in chat.</span>
-        <span class="font-semibold" style="opacity:.4">Nothing keeps it.</span>
+      <span class="eyebrow mb-4">The problem</span>
+      <h2 class="head" style="font-size:var(--fs-h2)">
+        <span>Work happens in chat. </span>
+        <span class="sun-text" style="font-weight:700">Nothing keeps it.</span>
       </h2>
     </div>
     <div class="rule mb-12 sm:mb-16"></div>
 
-    <div class="grid grid-cols-1 gap-px md:grid-cols-3" style="background:var(--border-line)">
-      <div class="reveal p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">01</span>
-        <p class="mt-7 font-serif text-2xl font-medium italic leading-snug text-fg">Your team lives in chat. Your work history doesn't.</p>
+    <div class="card-grid grid grid-cols-1 gap-px border border-line md:grid-cols-3">
+      <div class="cell cell-hover reveal p-8 sm:p-10">
+        <span class="label text-ghost">01</span>
+        <p class="mt-7 text-[1.45rem] font-medium leading-snug text-ink sm:text-[1.55rem]" style="letter-spacing:-0.02em">Your team lives in chat. Your work history doesn't.</p>
       </div>
-      <div class="reveal reveal-d1 p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">02</span>
-        <p class="mt-7 font-serif text-2xl font-medium italic leading-snug text-fg">Standups happen. Status updates don't.</p>
+      <div class="cell cell-hover reveal reveal-d1 p-8 sm:p-10">
+        <span class="label text-ghost">02</span>
+        <p class="mt-7 text-[1.45rem] font-medium leading-snug text-ink sm:text-[1.55rem]" style="letter-spacing:-0.02em">Standups happen. Status updates don't.</p>
       </div>
-      <div class="reveal reveal-d2 p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">03</span>
-        <p class="mt-7 font-serif text-2xl font-medium italic leading-snug text-fg">You bought project software. No one logs in.</p>
+      <div class="cell cell-hover reveal reveal-d2 p-8 sm:p-10">
+        <span class="label text-ghost">03</span>
+        <p class="mt-7 text-[1.45rem] font-medium leading-snug text-ink sm:text-[1.55rem]" style="letter-spacing:-0.02em">You bought project software. No one logs in.</p>
       </div>
     </div>
   </div>
@@ -411,53 +514,53 @@
   <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
     <div class="rule mb-12 sm:mb-16"></div>
     <div class="reveal mb-12 flex flex-col items-center text-center sm:mb-16">
-      <span class="label-mono mb-4 text-violet-light">How it works</span>
-      <h2 class="font-serif leading-[1.05]" style="font-size:var(--fs-h2)">
-        <span class="font-light italic">From a chat message</span>
-        <span class="font-semibold" style="opacity:.4">to a system of record.</span>
+      <span class="eyebrow mb-4">How it works</span>
+      <h2 class="head" style="font-size:var(--fs-h2)">
+        <span>From a chat message </span>
+        <span class="sun-text" style="font-weight:700">to a system of record.</span>
       </h2>
     </div>
     <div class="rule mb-12 sm:mb-16"></div>
 
-    <div class="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4" style="background:var(--border-line)">
-      <div class="reveal p-8" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">Step 01</span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">Chat where you already do</h3>
-        <p class="mt-3 text-sm leading-relaxed text-muted">Your team uses WhatsApp, Slack, or Teams as usual. No new app, no new habit to build.</p>
+    <div class="card-grid grid grid-cols-1 gap-px border border-line sm:grid-cols-2 lg:grid-cols-4">
+      <div class="cell cell-hover reveal p-8">
+        <span class="label text-ghost">Step 01</span>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Chat where you already do</h3>
+        <p class="mt-3 text-sm leading-relaxed text-inksoft">Your team uses WhatsApp, Slack, or Teams as usual. No new app, no new habit to build.</p>
       </div>
-      <div class="reveal reveal-d1 p-8" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">Step 02</span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">The agent writes it down</h3>
-        <p class="mt-3 text-sm leading-relaxed text-muted">It reads each message, understands it, and writes a structured update to your ERPNext.</p>
+      <div class="cell cell-hover reveal reveal-d1 p-8">
+        <span class="label text-ghost">Step 02</span>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">The agent writes it down</h3>
+        <p class="mt-3 text-sm leading-relaxed text-inksoft">It reads each message, understands it, and writes a structured update to your ERPNext.</p>
       </div>
-      <div class="reveal reveal-d2 p-8" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">Step 03</span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">Context carries over</h3>
-        <p class="mt-3 text-sm leading-relaxed text-muted">It holds context across days, projects, and people, so the next message picks up where the last left off.</p>
+      <div class="cell cell-hover reveal reveal-d2 p-8">
+        <span class="label text-ghost">Step 03</span>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Context carries over</h3>
+        <p class="mt-3 text-sm leading-relaxed text-inksoft">It holds context across days, projects, and people, so the next message picks up where the last left off.</p>
       </div>
-      <div class="reveal reveal-d3 p-8" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">Step 04</span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">Ask it anything</h3>
-        <p class="mt-3 text-sm leading-relaxed text-muted">In the same thread: "what's pending from the warehouse team this week?"</p>
+      <div class="cell cell-hover reveal reveal-d3 p-8">
+        <span class="label text-ghost">Step 04</span>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Ask it anything</h3>
+        <p class="mt-3 text-sm leading-relaxed text-inksoft">In the same thread: "what's pending from the warehouse team this week?"</p>
       </div>
     </div>
 
     <!-- Architecture panel -->
-    <div class="reveal mt-px border border-line p-6 sm:p-10" style="background:var(--obsidian-surface)">
+    <div class="reveal mt-px border border-line p-6 sm:p-10" style="background:var(--paper)">
       <div class="flex flex-col items-center justify-center gap-4 md:flex-row">
-        <div class="w-full border border-line px-6 py-5 text-center md:w-auto">
-          <p class="font-serif text-lg font-semibold text-fg">Your chat thread</p>
-          <p class="label-mono mt-1.5 text-ghost" style="font-size:.6rem">WhatsApp · Slack · Teams</p>
+        <div class="w-full border border-line px-6 py-5 text-center md:w-auto" style="background:var(--cream)">
+          <p class="text-[1.05rem] font-semibold text-ink">Your chat thread</p>
+          <p class="label mt-1.5 text-ghost" style="font-size:.6rem">WhatsApp · Slack · Teams</p>
         </div>
-        <svg class="shrink-0 rotate-90 text-ghost md:rotate-0" width="34" height="20" viewBox="0 0 34 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10h28M24 4l6 6-6 6"/></svg>
-        <div class="w-full border px-6 py-5 text-center md:w-auto" style="border-color:rgba(79,70,229,0.45);background:rgba(79,70,229,0.07)">
-          <p class="font-serif text-lg font-semibold" style="color:var(--violet-light)">am2am agent</p>
-          <p class="label-mono mt-1.5 text-ghost" style="font-size:.6rem">reads · remembers · writes</p>
+        <svg class="shrink-0 rotate-90 text-muted md:rotate-0" width="34" height="20" viewBox="0 0 34 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10h28M24 4l6 6-6 6"/></svg>
+        <div class="w-full border px-6 py-5 text-center md:w-auto" style="border-color:rgba(249,115,22,0.5);background:linear-gradient(180deg, rgba(252,211,77,0.12), rgba(249,115,22,0.05))">
+          <p class="text-[1.05rem] font-semibold sun-text">am2am agent</p>
+          <p class="label mt-1.5 text-rust" style="font-size:.6rem">reads · remembers · writes</p>
         </div>
-        <svg class="shrink-0 rotate-90 text-ghost md:rotate-0" width="34" height="20" viewBox="0 0 34 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10h28M24 4l6 6-6 6"/></svg>
-        <div class="w-full border border-line px-6 py-5 text-center md:w-auto">
-          <p class="font-serif text-lg font-semibold text-fg">ERPNext</p>
-          <p class="label-mono mt-1.5 text-ghost" style="font-size:.6rem">tasks · projects · timelines</p>
+        <svg class="shrink-0 rotate-90 text-muted md:rotate-0" width="34" height="20" viewBox="0 0 34 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10h28M24 4l6 6-6 6"/></svg>
+        <div class="w-full border border-line px-6 py-5 text-center md:w-auto" style="background:var(--cream)">
+          <p class="text-[1.05rem] font-semibold text-ink">ERPNext</p>
+          <p class="label mt-1.5 text-ghost" style="font-size:.6rem">tasks · projects · timelines</p>
         </div>
       </div>
     </div>
@@ -465,69 +568,72 @@
 </section>
 
 <!-- ============ FEATURES ============ -->
-<section id="features" class="border-t border-line py-20 md:py-28" style="background:var(--obsidian-surface)">
+<section id="features" class="border-t border-line py-20 md:py-28" style="background:var(--cream)">
   <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
     <div class="rule mb-12 sm:mb-16"></div>
     <div class="reveal mb-12 flex flex-col items-center text-center sm:mb-16">
-      <span class="label-mono mb-4 text-violet-light">What the agent does</span>
-      <h2 class="font-serif font-light italic leading-[1.05]" style="font-size:var(--fs-h2)">One job, done end to end.</h2>
+      <span class="eyebrow mb-4">What the agent does</span>
+      <h2 class="head" style="font-size:var(--fs-h2)">
+        <span>One job, done </span>
+        <span class="sun-text" style="font-weight:700">end to end.</span>
+      </h2>
     </div>
     <div class="rule mb-12 sm:mb-16"></div>
 
-    <div class="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-3" style="background:var(--border-line)">
+    <div class="card-grid grid grid-cols-1 gap-px border border-line sm:grid-cols-2 lg:grid-cols-3">
       <!-- Multilingual -->
-      <div class="group p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">01</span>
-        <span class="mt-6 flex h-11 w-11 items-center justify-center rounded-[3px] transition-shadow duration-500 group-hover:shadow-[0_0_22px_rgba(79,70,229,0.45)]" style="background:var(--border-line);color:var(--violet-light)">
+      <div class="cell cell-hover group p-8 sm:p-10">
+        <span class="label text-ghost">01</span>
+        <span class="icon-chip mt-6 flex h-11 w-11 items-center justify-center rounded-[4px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg>
         </span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">Multilingual by default</h3>
-        <p class="mt-2.5 text-sm leading-relaxed text-muted">English, Spanish, Portuguese, Hindi, Arabic, and more — switching language mid-conversation.</p>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Multilingual by default</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-inksoft">English, Spanish, Portuguese, Hindi, Arabic, and more — switching language mid-conversation.</p>
       </div>
       <!-- ERPNext -->
-      <div class="group p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">02</span>
-        <span class="mt-6 flex h-11 w-11 items-center justify-center rounded-[3px] transition-shadow duration-500 group-hover:shadow-[0_0_22px_rgba(79,70,229,0.45)]" style="background:var(--border-line);color:var(--violet-light)">
+      <div class="cell cell-hover group p-8 sm:p-10">
+        <span class="label text-ghost">02</span>
+        <span class="icon-chip mt-6 flex h-11 w-11 items-center justify-center rounded-[4px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
         </span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">Connected to ERPNext</h3>
-        <p class="mt-2.5 text-sm leading-relaxed text-muted">Tasks, projects, timelines, and sites — updated as your team chats.</p>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Connected to ERPNext</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-inksoft">Tasks, projects, timelines, and sites — updated as your team chats.</p>
       </div>
       <!-- Memory -->
-      <div class="group p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">03</span>
-        <span class="mt-6 flex h-11 w-11 items-center justify-center rounded-[3px] transition-shadow duration-500 group-hover:shadow-[0_0_22px_rgba(79,70,229,0.45)]" style="background:var(--border-line);color:var(--violet-light)">
+      <div class="cell cell-hover group p-8 sm:p-10">
+        <span class="label text-ghost">03</span>
+        <span class="icon-chip mt-6 flex h-11 w-11 items-center justify-center rounded-[4px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.4 2.6L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>
         </span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">Persistent memory</h3>
-        <p class="mt-2.5 text-sm leading-relaxed text-muted">Context carries across days, projects, and the people involved.</p>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Persistent memory</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-inksoft">Context carries across days, projects, and the people involved.</p>
       </div>
       <!-- Audit -->
-      <div class="group p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">04</span>
-        <span class="mt-6 flex h-11 w-11 items-center justify-center rounded-[3px] transition-shadow duration-500 group-hover:shadow-[0_0_22px_rgba(79,70,229,0.45)]" style="background:var(--border-line);color:var(--violet-light)">
+      <div class="cell cell-hover group p-8 sm:p-10">
+        <span class="label text-ghost">04</span>
+        <span class="icon-chip mt-6 flex h-11 w-11 items-center justify-center rounded-[4px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="m9 15 2 2 4-4"/></svg>
         </span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">Full audit trail</h3>
-        <p class="mt-2.5 text-sm leading-relaxed text-muted">Every action logged, reviewable, and reversible.</p>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Full audit trail</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-inksoft">Every action logged, reviewable, and reversible.</p>
       </div>
       <!-- Always on -->
-      <div class="group p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">05</span>
-        <span class="mt-6 flex h-11 w-11 items-center justify-center rounded-[3px] transition-shadow duration-500 group-hover:shadow-[0_0_22px_rgba(79,70,229,0.45)]" style="background:var(--border-line);color:var(--violet-light)">
+      <div class="cell cell-hover group p-8 sm:p-10">
+        <span class="label text-ghost">05</span>
+        <span class="icon-chip mt-6 flex h-11 w-11 items-center justify-center rounded-[4px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
         </span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">Always on</h3>
-        <p class="mt-2.5 text-sm leading-relaxed text-muted">Runs 24/7 and replies before your team logs in.</p>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Always on</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-inksoft">Runs 24/7 and replies before your team logs in.</p>
       </div>
       <!-- Guard layer -->
-      <div class="group p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono text-ghost">06</span>
-        <span class="mt-6 flex h-11 w-11 items-center justify-center rounded-[3px] transition-shadow duration-500 group-hover:shadow-[0_0_22px_rgba(79,70,229,0.45)]" style="background:var(--border-line);color:var(--violet-light)">
+      <div class="cell cell-hover group p-8 sm:p-10">
+        <span class="label text-ghost">06</span>
+        <span class="icon-chip mt-6 flex h-11 w-11 items-center justify-center rounded-[4px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1 1 0 0 1 1.3 0C15.5 3.8 18 5 20 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
         </span>
-        <h3 class="mt-5 font-serif text-xl font-semibold text-fg">Guard layer</h3>
-        <p class="mt-2.5 text-sm leading-relaxed text-muted">Unauthorized writes are blocked at the agent level.</p>
+        <h3 class="mt-5 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Guard layer</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-inksoft">Unauthorized writes are blocked at the agent level.</p>
       </div>
     </div>
   </div>
@@ -538,34 +644,34 @@
   <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
     <div class="rule mb-12 sm:mb-16"></div>
     <div class="reveal mb-12 flex flex-col items-center text-center sm:mb-16">
-      <span class="label-mono mb-4 text-violet-light">Who it's for</span>
-      <h2 class="font-serif leading-[1.05]" style="font-size:var(--fs-h2)">
-        <span class="font-light italic">Built for operators.</span>
-        <span class="font-semibold" style="opacity:.4">Not for everyone.</span>
+      <span class="eyebrow mb-4">Who it's for</span>
+      <h2 class="head" style="font-size:var(--fs-h2)">
+        <span>Built for operators. </span>
+        <span class="sun-text" style="font-weight:700">Not for everyone.</span>
       </h2>
     </div>
     <div class="rule mb-12 sm:mb-16"></div>
 
-    <div class="grid grid-cols-1 gap-px md:grid-cols-2" style="background:var(--border-line)">
-      <div class="reveal p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <h3 class="label-mono text-violet-light">Built for</h3>
+    <div class="card-grid grid grid-cols-1 gap-px border border-line md:grid-cols-2">
+      <div class="cell reveal p-8 sm:p-10">
+        <h3 class="label text-rust">Built for</h3>
         <ul class="mt-6 space-y-4">
-          <li class="flex gap-3 text-[15px] text-fg">
-            <svg class="mt-1 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--violet-light)"><path d="M20 6 9 17l-5-5"/></svg>
+          <li class="flex gap-3 text-[15px] text-ink">
+            <svg class="mt-1 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M20 6 9 17l-5-5"/></svg>
             20–500 person operations-heavy companies
           </li>
-          <li class="flex gap-3 text-[15px] text-fg">
-            <svg class="mt-1 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--violet-light)"><path d="M20 6 9 17l-5-5"/></svg>
+          <li class="flex gap-3 text-[15px] text-ink">
+            <svg class="mt-1 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M20 6 9 17l-5-5"/></svg>
             Teams that already coordinate in chat
           </li>
-          <li class="flex gap-3 text-[15px] text-fg">
-            <svg class="mt-1 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--violet-light)"><path d="M20 6 9 17l-5-5"/></svg>
+          <li class="flex gap-3 text-[15px] text-ink">
+            <svg class="mt-1 shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M20 6 9 17l-5-5"/></svg>
             Founders who want one system of record, not five
           </li>
         </ul>
       </div>
-      <div class="reveal reveal-d1 p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <h3 class="label-mono text-ghost">Not built for</h3>
+      <div class="cell reveal reveal-d1 p-8 sm:p-10" style="background:var(--cream)">
+        <h3 class="label text-muted">Not built for</h3>
         <ul class="mt-6 space-y-4">
           <li class="flex gap-3 text-[15px] text-muted">
             <svg class="mt-1.5 shrink-0 text-ghost" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14"/></svg>
@@ -586,34 +692,37 @@
 </section>
 
 <!-- ============ WHAT'S NEXT ============ -->
-<section id="roadmap" class="border-t border-line py-20 md:py-28" style="background:var(--obsidian-surface)">
+<section id="roadmap" class="border-t border-line py-20 md:py-28" style="background:var(--cream)">
   <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
     <div class="rule mb-12 sm:mb-16"></div>
     <div class="reveal mb-12 flex flex-col items-center text-center sm:mb-16">
-      <span class="label-mono mb-4 text-violet-light">What's next</span>
-      <h2 class="font-serif font-light italic leading-[1.05]" style="font-size:var(--fs-h2)">The PM agent is the first.</h2>
-      <p class="mt-5 max-w-xl text-muted" style="font-size:var(--fs-body-lg);line-height:1.6">We're building more agents for the workflows operations teams ask us about most. Each one does a single job, end to end.</p>
+      <span class="eyebrow mb-4">What's next</span>
+      <h2 class="head" style="font-size:var(--fs-h2)">
+        <span>The PM agent is </span>
+        <span class="sun-text" style="font-weight:700">the first.</span>
+      </h2>
+      <p class="mt-5 max-w-xl text-inksoft" style="font-size:var(--fs-body-lg);line-height:1.6">We're building more agents for the workflows operations teams ask us about most. Each one does a single job, end to end.</p>
     </div>
     <div class="rule mb-12 sm:mb-16"></div>
 
-    <div class="grid grid-cols-1 gap-px md:grid-cols-3" style="background:var(--border-line)">
-      <div class="reveal p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono inline-flex items-center border border-line px-2.5 py-1 text-ghost">In progress</span>
-        <h3 class="mt-6 font-serif text-xl font-semibold text-fg">Inbound inquiry handler</h3>
-        <p class="mt-2.5 text-sm leading-relaxed text-muted">Quotes drafted straight from a chat thread, ready to send.</p>
+    <div class="card-grid grid grid-cols-1 gap-px border border-line md:grid-cols-3">
+      <div class="cell cell-hover reveal p-8 sm:p-10">
+        <span class="label inline-flex items-center rounded-[3px] px-2.5 py-1 text-rust" style="border:1px solid rgba(249,115,22,0.4);background:rgba(249,115,22,0.07)">In progress</span>
+        <h3 class="mt-6 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Inbound inquiry handler</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-inksoft">Quotes drafted straight from a chat thread, ready to send.</p>
       </div>
-      <div class="reveal reveal-d1 p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono inline-flex items-center border border-line px-2.5 py-1 text-ghost">In progress</span>
-        <h3 class="mt-6 font-serif text-xl font-semibold text-fg">Invoice &amp; document processor</h3>
-        <p class="mt-2.5 text-sm leading-relaxed text-muted">Extract, validate, and post documents to your ERP.</p>
+      <div class="cell cell-hover reveal reveal-d1 p-8 sm:p-10">
+        <span class="label inline-flex items-center rounded-[3px] px-2.5 py-1 text-rust" style="border:1px solid rgba(249,115,22,0.4);background:rgba(249,115,22,0.07)">In progress</span>
+        <h3 class="mt-6 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Invoice &amp; document processor</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-inksoft">Extract, validate, and post documents to your ERP.</p>
       </div>
-      <div class="reveal reveal-d2 p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="label-mono inline-flex items-center border border-line px-2.5 py-1 text-ghost">In progress</span>
-        <h3 class="mt-6 font-serif text-xl font-semibold text-fg">Lead &amp; account researcher</h3>
-        <p class="mt-2.5 text-sm leading-relaxed text-muted">Context on the account, delivered before the call.</p>
+      <div class="cell cell-hover reveal reveal-d2 p-8 sm:p-10">
+        <span class="label inline-flex items-center rounded-[3px] px-2.5 py-1 text-rust" style="border:1px solid rgba(249,115,22,0.4);background:rgba(249,115,22,0.07)">In progress</span>
+        <h3 class="mt-6 text-[1.15rem] font-semibold text-ink" style="letter-spacing:-0.01em">Lead &amp; account researcher</h3>
+        <p class="mt-2.5 text-sm leading-relaxed text-inksoft">Context on the account, delivered before the call.</p>
       </div>
     </div>
-    <p class="reveal label-mono mt-8 text-center text-ghost">We launch each agent when it's ready, not before.</p>
+    <p class="reveal label mt-8 text-center text-ghost">We launch each agent when it's ready, not before.</p>
   </div>
 </section>
 
@@ -622,80 +731,85 @@
   <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
     <div class="rule mb-12 sm:mb-16"></div>
     <div class="reveal mb-12 flex flex-col items-center text-center sm:mb-16">
-      <span class="label-mono mb-4 text-violet-light">Security &amp; data</span>
-      <h2 class="font-serif font-light italic leading-[1.05]" style="font-size:var(--fs-h2)">Your data stays yours.</h2>
+      <span class="eyebrow mb-4">Security &amp; data</span>
+      <h2 class="head" style="font-size:var(--fs-h2)">
+        <span>Your data stays </span>
+        <span class="sun-text" style="font-weight:700">yours.</span>
+      </h2>
     </div>
     <div class="rule mb-12 sm:mb-16"></div>
 
-    <div class="grid grid-cols-1 gap-px md:grid-cols-3" style="background:var(--border-line)">
-      <div class="reveal flex flex-col gap-5 p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="flex h-11 w-11 items-center justify-center rounded-[3px]" style="background:var(--border-line);color:var(--violet-light)">
+    <div class="card-grid grid grid-cols-1 gap-px border border-line md:grid-cols-3">
+      <div class="cell reveal flex flex-col gap-5 p-8 sm:p-10">
+        <span class="icon-chip flex h-11 w-11 items-center justify-center rounded-[4px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg>
         </span>
-        <p class="text-[15px] leading-relaxed text-muted">Your data stays in your ERPNext, on your hosting.</p>
+        <p class="text-[15px] leading-relaxed text-inksoft">Your data stays in your ERPNext, on your hosting.</p>
       </div>
-      <div class="reveal reveal-d1 flex flex-col gap-5 p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="flex h-11 w-11 items-center justify-center rounded-[3px]" style="background:var(--border-line);color:var(--violet-light)">
+      <div class="cell reveal reveal-d1 flex flex-col gap-5 p-8 sm:p-10">
+        <span class="icon-chip flex h-11 w-11 items-center justify-center rounded-[4px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.4 2.6L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg>
         </span>
-        <p class="text-[15px] leading-relaxed text-muted">Every action is logged with a timestamp — and reversible from day one.</p>
+        <p class="text-[15px] leading-relaxed text-inksoft">Every action is logged with a timestamp — and reversible from day one.</p>
       </div>
-      <div class="reveal reveal-d2 flex flex-col gap-5 p-8 sm:p-10" style="background:var(--obsidian-surface)">
-        <span class="flex h-11 w-11 items-center justify-center rounded-[3px]" style="background:var(--border-line);color:var(--violet-light)">
+      <div class="cell reveal reveal-d2 flex flex-col gap-5 p-8 sm:p-10">
+        <span class="icon-chip flex h-11 w-11 items-center justify-center rounded-[4px]">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
         </span>
-        <p class="text-[15px] leading-relaxed text-muted">Official business APIs only. No consumer chat scraping.</p>
+        <p class="text-[15px] leading-relaxed text-inksoft">Official business APIs only. No consumer chat scraping.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ FAQ ============ -->
-<section id="faq" class="border-t border-line py-20 md:py-28" style="background:var(--obsidian-surface)">
+<section id="faq" class="border-t border-line py-20 md:py-28" style="background:var(--cream)">
   <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
     <div class="rule mb-12 sm:mb-16"></div>
     <div class="reveal mb-12 flex flex-col items-center text-center sm:mb-16">
-      <span class="label-mono mb-4 text-violet-light">FAQ</span>
-      <h2 class="font-serif font-light italic leading-[1.05]" style="font-size:var(--fs-h2)">Straight answers.</h2>
+      <span class="eyebrow mb-4">FAQ</span>
+      <h2 class="head" style="font-size:var(--fs-h2)">
+        <span>Straight </span><span class="sun-text" style="font-weight:700">answers.</span>
+      </h2>
     </div>
     <div class="rule mb-12 sm:mb-16"></div>
 
     <div class="reveal mx-auto max-w-3xl space-y-3">
       <details class="group px-5">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-fg">
+        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-ink">
           Will my team have to learn something new?
-          <svg class="faq-chevron shrink-0 text-ghost" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg class="faq-chevron shrink-0 text-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
-        <p class="pb-5 text-[15px] leading-relaxed text-muted">No. They keep using the chat tool they already use. The agent works inside the threads they're already in.</p>
+        <p class="pb-5 text-[15px] leading-relaxed text-inksoft">No. They keep using the chat tool they already use. The agent works inside the threads they're already in.</p>
       </details>
       <details class="group px-5">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-fg">
+        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-ink">
           What if the agent makes a mistake?
-          <svg class="faq-chevron shrink-0 text-ghost" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg class="faq-chevron shrink-0 text-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
-        <p class="pb-5 text-[15px] leading-relaxed text-muted">Every write to ERPNext is logged and reversible. You'll see exactly what changed in the audit trail, and you can roll it back.</p>
+        <p class="pb-5 text-[15px] leading-relaxed text-inksoft">Every write to ERPNext is logged and reversible. You'll see exactly what changed in the audit trail, and you can roll it back.</p>
       </details>
       <details class="group px-5">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-fg">
+        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-ink">
           What chat platforms work?
-          <svg class="faq-chevron shrink-0 text-ghost" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg class="faq-chevron shrink-0 text-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
-        <p class="pb-5 text-[15px] leading-relaxed text-muted">WhatsApp Business, Slack, Microsoft Teams, and Rocket.Chat. Others on request.</p>
+        <p class="pb-5 text-[15px] leading-relaxed text-inksoft">WhatsApp Business, Slack, Microsoft Teams, and Rocket.Chat. Others on request.</p>
       </details>
       <details class="group px-5">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-fg">
+        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-ink">
           How long does setup take?
-          <svg class="faq-chevron shrink-0 text-ghost" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg class="faq-chevron shrink-0 text-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
-        <p class="pb-5 text-[15px] leading-relaxed text-muted">Two to three weeks from signed agreement to live on your team's threads.</p>
+        <p class="pb-5 text-[15px] leading-relaxed text-inksoft">Two to three weeks from signed agreement to live on your team's threads.</p>
       </details>
       <details class="group px-5">
-        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-fg">
+        <summary class="flex items-center justify-between gap-4 py-5 text-[17px] font-medium text-ink">
           Where does my data go?
-          <svg class="faq-chevron shrink-0 text-ghost" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <svg class="faq-chevron shrink-0 text-muted" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
         <!-- FOUNDER: verify this matches your actual data flow before launch. -->
-        <p class="pb-5 text-[15px] leading-relaxed text-muted">It stays in your ERPNext instance, on hosting you already control. The agent reads and writes there — it does not copy your project data into a separate store of ours.</p>
+        <p class="pb-5 text-[15px] leading-relaxed text-inksoft">It stays in your ERPNext instance, on hosting you already control. The agent reads and writes there — it does not copy your project data into a separate store of ours.</p>
       </details>
     </div>
   </div>
@@ -704,17 +818,17 @@
 <!-- ============ FINAL CTA ============ -->
 <section class="relative overflow-hidden border-t border-line py-24 md:py-32">
   <div class="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[760px] -translate-x-1/2 -translate-y-1/2" aria-hidden="true"
-       style="background:radial-gradient(ellipse, rgba(79,70,229,0.16), transparent 70%)"></div>
+       style="background:radial-gradient(ellipse, rgba(249,115,22,0.16), transparent 70%)"></div>
   <div class="relative mx-auto max-w-content px-5 sm:px-8 lg:px-12">
     <div class="reveal flex flex-col items-center text-center">
-      <span class="label-mono mb-5 text-violet-light">Next step</span>
-      <h2 class="mx-auto max-w-2xl font-serif leading-[1.04]" style="font-size:var(--fs-h2)">
-        <span class="font-light italic">See it run on your team's data</span>
-        <span class="font-semibold" style="opacity:.4">in 20 minutes.</span>
+      <span class="eyebrow mb-5">Next step</span>
+      <h2 class="head mx-auto max-w-2xl" style="font-size:var(--fs-h2);line-height:1.06">
+        <span>See it run on your team's data </span>
+        <span class="sun-text" style="font-weight:700">in 20 minutes.</span>
       </h2>
       <a href="https://cal.com/am2am-demo" class="btn btn-primary group mt-9">
         Book a demo
-        <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--violet-pure)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sun-light)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
   </div>
@@ -723,37 +837,42 @@
 </main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="relative z-[2] border-t border-line" style="background:var(--obsidian-surface)">
+<footer class="relative z-[2] border-t border-line" style="background:var(--cream)">
   <div class="mx-auto max-w-content px-5 py-14 sm:px-8 lg:px-12">
     <div class="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
       <div class="max-w-sm">
-        <img src="logo.png" alt="am2am.ai" class="h-14 w-auto rounded-[6px]" />
-        <p class="mt-5 text-sm text-muted">AI agents that run your workflow.</p>
-        <p class="label-mono mt-4 text-ghost">— Operations intelligence · 2026</p>
+        <a href="#main" class="flex items-center gap-3" aria-label="am2am.ai home">
+          <svg viewBox="0 0 240 240" class="h-11 w-11" role="img" aria-label="am2am.ai clock mark"><use href="#logo-mark" /></svg>
+          <span class="wordmark text-[1.7rem]" aria-hidden="true">
+            <span class="wm-am">am</span><span class="wm-2 sun-text">2</span><span class="wm-am">am</span><span class="wm-ai">.ai</span>
+          </span>
+        </a>
+        <p class="mt-5 text-sm text-inksoft">AI agents that run your workflow.</p>
+        <p class="label mt-4 text-ghost">— Operations intelligence · 2026</p>
       </div>
 
       <nav aria-label="Footer" class="grid grid-cols-2 gap-x-10 gap-y-10 sm:grid-cols-3">
         <div class="flex flex-col gap-5">
-          <h3 class="label-mono text-muted">Product</h3>
-          <a href="#how-it-works" class="ulink text-sm text-muted">How it works</a>
-          <a href="#features" class="ulink text-sm text-muted">What it does</a>
-          <a href="#roadmap" class="ulink text-sm text-muted">What's next</a>
+          <h3 class="label text-muted">Product</h3>
+          <a href="#how-it-works" class="ulink text-sm text-inksoft">How it works</a>
+          <a href="#features" class="ulink text-sm text-inksoft">What it does</a>
+          <a href="#roadmap" class="ulink text-sm text-inksoft">What's next</a>
         </div>
         <div class="flex flex-col gap-5">
-          <h3 class="label-mono text-muted">Company</h3>
-          <a href="#faq" class="ulink text-sm text-muted">FAQ</a>
-          <a href="https://cal.com/am2am-demo" class="ulink text-sm text-muted">Book a demo</a>
+          <h3 class="label text-muted">Company</h3>
+          <a href="#faq" class="ulink text-sm text-inksoft">FAQ</a>
+          <a href="https://cal.com/am2am-demo" class="ulink text-sm text-inksoft">Book a demo</a>
         </div>
         <div class="flex flex-col gap-5">
-          <h3 class="label-mono text-muted">Contact</h3>
-          <a href="mailto:hello@am2am.ai" class="ulink text-sm text-muted">hello@am2am.ai</a>
-          <a href="https://www.linkedin.com/company/am2am-ai" class="ulink text-sm text-muted">LinkedIn ↗</a>
+          <h3 class="label text-muted">Contact</h3>
+          <a href="mailto:hello@am2am.ai" class="ulink text-sm text-inksoft">hello@am2am.ai</a>
+          <a href="https://www.linkedin.com/company/am2am-ai" class="ulink text-sm text-inksoft">LinkedIn ↗</a>
         </div>
       </nav>
     </div>
 
     <div class="rule my-10"></div>
-    <p class="label-mono text-ghost">© 2026 am2am.ai · All rights reserved</p>
+    <p class="label text-ghost">© 2026 am2am.ai · All rights reserved</p>
   </div>
 </footer>
 

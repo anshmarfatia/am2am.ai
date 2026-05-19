@@ -5,7 +5,14 @@
       "Read(//c/Users/anshm/.claude/plugins/**)",
       "Read(//c/Users/anshm/.claude/skills/**)",
       "WebFetch(domain:www.ausdata.ai)",
-      "PowerShell(Copy-Item *)"
+      "PowerShell(Copy-Item *)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(xxd webfetch-1779190036284-q5uvf3.bin)",
+      "Bash(cp webfetch-1779190036284-q5uvf3.bin design.gz)",
+      "Bash(gunzip -k -f design.gz)",
+      "Bash(xxd design *)",
+      "Bash(mkdir -p design-extract)",
+      "Bash(tar -xf design -C design-extract)"
     ]
   }
 }

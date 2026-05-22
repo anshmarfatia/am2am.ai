@@ -416,12 +416,12 @@
 
   /* ---------- Use-case tabs ---------- */
   .agent-tabs {
-    display: flex; flex-direction: column; gap: 6px; padding: 6px; width: 100%; max-width: 640px;
+    display: flex; flex-direction: column; gap: 6px; padding: 6px; width: 100%; max-width: 760px;
     border-radius: 16px; background: var(--paper); border: 1px solid var(--rule-strong);
     box-shadow: 0 12px 32px -18px rgba(42,21,5,.34);
   }
   .agent-tab {
-    position: relative; display: flex; align-items: center; gap: 11px; flex: 1;
+    position: relative; display: flex; align-items: center; gap: 11px; flex: 1 1 0; min-width: 0;
     padding: .8rem 1.05rem; border-radius: 11px; border: 0; cursor: pointer; background: transparent;
     text-align: left; color: var(--ink-soft); font-family: inherit;
     transition: background .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
@@ -435,14 +435,8 @@
   .at-ic svg { width: 18px; height: 18px; }
   .agent-tab[aria-selected="true"] .at-ic { background: rgba(255,255,255,.14); color: var(--sun-light); }
   .at-txt { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
-  .at-title { font-weight: 600; font-size: .92rem; letter-spacing: -.01em; white-space: nowrap; }
+  .at-title { font-weight: 600; font-size: .92rem; letter-spacing: -.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .at-sub { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: .12em; opacity: .7; margin-top: 2px; }
-  .at-badge {
-    margin-left: auto; align-self: center; flex: 0 0 auto; font-family: var(--font-mono); font-size: 7.5px;
-    text-transform: uppercase; letter-spacing: .1em; padding: 3px 7px; border-radius: 999px;
-    background: rgba(249,115,22,.16); color: var(--rust);
-  }
-  .agent-tab[aria-selected="true"] .at-badge { background: rgba(255,255,255,.18); color: var(--sun-light); }
   @media (min-width: 768px) { .agent-tabs { flex-direction: row; } }
 
   /* ---------- Use-case attribute cells ---------- */
@@ -758,7 +752,6 @@
         <button type="button" class="agent-tab" role="tab" data-agent="supply" aria-selected="true">
           <span class="at-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1"/><path d="M14 9h4l3 3v5a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span>
           <span class="at-txt"><span class="at-title">Supply Chain &amp; Fleet</span><span class="at-sub">ERP</span></span>
-          <span class="at-badge">Sweet spot</span>
         </button>
       </div>
     </div>

@@ -194,13 +194,13 @@
   .hero-stage { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
 
   .phone {
-    width: 252px; flex: 0 0 auto;
-    background: #0c0b0a; border-radius: 34px; padding: 9px;
-    box-shadow: 0 34px 64px -26px rgba(42,21,5,.55), 0 0 0 1px rgba(42,21,5,.12);
+    width: 296px; flex: 0 0 auto;
+    background: #0c0b0a; border-radius: 40px; padding: 10px;
+    box-shadow: 0 38px 70px -28px rgba(42,21,5,.55), 0 0 0 1px rgba(42,21,5,.12);
   }
   .phone-screen {
-    position: relative; border-radius: 26px; overflow: hidden;
-    background: #ECE5DD; height: 432px; display: flex; flex-direction: column;
+    position: relative; border-radius: 31px; overflow: hidden;
+    background: #ECE5DD; height: 524px; display: flex; flex-direction: column;
   }
   .phone-notch {
     position: absolute; top: 0; left: 50%; transform: translateX(-50%);
@@ -378,12 +378,12 @@
   @keyframes arrowFlowV { from { stroke-dashoffset: 130; } to { stroke-dashoffset: 20; } }
 
   /* Laptop / ERP output mockup */
-  .laptop { width: 100%; max-width: 460px; }
+  .laptop { width: 100%; max-width: 580px; }
   .laptop-lid {
-    background: #0c0b0a; border-radius: 14px; padding: 12px;
-    box-shadow: 0 34px 64px -30px rgba(42,21,5,.55), 0 0 0 1px rgba(42,21,5,.12);
+    background: #0c0b0a; border-radius: 16px; padding: 13px;
+    box-shadow: 0 38px 70px -32px rgba(42,21,5,.55), 0 0 0 1px rgba(42,21,5,.12);
   }
-  .laptop-screen { background: var(--paper); border-radius: 7px; overflow: hidden; border: 1px solid rgba(0,0,0,.06); }
+  .laptop-screen { background: var(--paper); border-radius: 8px; overflow: hidden; border: 1px solid rgba(0,0,0,.06); height: 392px; display: flex; flex-direction: column; }
   .laptop-deck {
     position: relative; height: 13px; width: 116%; margin: 0 -8%;
     background: linear-gradient(180deg, #e3d8c6 0%, #b8a98d 100%);
@@ -413,6 +413,69 @@
     .flow-arrow .pulse, .flow-arrow-v .pulse-v, .erp-live i, .erp-scan { animation: none !important; }
     .erp-scan { opacity: 0; }
   }
+
+  /* ---------- Use-case tabs ---------- */
+  .agent-tabs {
+    display: flex; flex-direction: column; gap: 6px; padding: 6px; width: 100%; max-width: 640px;
+    border-radius: 16px; background: var(--paper); border: 1px solid var(--rule-strong);
+    box-shadow: 0 12px 32px -18px rgba(42,21,5,.34);
+  }
+  .agent-tab {
+    position: relative; display: flex; align-items: center; gap: 11px; flex: 1;
+    padding: .8rem 1.05rem; border-radius: 11px; border: 0; cursor: pointer; background: transparent;
+    text-align: left; color: var(--ink-soft); font-family: inherit;
+    transition: background .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .agent-tab:hover { background: rgba(42,21,5,.04); }
+  .agent-tab[aria-selected="true"] { background: var(--ink); color: var(--cream-warm); box-shadow: 0 8px 20px -8px rgba(42,21,5,.55); }
+  .at-ic {
+    width: 32px; height: 32px; border-radius: 9px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(165deg, rgba(252,211,77,.22), rgba(220,38,38,.12)); color: var(--rust);
+  }
+  .at-ic svg { width: 18px; height: 18px; }
+  .agent-tab[aria-selected="true"] .at-ic { background: rgba(255,255,255,.14); color: var(--sun-light); }
+  .at-txt { display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+  .at-title { font-weight: 600; font-size: .92rem; letter-spacing: -.01em; white-space: nowrap; }
+  .at-sub { font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: .12em; opacity: .7; margin-top: 2px; }
+  .at-badge {
+    margin-left: auto; align-self: center; flex: 0 0 auto; font-family: var(--font-mono); font-size: 7.5px;
+    text-transform: uppercase; letter-spacing: .1em; padding: 3px 7px; border-radius: 999px;
+    background: rgba(249,115,22,.16); color: var(--rust);
+  }
+  .agent-tab[aria-selected="true"] .at-badge { background: rgba(255,255,255,.18); color: var(--sun-light); }
+  @media (min-width: 768px) { .agent-tabs { flex-direction: row; } }
+
+  /* ---------- Use-case attribute cells ---------- */
+  .attr-cell { border: 1px solid var(--rule-strong); border-radius: 12px; background: var(--paper); padding: 1.1rem 1.15rem; }
+
+  /* ---------- ERPNext-style desk ---------- */
+  .erp { display: flex; flex-direction: column; height: 100%; background: #fff; font-size: 11px; color: #1f272e; }
+  .erp-nav { display: flex; align-items: center; gap: 9px; padding: 7px 11px; border-bottom: 1px solid #ededed; flex: 0 0 auto; }
+  .erp-logo { width: 20px; height: 20px; flex: 0 0 auto; }
+  .erp-search { flex: 1; height: 24px; display: flex; align-items: center; gap: 6px; padding: 0 9px; border-radius: 7px; background: #f4f5f6; border: 1px solid #ededed; color: #9aa2ab; font-size: 9.5px; min-width: 0; overflow: hidden; white-space: nowrap; }
+  .erp-search svg { width: 12px; height: 12px; flex: 0 0 auto; }
+  .erp-navend { display: flex; align-items: center; gap: 7px; flex: 0 0 auto; }
+  .erp-navdot { width: 16px; height: 16px; border-radius: 50%; background: #eef0f2; }
+  .erp-ava { width: 19px; height: 19px; border-radius: 50%; background: linear-gradient(135deg, #2490ef, #1f7fd6); }
+  .erp-main { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 11px 13px; }
+  .erp-titlerow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 9px; flex: 0 0 auto; }
+  .erp-h { font-size: 14px; font-weight: 600; color: #1f272e; }
+  .erp-count { font-size: 11px; font-weight: 400; color: #9aa2ab; margin-left: 7px; }
+  .erp-add { background: #2490ef; color: #fff; font-weight: 500; font-size: 10.5px; padding: 5px 11px; border-radius: 7px; white-space: nowrap; box-shadow: 0 1px 2px rgba(36,144,239,.45); }
+  .erp-list { border: 1px solid #ededed; border-radius: 9px; overflow: hidden; flex: 1; min-height: 0; }
+  .erp-lhead { display: grid; gap: 9px; padding: 7px 11px; background: #fafbfc; border-bottom: 1px solid #ededed; font-size: 8.5px; text-transform: uppercase; letter-spacing: .05em; color: #9aa2ab; align-items: center; }
+  .erp-row { display: grid; gap: 9px; padding: 9px 11px; border-bottom: 1px solid #f2f3f4; align-items: center; }
+  .erp-row:last-child { border-bottom: 0; }
+  .erp-check { width: 13px; height: 13px; border-radius: 3px; border: 1.5px solid #c7ccd1; flex: 0 0 auto; }
+  .erp-id { color: #2490ef; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .erp-cell { color: #42505c; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .erp-ind { display: inline-flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 500; justify-self: end; white-space: nowrap; }
+  .erp-ind::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: 0 0 auto; }
+  .erp-ind-green { color: #28a745; }
+  .erp-ind-blue { color: #2490ef; }
+  .erp-ind-orange { color: #f0921f; }
+  .erp-ind-red { color: #e24c4c; }
+  .erp-ind-gray { color: #9aa2ab; }
 
   /* ---------- Comparison cards ---------- */
   .cmp-card { border-radius: 13px; height: 100%; }
@@ -570,6 +633,18 @@
         <text x="56" y="69" text-anchor="middle" font-family="monospace" font-size="7" fill="#5C3318">MH-12</text>
       </g>
     </symbol>
+    <symbol id="site-photo" viewBox="0 0 178 96">
+      <rect width="178" height="96" fill="#bcd3e0"/>
+      <rect y="64" width="178" height="32" fill="#c9b79a"/>
+      <rect x="18" y="30" width="46" height="34" fill="#9aa6ad"/>
+      <rect x="22" y="34" width="9" height="9" fill="#cfd8dc"/><rect x="35" y="34" width="9" height="9" fill="#cfd8dc"/><rect x="48" y="34" width="9" height="9" fill="#cfd8dc"/>
+      <rect x="22" y="47" width="9" height="9" fill="#cfd8dc"/><rect x="35" y="47" width="9" height="9" fill="#cfd8dc"/><rect x="48" y="47" width="9" height="9" fill="#cfd8dc"/>
+      <rect x="96" y="40" width="40" height="24" fill="#b0bcc2"/>
+      <g stroke="#5C3318" stroke-width="2.4" fill="none"><path d="M120 64 V14 H150"/><path d="M150 14 l0 12"/><path d="M120 22 L150 14"/></g>
+      <rect x="146" y="24" width="5" height="9" fill="#C2410C"/>
+      <rect x="70" y="70" width="20" height="6" rx="1" fill="#F97316"/>
+      <circle cx="74" cy="78" r="3" fill="#2A1505"/><circle cx="86" cy="78" r="3" fill="#2A1505"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -652,266 +727,51 @@
   </div>
 </section>
 
-<!-- ============ USE-CASE MATRIX ============ -->
-<section id="use-cases" class="border-t border-line py-20 md:py-28" style="background:var(--cream)">
-  <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
-    <div class="reveal mb-12 flex flex-col items-center text-center sm:mb-16">
-      <span class="eyebrow mb-4">Where it fits</span>
-      <h2 class="head" style="font-size:var(--fs-h2);line-height:1.08">
-        Not every field is built for autonomy.
-        <span class="sun-text" style="font-weight:700">Supply chain is.</span>
-      </h2>
-    </div>
-
-    <div class="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-3">
-
-      <!-- Column 1: Sales Field Entry (CRM) -->
-      <div class="reveal cmp-card">
-        <div class="cmp-inner">
-          <div class="flex items-center gap-2.5">
-            <span class="mx-emoji" aria-hidden="true">❌</span>
-            <span class="label text-ghost">Sales Field Entry</span>
-          </div>
-          <h3 class="mt-3 text-[1.3rem] font-semibold text-ink" style="letter-spacing:-0.02em">CRM</h3>
-          <div class="mt-2 flex flex-wrap gap-1.5">
-            <span class="cmp-tag">Salesforce</span>
-            <span class="cmp-tag">HubSpot</span>
-          </div>
-          <div class="cmp-divider"></div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">User Profile</p>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Reps on the move; highly distracted.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">Data Entry Friction</p>
-            <span class="mx-pill mx-pill-warn">High</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Reps hate filling out CRM fields; data is usually missing.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">Transaction Complexity</p>
-            <span class="mx-pill mx-pill-low">Low–Medium</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Mostly textual notes, deal stages, and call logs.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">Blame Liability Risk</p>
-            <span class="mx-pill mx-pill-low">Low</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">If a deal stage is wrong, sales forecasting is slightly off.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">Moat Potential</p>
-            <span class="mx-pill mx-pill-low">Low</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Easily replaced by a generic CRM voice-to-text tool.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Column 2: Construction PM -->
-      <div class="reveal reveal-d1 cmp-card">
-        <div class="cmp-inner">
-          <div class="flex items-center gap-2.5">
-            <span class="mx-emoji" aria-hidden="true">🟡</span>
-            <span class="label text-ghost">Construction PM</span>
-          </div>
-          <h3 class="mt-3 text-[1.3rem] font-semibold text-ink" style="letter-spacing:-0.02em">Jira / MS Project</h3>
-          <div class="mt-2 flex flex-wrap gap-1.5">
-            <span class="cmp-tag">Jira</span>
-            <span class="cmp-tag">MS Project</span>
-          </div>
-          <div class="cmp-divider"></div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">User Profile</p>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Site engineers, sub-contractors; hands dirty.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">Data Entry Friction</p>
-            <span class="mx-pill mx-pill-risk">Severe</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Forcing an engineer to open MS Project on a dusty laptop fails.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">Transaction Complexity</p>
-            <span class="mx-pill mx-pill-risk">Extremely High</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Complex dependencies — e.g. "if concrete curing is delayed, shift step 4."</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">Blame Liability Risk</p>
-            <span class="mx-pill mx-pill-risk">Severe</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">If a structural checklist entry is misparsed, it creates safety risks.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label text-muted">Moat Potential</p>
-            <span class="mx-pill mx-pill-warn">High</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Deeply custom semantic graphs required for site blueprints.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Column 3: Supply Chain & Fleet Ops (winner) -->
-      <div class="reveal reveal-d2 cmp-card is-win lg:-translate-y-2">
-        <div class="cmp-inner">
-          <span class="inline-flex w-fit items-center gap-2 rounded-full px-3 py-1" style="background:rgba(249,115,22,.1)">
-            <span class="h-1.5 w-1.5 rounded-full" style="background:var(--sun)"></span>
-            <span class="label" style="color:var(--rust)">The am2am sweet spot</span>
-          </span>
-          <div class="mt-3 flex items-center gap-2.5">
-            <span class="mx-emoji" aria-hidden="true">🚀</span>
-            <span class="label" style="color:var(--rust)">Supply Chain &amp; Fleet Ops</span>
-          </div>
-          <h3 class="mt-2 text-[1.3rem] font-semibold text-ink" style="letter-spacing:-0.02em">ERP</h3>
-          <div class="mt-2 flex flex-wrap gap-1.5">
-            <span class="cmp-tag">SAP</span>
-            <span class="cmp-tag">Oracle</span>
-          </div>
-          <div class="cmp-divider"></div>
-          <div class="mx-attr">
-            <p class="cmp-line-label" style="color:var(--rust)">User Profile</p>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Warehouse managers, dock operators, drivers.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label" style="color:var(--rust)">Data Entry Friction</p>
-            <span class="mx-pill mx-pill-warn">Critical</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">High-velocity updates required to keep logistics moving.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label" style="color:var(--rust)">Transaction Complexity</p>
-            <span class="mx-pill mx-pill-win">Low · Deterministic</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Gate entry, stock count, dispatch verification.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label" style="color:var(--rust)">Blame Liability Risk</p>
-            <span class="mx-pill mx-pill-win">Low</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">Checked easily via cross-references — gate passes, barcodes.</p>
-          </div>
-          <div class="mx-attr">
-            <p class="cmp-line-label" style="color:var(--rust)">Moat Potential</p>
-            <span class="mx-pill mx-pill-win">Maximum</span>
-            <p class="text-[0.92rem] leading-relaxed text-inksoft">High transaction density embeds your node into the ledger.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROCESS FLOW: INPUT -> AMY -> OUTPUT ============ -->
-<section class="relative overflow-hidden border-t border-line py-20 md:py-28">
-  <div class="pointer-events-none absolute left-1/2 top-1/2 h-[80%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true"
-       style="background:radial-gradient(circle, rgba(252,211,77,0.18), transparent 66%)"></div>
+<!-- ============ USE-CASE SHOWCASE (tabbed agents) ============ -->
+<section id="use-cases" class="relative overflow-hidden border-t border-line py-20 md:py-28" style="background:var(--cream)">
+  <div class="pointer-events-none absolute left-1/2 top-1/3 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true"
+       style="background:radial-gradient(circle, rgba(252,211,77,0.16), transparent 66%)"></div>
 
   <div class="relative z-10 mx-auto max-w-content px-5 sm:px-8 lg:px-12">
-    <div class="reveal mb-14 flex flex-col items-center text-center sm:mb-16">
-      <span class="eyebrow mb-4">How it works</span>
+    <div class="reveal mb-10 flex flex-col items-center text-center sm:mb-12">
+      <span class="eyebrow mb-4">Use cases</span>
       <h2 class="head" style="font-size:var(--fs-h2);line-height:1.08">
-        From a field message to a system of record.
-        <span class="sun-text" style="font-weight:700">In seconds.</span>
+        One platform.
+        <span class="sun-text" style="font-weight:700">Three field agents.</span>
       </h2>
+      <p class="mt-5 max-w-[58ch] text-inksoft" style="font-size:var(--fs-body-lg);font-weight:500;line-height:1.6">
+        Pick a use case to see exactly how a field message becomes a verified system record.
+      </p>
     </div>
 
-    <div id="heroFlow" class="flow-anim grid grid-cols-1 items-center gap-12 lg:grid-cols-[auto_minmax(80px,1fr)_auto] lg:gap-10">
+    <!-- Agent tabs -->
+    <div class="reveal mb-12 flex justify-center sm:mb-14">
+      <div class="agent-tabs" role="tablist" aria-label="Agent use cases">
+        <button type="button" class="agent-tab" role="tab" data-agent="sales" aria-selected="false">
+          <span class="at-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span>
+          <span class="at-txt"><span class="at-title">Sales Field Entry</span><span class="at-sub">CRM</span></span>
+        </button>
+        <button type="button" class="agent-tab" role="tab" data-agent="pm" aria-selected="false">
+          <span class="at-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h6"/></svg></span>
+          <span class="at-txt"><span class="at-title">Project Management</span><span class="at-sub">Jira / MS Project</span></span>
+        </button>
+        <button type="button" class="agent-tab" role="tab" data-agent="supply" aria-selected="true">
+          <span class="at-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1"/><path d="M14 9h4l3 3v5a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span>
+          <span class="at-txt"><span class="at-title">Supply Chain &amp; Fleet</span><span class="at-sub">ERP</span></span>
+          <span class="at-badge">Sweet spot</span>
+        </button>
+      </div>
+    </div>
 
-      <!-- Stage 1: Input -->
+    <!-- Flow: input -> AMY -> output -->
+    <div id="heroFlow" class="flow-anim grid grid-cols-1 items-center gap-12 xl:grid-cols-[auto_minmax(80px,1fr)_auto] xl:gap-8">
+
+      <!-- Stage 1: Input (phone) -->
       <div class="hero-stage">
-        <span class="label text-muted">01 · Input</span>
+        <span class="label text-muted">01 · Field input</span>
         <div class="phone relative z-[2]" aria-hidden="true">
-          <div class="phone-screen">
-            <div class="phone-notch"></div>
-
-            <!-- WhatsApp view -->
-            <div class="phone-view" data-view="whatsapp">
-              <div class="wa-header">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,.85)"><path d="m15 18-6-6 6-6"/></svg>
-                <span class="wa-avatar">
-                  <svg viewBox="0 0 240 240" width="22" height="22"><use href="#logo-mark" /></svg>
-                </span>
-                <span class="leading-tight">
-                  <span class="block text-[12.5px] font-semibold">am2am Operations</span>
-                  <span class="block text-[9.5px]" style="color:rgba(255,255,255,.7)">online</span>
-                </span>
-                <svg class="ml-auto" width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,.8)"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-              </div>
-              <div class="wa-body">
-                <div class="wa-msg wa-out" data-loop="msg1">
-                  <span class="wa-photo">
-                    <svg width="178" height="96" viewBox="0 0 178 96" role="img" aria-label="Bill of lading photo"><use href="#bol-photo" /></svg>
-                  </span>
-                  Truck MH-12 arrived. Unloaded 50 cartons, 2 damaged.
-                  <span class="wa-time">09:14
-                    <svg width="14" height="11" viewBox="0 0 16 11" fill="none" stroke="#53bdeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.2 3.4L10 2"/><path d="M6 9.4 11.6 2"/></svg>
-                  </span>
-                </div>
-                <div class="wa-proc" data-loop="proc">
-                  <span class="spinner"></span>
-                  <span class="shield-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg>
-                  </span>
-                  Validating and syncing securely
-                </div>
-                <div class="wa-msg wa-in" data-loop="msg2">
-                  <span class="wa-doc">
-                    <span class="wa-doc-ic">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                    </span>
-                    <span class="leading-tight">
-                      <span class="block text-[10.5px] font-semibold" style="color:#111b21">Gate-Pass-MH12.pdf</span>
-                      <span class="block text-[9px]" style="color:#667781">PDF Document, 1 page</span>
-                    </span>
-                  </span>
-                  Digital gate pass issued. Inventory record updated.
-                  <span class="wa-time">09:14</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Teams view -->
-            <div class="phone-view" data-view="teams" hidden>
-              <div class="tm-header">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,.85)"><path d="m15 18-6-6 6-6"/></svg>
-                <span class="tm-avatar">
-                  <svg viewBox="0 0 240 240" width="22" height="22"><use href="#logo-mark" /></svg>
-                </span>
-                <span class="leading-tight">
-                  <span class="block text-[12.5px] font-semibold">am2am Operations</span>
-                  <span class="block text-[9.5px]" style="color:rgba(255,255,255,.75)">Teams · Logistics</span>
-                </span>
-                <svg class="ml-auto" width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,.8)"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-              </div>
-              <div class="tm-body">
-                <div class="tm-msg tm-out" data-loop="msg1">
-                  <span class="tm-name">Dock Operator</span>
-                  <span class="wa-photo">
-                    <svg width="100%" height="92" viewBox="0 0 178 96" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bill of lading photo"><use href="#bol-photo" /></svg>
-                  </span>
-                  Truck MH-12 arrived. Unloaded 50 cartons, 2 damaged.
-                  <span class="tm-time">09:14 · Sent</span>
-                </div>
-                <div class="tm-proc" data-loop="proc">
-                  <span class="spinner"></span>
-                  <span class="shield-badge">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg>
-                  </span>
-                  Validating and syncing securely
-                </div>
-                <div class="tm-msg tm-in" data-loop="msg2">
-                  <span class="tm-name">AMY</span>
-                  <span class="tm-doc">
-                    <span class="tm-doc-ic">
-                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-                    </span>
-                    <span class="leading-tight">
-                      <span class="block text-[10.5px] font-semibold" style="color:#242424">Gate-Pass-MH12.pdf</span>
-                      <span class="block text-[9px]" style="color:#616161">PDF Document · 1 page</span>
-                    </span>
-                  </span>
-                  Digital gate pass issued. Inventory record updated.
-                  <span class="tm-time">09:14</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
+          <div class="phone-screen" id="phoneScreen"><!-- rendered by JS --></div>
         </div>
-
-        <!-- Channel toggle -->
         <div class="chan-toggle" role="group" aria-label="Messaging channel">
           <button type="button" class="chan-btn" data-chan="whatsapp" aria-pressed="true">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -930,50 +790,24 @@
           <span class="amy-name">AMY</span>
           <span class="amy-sub">AI middleware</span>
         </span>
-        <svg class="flow-arrow hidden lg:block" viewBox="0 0 220 24" role="img" aria-label="processes into">
+        <svg class="flow-arrow hidden xl:block" viewBox="0 0 220 24" role="img" aria-label="processes into">
           <line class="track" x1="6" y1="12" x2="198" y2="12" />
           <path class="pulse" d="M6 12 H198" fill="none" />
           <path class="head" d="M196 5 L212 12 L196 19 Z" />
         </svg>
-        <svg class="flow-arrow-v lg:hidden" width="26" height="56" viewBox="0 0 26 56" role="img" aria-label="processes into">
+        <svg class="flow-arrow-v xl:hidden" width="26" height="56" viewBox="0 0 26 56" role="img" aria-label="processes into">
           <line class="track" x1="13" y1="4" x2="13" y2="44" stroke="var(--rule-strong)" stroke-width="2" />
           <path class="pulse-v" d="M13 4 V44" fill="none" />
           <path d="M7 43 L13 54 L19 43 Z" fill="currentColor" />
         </svg>
       </div>
 
-      <!-- Stage 3: Output (laptop / ERP) -->
+      <!-- Stage 3: Output (laptop / ERPNext) -->
       <div class="flex flex-col items-center gap-5">
-        <span class="label text-muted">03 · Output</span>
+        <span class="label text-muted">03 · System of record</span>
         <div class="laptop" aria-hidden="true">
           <div class="laptop-lid">
-            <div class="laptop-screen">
-              <div class="erp-bar">
-                <span class="erp-dots">
-                  <span class="erp-dot" style="background:#ff5f56"></span>
-                  <span class="erp-dot" style="background:#ffbd2e"></span>
-                  <span class="erp-dot" style="background:#27c93f"></span>
-                </span>
-                <span class="erp-title">Central ERP · Inventory</span>
-                <span class="erp-live"><i></i> Live</span>
-              </div>
-              <div class="erp-scanwrap"><div class="erp-scan"></div></div>
-              <div class="db-row db-row-head">
-                <span>Truck ID</span><span>Cartons</span><span>Exceptions</span><span>Status</span>
-              </div>
-              <div class="db-row">
-                <span>MH-09</span><span>120</span><span style="color:var(--muted)">None</span><span><span class="db-pill db-pill-ok">Logged</span></span>
-              </div>
-              <div class="db-row">
-                <span>KA-04</span><span>88</span><span style="color:var(--muted)">1 short</span><span><span class="db-pill db-pill-ok">Logged</span></span>
-              </div>
-              <div class="db-row db-row-live">
-                <span class="dbcell" style="font-weight:600;color:var(--ink)">MH-12</span>
-                <span class="dbcell" style="font-weight:600;color:var(--ink)">50</span>
-                <span class="dbcell" style="color:var(--sun-deep);font-weight:600">2 damaged</span>
-                <span class="dbcell"><span class="db-pill db-pill-ok">Logged</span></span>
-              </div>
-            </div>
+            <div class="laptop-screen" id="erpScreen"><!-- rendered by JS --></div>
           </div>
           <div class="laptop-deck"></div>
         </div>
@@ -996,6 +830,9 @@
       </div>
 
     </div>
+
+    <!-- Per-agent use-case attributes -->
+    <div id="agentAttrs" class="reveal mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:mt-16"><!-- rendered by JS --></div>
   </div>
 </section>
 
@@ -1293,47 +1130,203 @@
     reveals.forEach(function (el) { io.observe(el); });
   }
 
-  /* --- Channel toggle: swap WhatsApp / Teams view inside the phone --- */
-  var chanToggle = document.querySelector('.chan-toggle');
-  if (chanToggle) {
-    var chanBtns = chanToggle.querySelectorAll('.chan-btn');
-    var phoneViews = document.querySelectorAll('.phone-view');
-    chanBtns.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var chan = btn.getAttribute('data-chan');
-        chanBtns.forEach(function (b) {
-          b.setAttribute('aria-pressed', String(b === btn));
-        });
-        phoneViews.forEach(function (v) {
-          v.hidden = (v.getAttribute('data-view') !== chan);
-        });
-      });
-    });
-  }
+  /* --- Use-case showcase: tab-driven phone (WhatsApp/Teams) + ERPNext + attributes --- */
+  var flow = document.getElementById('heroFlow');
+  if (flow) {
+    var phoneScreen = document.getElementById('phoneScreen');
+    var erpScreen = document.getElementById('erpScreen');
+    var attrsEl = document.getElementById('agentAttrs');
+    var agentTabs = Array.prototype.slice.call(document.querySelectorAll('.agent-tab'));
+    var chanBtns = Array.prototype.slice.call(document.querySelectorAll('.chan-btn'));
+    var activeAgent = 'supply';
+    var activeChan = 'whatsapp';
 
-  /* --- Hero loop animation: photo -> processing -> database row -> PDF receipt --- */
-  var stage = document.getElementById('heroFlow');
-  if (stage) {
-    function applyPhase(n) {
-      stage.classList.remove('s1', 's2', 's3', 's4');
-      if (n >= 1) stage.classList.add('s1');
-      if (n >= 2) stage.classList.add('s2');
-      if (n >= 3) stage.classList.add('s3');
-      if (n >= 4) stage.classList.add('s4');
+    var TICKS = '<svg width="14" height="11" viewBox="0 0 16 11" fill="none" stroke="#53bdeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.2 3.4L10 2"/><path d="M6 9.4 11.6 2"/></svg>';
+    var SHIELD = '<span class="shield-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg></span>';
+    var LOGO = '<svg viewBox="0 0 240 240" width="22" height="22"><use href="#logo-mark"/></svg>';
+    var DOTS = '<svg class="ml-auto" width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,.8)"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>';
+    var BACK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,.85)"><path d="m15 18-6-6 6-6"/></svg>';
+
+    function photo(kind, h) {
+      if (!kind) return '';
+      return '<span class="wa-photo"><svg width="100%" height="' + (h || 104) + '" viewBox="0 0 178 96" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Field photo"><use href="#' + kind + '"/></svg></span>';
     }
-    if (reduceMotion) {
-      applyPhase(4);
-    } else {
-      function runLoop() {
-        applyPhase(0);
-        setTimeout(function () { applyPhase(1); }, 700);
-        setTimeout(function () { applyPhase(2); }, 2100);
-        setTimeout(function () { applyPhase(3); }, 3700);
-        setTimeout(function () { applyPhase(4); }, 5300);
+    function docIcon(kind) {
+      if (kind === 'record') return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2490ef" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>';
+      return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>';
+    }
+
+    function waPhone(a) {
+      var m = a.msgs;
+      return '<div class="phone-notch"></div>'
+        + '<div class="wa-header">' + BACK + '<span class="wa-avatar">' + LOGO + '</span>'
+        + '<span class="leading-tight"><span class="block text-[12.5px] font-semibold">' + a.head.name + '</span><span class="block text-[9.5px]" style="color:rgba(255,255,255,.7)">online</span></span>' + DOTS + '</div>'
+        + '<div class="wa-body">'
+        + '<div class="wa-msg wa-out" data-loop="msg1">' + photo(m.photo) + m.out + '<span class="wa-time">' + m.time + ' ' + TICKS + '</span></div>'
+        + '<div class="wa-proc" data-loop="proc"><span class="spinner"></span>' + SHIELD + m.proc + '</div>'
+        + '<div class="wa-msg wa-in" data-loop="msg2"><span class="wa-doc"><span class="wa-doc-ic">' + docIcon(m.doc.kind) + '</span><span class="leading-tight"><span class="block text-[10.5px] font-semibold" style="color:#111b21">' + m.doc.name + '</span><span class="block text-[9px]" style="color:#667781">' + m.doc.meta + '</span></span></span>' + m.reply + '<span class="wa-time">' + m.time + '</span></div>'
+        + '</div>';
+    }
+    function tmPhone(a) {
+      var m = a.msgs;
+      return '<div class="phone-notch"></div>'
+        + '<div class="tm-header">' + BACK + '<span class="tm-avatar">' + LOGO + '</span>'
+        + '<span class="leading-tight"><span class="block text-[12.5px] font-semibold">' + a.head.name + '</span><span class="block text-[9.5px]" style="color:rgba(255,255,255,.75)">Teams · ' + a.head.team + '</span></span>' + DOTS + '</div>'
+        + '<div class="tm-body">'
+        + '<div class="tm-msg tm-out" data-loop="msg1"><span class="tm-name">' + a.head.role + '</span>' + photo(m.photo, 92) + m.out + '<span class="tm-time">' + m.time + ' · Sent</span></div>'
+        + '<div class="tm-proc" data-loop="proc"><span class="spinner"></span>' + SHIELD + m.proc + '</div>'
+        + '<div class="tm-msg tm-in" data-loop="msg2"><span class="tm-name">AMY</span><span class="tm-doc"><span class="tm-doc-ic">' + docIcon(m.doc.kind) + '</span><span class="leading-tight"><span class="block text-[10.5px] font-semibold" style="color:#242424">' + m.doc.name + '</span><span class="block text-[9px]" style="color:#616161">' + m.doc.meta + '</span></span></span>' + m.reply + '<span class="tm-time">' + m.time + '</span></div>'
+        + '</div>';
+    }
+
+    var ERP_LOGO = '<svg class="erp-logo" viewBox="0 0 24 24" fill="none"><path d="M12 2 21 7v10l-9 5-9-5V7z" fill="#2490ef"/><path d="M12 2 21 7l-9 5-9-5z" fill="#5aa9f6"/><path d="M12 12v10l9-5V7z" fill="#1c79cf"/></svg>';
+    var ERP_SEARCH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Search or type a command (Ctrl + G)';
+
+    function erpHTML(a) {
+      var e = a.erp;
+      var head = '<div class="erp-lhead" style="grid-template-columns:' + e.grid + '"><span></span>' + e.cols.map(function (c) { return '<span>' + c + '</span>'; }).join('') + '<span></span></div>';
+      function row(r, live) {
+        var dc = live ? ' dbcell' : '';
+        var s = '<div class="erp-row' + (live ? ' db-row-live' : '') + '" style="grid-template-columns:' + e.grid + '">';
+        s += '<span class="erp-check' + dc + '"></span>';
+        s += '<span class="erp-id' + dc + '">' + r.id + '</span>';
+        s += r.cells.map(function (c) { return '<span class="erp-cell' + dc + '">' + c + '</span>'; }).join('');
+        s += '<span class="erp-ind erp-ind-' + r.ind.cls + dc + '">' + r.ind.label + '</span>';
+        return s + '</div>';
       }
-      runLoop();
-      setInterval(runLoop, 9000);
+      var rows = e.rows.map(function (r) { return row(r, false); }).join('') + row(e.live, true);
+      return '<div class="erp">'
+        + '<div class="erp-nav">' + ERP_LOGO + '<span class="erp-search">' + ERP_SEARCH + '</span><span class="erp-navend"><span class="erp-navdot"></span><span class="erp-ava"></span></span></div>'
+        + '<div class="erp-main"><div class="erp-titlerow"><div><span class="erp-h">' + e.title + '</span><span class="erp-count">' + e.count + '</span></div><span class="erp-add">+ ' + e.add + '</span></div>'
+        + '<div class="erp-list">' + head + rows + '</div></div></div>';
     }
+
+    function attrsHTML(a) {
+      return a.attrs.map(function (at) {
+        return '<div class="attr-cell"><p class="cmp-line-label text-muted">' + at.label + '</p><span class="mx-pill mx-pill-' + at.cls + '">' + at.pill + '</span><p class="text-[0.9rem] leading-relaxed text-inksoft">' + at.text + '</p></div>';
+      }).join('');
+    }
+
+    var AGENTS = {
+      sales: {
+        head: { name: 'am2am Sales Desk', team: 'Revenue', role: 'Field Sales Rep' },
+        msgs: {
+          time: '09:14', photo: null,
+          out: 'Met Acme Corp — verbal yes on the ₹12L annual plan. Move stage to Negotiation, close target Friday.',
+          proc: 'Updating CRM securely',
+          doc: { kind: 'record', name: 'CRM-OPP-0042', meta: 'Opportunity · Negotiation' },
+          reply: 'Opportunity updated. Follow-up reminder set for Friday.'
+        },
+        erp: {
+          title: 'Opportunity', count: '142', add: 'Add Opportunity',
+          grid: '14px 1.1fr 1fr 0.95fr auto', cols: ['Opportunity', 'Customer', 'Stage'],
+          rows: [
+            { id: 'CRM-OPP-0039', cells: ['Globex', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
+            { id: 'CRM-OPP-0041', cells: ['Initech', 'Proposal'], ind: { cls: 'orange', label: 'Replied' } }
+          ],
+          live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'blue', label: 'Open' } }
+        },
+        attrs: [
+          { label: 'Data Entry Friction', cls: 'warn', pill: 'High', text: 'Reps hate filling out CRM fields; data is usually missing.' },
+          { label: 'Transaction Complexity', cls: 'low', pill: 'Low–Medium', text: 'Mostly textual notes, deal stages, and call logs.' },
+          { label: 'Blame Liability Risk', cls: 'low', pill: 'Low', text: 'If a deal stage is wrong, forecasting is only slightly off.' },
+          { label: 'Moat Potential', cls: 'low', pill: 'Low', text: 'Easily replaced by a generic CRM voice-to-text tool.' }
+        ]
+      },
+      pm: {
+        head: { name: 'am2am Projects', team: 'Site Ops', role: 'Site Engineer' },
+        msgs: {
+          time: '10:02', photo: 'site-photo',
+          out: "Foundation pour done at Tower B. Curing started — electricals can't start for 2 days.",
+          proc: 'Recalculating dependencies',
+          doc: { kind: 'pdf', name: 'Schedule-TowerB.pdf', meta: 'Gantt update · 3 tasks shifted' },
+          reply: 'Task TASK-0188 shifted +2 days. 3 dependent tasks rescheduled.'
+        },
+        erp: {
+          title: 'Task', count: '1,204', add: 'Add Task',
+          grid: '14px 0.9fr 1.2fr 0.7fr auto', cols: ['Task', 'Subject', 'Progress'],
+          rows: [
+            { id: 'TASK-0186', cells: ['Foundation – Tower B', '100%'], ind: { cls: 'green', label: 'Completed' } },
+            { id: 'TASK-0189', cells: ['Plumbing – Tower B', '60%'], ind: { cls: 'blue', label: 'Working' } }
+          ],
+          live: { id: 'TASK-0188', cells: ['Electricals – Tower B', '+2 days'], ind: { cls: 'orange', label: 'Open' } }
+        },
+        attrs: [
+          { label: 'Data Entry Friction', cls: 'risk', pill: 'Severe', text: 'Forcing an engineer to open MS Project on a dusty laptop fails.' },
+          { label: 'Transaction Complexity', cls: 'risk', pill: 'Extremely High', text: 'Complex dependencies — "if curing is delayed, shift step 4."' },
+          { label: 'Blame Liability Risk', cls: 'risk', pill: 'Severe', text: 'A misparsed structural checklist entry creates safety risks.' },
+          { label: 'Moat Potential', cls: 'warn', pill: 'High', text: 'Deeply custom semantic graphs required for site blueprints.' }
+        ]
+      },
+      supply: {
+        head: { name: 'am2am Operations', team: 'Logistics', role: 'Dock Operator' },
+        msgs: {
+          time: '09:14', photo: 'bol-photo',
+          out: 'Truck MH-12 arrived. Unloaded 50 cartons, 2 damaged.',
+          proc: 'Validating and syncing securely',
+          doc: { kind: 'pdf', name: 'Gate-Pass-MH12.pdf', meta: 'PDF Document · 1 page' },
+          reply: 'Digital gate pass issued. Inventory record updated.'
+        },
+        erp: {
+          title: 'Stock Entry', count: '3,981', add: 'Add Stock Entry',
+          grid: '14px 1.1fr 1fr 0.55fr auto', cols: ['Stock Entry', 'Item', 'Qty'],
+          rows: [
+            { id: 'MAT-STE-0091', cells: ['Cartons · MH-09', '120'], ind: { cls: 'green', label: 'Submitted' } },
+            { id: 'MAT-STE-0092', cells: ['Cartons · KA-04', '88'], ind: { cls: 'green', label: 'Submitted' } }
+          ],
+          live: { id: 'MAT-STE-0093', cells: ['Cartons · MH-12', '50'], ind: { cls: 'green', label: 'Submitted' } }
+        },
+        attrs: [
+          { label: 'Data Entry Friction', cls: 'warn', pill: 'Critical', text: 'High-velocity updates required to keep logistics moving.' },
+          { label: 'Transaction Complexity', cls: 'win', pill: 'Low · Deterministic', text: 'Gate entry, stock count, dispatch verification.' },
+          { label: 'Blame Liability Risk', cls: 'win', pill: 'Low', text: 'Checked easily via cross-references — gate passes, barcodes.' },
+          { label: 'Moat Potential', cls: 'win', pill: 'Maximum', text: 'High transaction density embeds your node into the ledger.' }
+        ]
+      }
+    };
+
+    function renderPhone() { phoneScreen.innerHTML = (activeChan === 'teams' ? tmPhone : waPhone)(AGENTS[activeAgent]); }
+    function renderErp() { erpScreen.innerHTML = erpHTML(AGENTS[activeAgent]); }
+    function renderAttrs() { attrsEl.innerHTML = attrsHTML(AGENTS[activeAgent]); }
+
+    var timers = [], interval = null;
+    function applyPhase(n) {
+      flow.classList.remove('s1', 's2', 's3', 's4');
+      for (var i = 1; i <= n; i++) flow.classList.add('s' + i);
+    }
+    function clearLoop() {
+      timers.forEach(clearTimeout); timers = [];
+      if (interval) { clearInterval(interval); interval = null; }
+    }
+    function startLoop() {
+      clearLoop();
+      if (reduceMotion) { applyPhase(4); return; }
+      function run() {
+        applyPhase(0);
+        timers.push(setTimeout(function () { applyPhase(1); }, 700));
+        timers.push(setTimeout(function () { applyPhase(2); }, 2100));
+        timers.push(setTimeout(function () { applyPhase(3); }, 3700));
+        timers.push(setTimeout(function () { applyPhase(4); }, 5300));
+      }
+      run();
+      interval = setInterval(run, 9000);
+    }
+
+    function selectAgent(id) {
+      activeAgent = id;
+      agentTabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-agent') === id)); });
+      renderPhone(); renderErp(); renderAttrs(); startLoop();
+    }
+    function selectChan(c) {
+      activeChan = c;
+      chanBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-chan') === c)); });
+      renderPhone(); startLoop();
+    }
+
+    agentTabs.forEach(function (t) { t.addEventListener('click', function () { selectAgent(t.getAttribute('data-agent')); }); });
+    chanBtns.forEach(function (b) { b.addEventListener('click', function () { selectChan(b.getAttribute('data-chan')); }); });
+
+    renderPhone(); renderErp(); renderAttrs(); startLoop();
   }
 
   /* --- Wizard --- */

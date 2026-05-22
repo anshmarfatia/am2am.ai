@@ -14,6 +14,62 @@
 <meta property="og:image" content="https://am2am.ai/og-image.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="am2am.png" type="image/png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is AMY, exactly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AMY is your dedicated Fractional Chief AI Officer and intelligent middleware. Instead of a standard chatbot, AMY operates directly via WhatsApp to manage your field operations, instantly validating and syncing field data back to your core ledgers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is AMY different from generic voice-to-text tools or ChatGPT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generic tools generate text. AMY executes deterministic updates. AMY understands complex transaction density and semantic graphs (like site blueprints), securely mapping conversational input directly into structural fields within SAP, Oracle, Jira, or MS Project without manual data entry."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What workflows can AMY actually handle?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AMY eliminates high-friction field data entry. Use cases include Sales Field Entry (logging deal stages and call notes for distracted reps), Construction PM (shifting project dependencies for engineers with dirty hands), and Supply Chain Ops (verifying gate entry, stock counts, and dispatch)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What systems does AMY integrate with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AMY instantly syncs with SAP, Oracle, Jira, MS Project, standard CRMs, and custom ERPs. We embed our nodes directly into your system's ledger."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does setup take and what is the required effort?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Zero setup is required by your team—it is 100% managed by us. We will architect, build, and launch a working prototype for your operations in just 96 hours."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does AMY handle high-liability risks like construction safety or fleet tracking?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AMY utilizes deterministic logic (e.g., cross-referencing gate passes or barcodes) and custom semantic graphs to ensure data is parsed flawlessly. This eliminates the severe risks of misparsed structural checklists or skipped dependencies."
+      }
+    }
+  ]
+}
+</script>
 <script>document.documentElement.className += ' js';</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -588,6 +644,29 @@
     .btn-primary:hover { transform: none; }
     *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   }
+
+  /* ---------- FAQ accordion ---------- */
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+  .faq-q { margin: 0; }
+  .faq-trigger {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+    padding: 1.4rem 0.25rem; background: transparent; border: 0; cursor: pointer;
+    font-family: var(--font-body); font-weight: 600; font-size: 1.06rem; letter-spacing: -.01em;
+    color: var(--ink); text-align: left; transition: color .2s var(--ease);
+  }
+  .faq-trigger:hover { color: var(--rust); }
+  .faq-chevron { flex: 0 0 auto; width: 20px; height: 20px; color: var(--rust); transition: transform .3s var(--ease); }
+  .faq-item[data-state="open"] .faq-trigger { color: var(--rust); }
+  .faq-item[data-state="open"] .faq-chevron { transform: rotate(180deg); }
+  .faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s var(--ease); }
+  .faq-item[data-state="open"] .faq-panel { grid-template-rows: 1fr; }
+  .faq-panel-inner { overflow: hidden; }
+  .faq-panel p { margin: 0; padding: 0 2.5rem 1.5rem 0.25rem; color: var(--ink-soft); font-size: 1rem; line-height: 1.68; max-width: 64ch; }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-panel { transition: none; }
+    .faq-chevron { transition: none; }
+  }
 </style>
 </head>
 
@@ -662,6 +741,7 @@
     <div class="ml-1 hidden items-center lg:flex">
       <a href="#integrations" class="nav-link">Integrations</a>
       <a href="#get-started" class="nav-link">Get started</a>
+      <a href="#faq" class="nav-link">FAQ</a>
     </div>
 
     <div class="ml-auto flex items-center gap-2">
@@ -677,6 +757,7 @@
     <nav aria-label="Mobile" class="flex flex-col p-2">
       <a href="#integrations" class="nav-link !text-[0.74rem] px-3 py-3">Integrations</a>
       <a href="#get-started" class="nav-link !text-[0.74rem] px-3 py-3">Get started</a>
+      <a href="#faq" class="nav-link !text-[0.74rem] px-3 py-3">FAQ</a>
       <a href="https://cal.com/am2am-demo" class="btn btn-mono btn-sm btn-primary mt-1">Schedule consultation</a>
     </nav>
   </div>
@@ -1034,6 +1115,118 @@
   </div>
 </section>
 
+<!-- ============ FAQ ============ -->
+<section id="faq" class="border-t border-line py-20 md:py-28">
+  <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-1 gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+
+      <!-- Intro -->
+      <div class="reveal self-start lg:sticky lg:top-28">
+        <span class="eyebrow mb-4">FAQ</span>
+        <h2 class="head" style="font-size:var(--fs-h2);line-height:1.08">
+          Questions about
+          <span class="sun-text" style="font-weight:700">AMY</span>?
+        </h2>
+        <p class="mt-5 max-w-[42ch] text-inksoft" style="font-size:var(--fs-body-lg);font-weight:500;line-height:1.6">
+          How your Fractional CAIO works, what she connects to, and what it takes to launch.
+        </p>
+        <a href="https://cal.com/am2am-demo" class="btn btn-ghost group mt-8">
+          Still have questions? Talk to us
+          <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Accordion -->
+      <div class="reveal reveal-d1" id="faqList">
+        <div class="faq-item" data-state="open">
+          <h3 class="faq-q">
+            <button type="button" class="faq-trigger" id="faq-q-1" aria-expanded="true" aria-controls="faq-a-1">
+              <span>What is AMY, exactly?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </h3>
+          <div class="faq-panel" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
+            <div class="faq-panel-inner">
+              <p>AMY is your dedicated Fractional Chief AI Officer and intelligent middleware. Instead of a standard chatbot, AMY operates directly via WhatsApp to manage your field operations, instantly validating and syncing field data back to your core ledgers.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-state="closed">
+          <h3 class="faq-q">
+            <button type="button" class="faq-trigger" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
+              <span>How is AMY different from generic voice-to-text tools or ChatGPT?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </h3>
+          <div class="faq-panel" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
+            <div class="faq-panel-inner">
+              <p>Generic tools generate text. AMY executes deterministic updates. AMY understands complex transaction density and semantic graphs (like site blueprints), securely mapping conversational input directly into structural fields within SAP, Oracle, Jira, or MS Project without manual data entry.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-state="closed">
+          <h3 class="faq-q">
+            <button type="button" class="faq-trigger" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
+              <span>What workflows can AMY actually handle?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </h3>
+          <div class="faq-panel" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
+            <div class="faq-panel-inner">
+              <p>AMY eliminates high-friction field data entry. Use cases include Sales Field Entry (logging deal stages and call notes for distracted reps), Construction PM (shifting project dependencies for engineers with dirty hands), and Supply Chain Ops (verifying gate entry, stock counts, and dispatch).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-state="closed">
+          <h3 class="faq-q">
+            <button type="button" class="faq-trigger" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
+              <span>What systems does AMY integrate with?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </h3>
+          <div class="faq-panel" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
+            <div class="faq-panel-inner">
+              <p>AMY instantly syncs with SAP, Oracle, Jira, MS Project, standard CRMs, and custom ERPs. We embed our nodes directly into your system's ledger.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-state="closed">
+          <h3 class="faq-q">
+            <button type="button" class="faq-trigger" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
+              <span>How long does setup take and what is the required effort?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </h3>
+          <div class="faq-panel" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+            <div class="faq-panel-inner">
+              <p>Zero setup is required by your team&mdash;it is 100% managed by us. We will architect, build, and launch a working prototype for your operations in just 96 hours.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item" data-state="closed">
+          <h3 class="faq-q">
+            <button type="button" class="faq-trigger" id="faq-q-6" aria-expanded="false" aria-controls="faq-a-6">
+              <span>How does AMY handle high-liability risks like construction safety or fleet tracking?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </h3>
+          <div class="faq-panel" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
+            <div class="faq-panel-inner">
+              <p>AMY utilizes deterministic logic (e.g., cross-referencing gate passes or barcodes) and custom semantic graphs to ensure data is parsed flawlessly. This eliminates the severe risks of misparsed structural checklists or skipped dependencies.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- ============ FOOTER ============ -->
@@ -1056,6 +1249,7 @@
           <h3 class="label text-muted">Platform</h3>
           <a href="#integrations" class="ulink text-sm text-inksoft">Integrations</a>
           <a href="#get-started" class="ulink text-sm text-inksoft">Get started</a>
+          <a href="#faq" class="ulink text-sm text-inksoft">FAQ</a>
         </div>
         <div class="flex flex-col gap-5">
           <h3 class="label text-muted">Company</h3>
@@ -1433,6 +1627,35 @@
     });
 
     showStep(1);
+  }
+
+  /* --- FAQ accordion (single-open, collapsible) --- */
+  var faqList = document.getElementById('faqList');
+  if (faqList) {
+    var faqItems = Array.prototype.slice.call(faqList.querySelectorAll('.faq-item'));
+    var faqTriggers = faqItems.map(function (it) { return it.querySelector('.faq-trigger'); });
+    faqTriggers.forEach(function (btn, idx) {
+      btn.addEventListener('click', function () {
+        var item = faqItems[idx];
+        var willOpen = item.getAttribute('data-state') !== 'open';
+        faqItems.forEach(function (it) {
+          it.setAttribute('data-state', 'closed');
+          it.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+        });
+        if (willOpen) {
+          item.setAttribute('data-state', 'open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      btn.addEventListener('keydown', function (e) {
+        var k = e.key, last = faqTriggers.length - 1, target = null;
+        if (k === 'ArrowDown') target = faqTriggers[(idx + 1) % faqTriggers.length];
+        else if (k === 'ArrowUp') target = faqTriggers[(idx - 1 + faqTriggers.length) % faqTriggers.length];
+        else if (k === 'Home') target = faqTriggers[0];
+        else if (k === 'End') target = faqTriggers[last];
+        if (target) { e.preventDefault(); target.focus(); }
+      });
+    });
   }
 })();
 </script>

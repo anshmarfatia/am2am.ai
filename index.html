@@ -286,21 +286,132 @@
   .db-row-live { transition: background .5s var(--ease); }
   .db-row-live .dbcell { opacity: 0; transition: opacity .45s var(--ease); }
 
-  /* Loop animation states (classes toggled on .hero-stage) */
-  .hero-stage [data-loop] { transition: opacity .45s var(--ease), transform .45s var(--ease); }
-  .hero-stage [data-loop="msg1"],
-  .hero-stage [data-loop="proc"],
-  .hero-stage [data-loop="msg2"] { opacity: 0; transform: translateY(9px) scale(.97); }
-  .hero-stage.s1 [data-loop="msg1"] { opacity: 1; transform: none; }
-  .hero-stage.s2 [data-loop="proc"] { opacity: 1; transform: none; }
-  .hero-stage.s3 .db-row-live .dbcell { opacity: 1; }
-  .hero-stage.s3 .db-row-live { background: rgba(22,163,74,.09); animation: rowFlash 1.2s var(--ease); }
-  .hero-stage.s4 [data-loop="proc"] { opacity: 0; transform: translateY(-6px) scale(.97); }
-  .hero-stage.s4 [data-loop="msg2"] { opacity: 1; transform: none; }
+  /* Loop animation states (classes toggled on .flow-anim) */
+  .flow-anim [data-loop] { transition: opacity .45s var(--ease), transform .45s var(--ease); }
+  .flow-anim [data-loop="msg1"],
+  .flow-anim [data-loop="proc"],
+  .flow-anim [data-loop="msg2"] { opacity: 0; transform: translateY(9px) scale(.97); }
+  .flow-anim.s1 [data-loop="msg1"] { opacity: 1; transform: none; }
+  .flow-anim.s2 [data-loop="proc"] { opacity: 1; transform: none; }
+  .flow-anim.s3 .db-row-live .dbcell { opacity: 1; }
+  .flow-anim.s3 .db-row-live { background: rgba(22,163,74,.09); animation: rowFlash 1.2s var(--ease); }
+  .flow-anim.s4 [data-loop="proc"] { opacity: 0; transform: translateY(-6px) scale(.97); }
+  .flow-anim.s4 [data-loop="msg2"] { opacity: 1; transform: none; }
   @keyframes rowFlash {
     0% { background: rgba(22,163,74,0); }
     30% { background: rgba(22,163,74,.30); }
     100% { background: rgba(22,163,74,.09); }
+  }
+
+  /* ---------- Use-case matrix ---------- */
+  .mx-emoji { font-size: 1.15rem; line-height: 1; }
+  .mx-attr + .mx-attr { margin-top: 1.05rem; }
+  .mx-pill {
+    display: inline-flex; align-items: center; font-family: var(--font-mono);
+    font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em;
+    padding: 2px 7px; border-radius: 999px; margin-bottom: .45rem;
+  }
+  .mx-pill-low  { background: rgba(140,122,107,.16); color: var(--muted); }
+  .mx-pill-warn { background: rgba(249,115,22,.13); color: var(--rust); }
+  .mx-pill-risk { background: rgba(220,38,38,.12); color: var(--sun-deep); }
+  .mx-pill-win  { background: rgba(22,163,74,.15); color: var(--ok); }
+
+  /* ---------- Process flow (input -> AMY -> output) ---------- */
+  .flow-anim { position: relative; }
+
+  /* Channel toggle */
+  .chan-toggle {
+    display: inline-flex; gap: 4px; padding: 4px; border-radius: 11px;
+    background: var(--paper); border: 1px solid var(--rule-strong);
+    box-shadow: 0 2px 8px -3px rgba(42,21,5,.18);
+  }
+  .chan-btn {
+    display: inline-flex; align-items: center; gap: 7px; cursor: pointer; border: 0;
+    padding: .55rem .95rem; border-radius: 8px; background: transparent;
+    font-family: var(--font-body); font-size: .82rem; font-weight: 600; color: var(--muted);
+    transition: background .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .chan-btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
+  .chan-btn:hover { color: var(--ink); }
+  .chan-btn[aria-pressed="true"] {
+    background: var(--ink); color: var(--cream-warm);
+    box-shadow: 0 3px 10px -3px rgba(42,21,5,.5);
+  }
+
+  .phone-view { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .phone-view[hidden] { display: none; }
+
+  /* Teams chat view */
+  .tm-header { background: #5B5FC7; color: #fff; padding: 13px 12px 9px; display: flex; align-items: center; gap: 9px; }
+  .tm-avatar { width: 32px; height: 32px; border-radius: 7px; background: #fff; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .tm-body { flex: 1; padding: 12px 10px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; background: #f5f5f5; }
+  .tm-msg { max-width: 90%; padding: 8px 10px; border-radius: 5px; font-size: 12px; line-height: 1.4; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,.08); color: #242424; }
+  .tm-out { align-self: flex-end; background: #E8EBFA; border: 1px solid #d6dbf5; }
+  .tm-in  { align-self: flex-start; background: #fff; border: 1px solid #ededed; }
+  .tm-name { font-size: 10px; font-weight: 700; color: #5B5FC7; margin-bottom: 3px; }
+  .tm-time { display: block; margin-top: 5px; font-size: 9px; color: #616161; }
+  .tm-doc { display: flex; align-items: center; gap: 8px; background: #faf9ff; border: 1px solid #e3e1f5; border-radius: 6px; padding: 8px 9px; margin-bottom: 6px; }
+  .tm-doc-ic { width: 30px; height: 30px; border-radius: 5px; background: #fff; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid rgba(0,0,0,.08); }
+  .tm-proc { align-self: center; display: flex; align-items: center; gap: 7px; background: #fff; border: 1px solid #e3e1f5; border-radius: 999px; padding: 6px 12px; font-size: 10.5px; color: #444; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+
+  /* AMY middleware + arrow */
+  .amy-badge {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: .7rem 1.45rem; border-radius: 13px; background: var(--grad); color: #fff;
+    box-shadow: 0 16px 34px -14px rgba(249,115,22,.6); text-align: center;
+  }
+  .amy-name { font-family: var(--font-body); font-weight: 700; font-size: 1.18rem; letter-spacing: -.02em; line-height: 1; }
+  .amy-sub { font-family: var(--font-mono); font-size: 8px; text-transform: uppercase; letter-spacing: .2em; opacity: .92; }
+  .flow-arrow { width: 100%; min-width: 70px; max-width: 220px; height: 24px; display: block; }
+  .flow-arrow .track { stroke: var(--rule-strong); stroke-width: 2; }
+  .flow-arrow .head  { fill: var(--rust); }
+  .flow-arrow .pulse {
+    stroke: var(--sun); stroke-width: 2.6; stroke-linecap: round;
+    stroke-dasharray: 16 240; animation: arrowFlow 2.2s linear infinite;
+  }
+  @keyframes arrowFlow { from { stroke-dashoffset: 256; } to { stroke-dashoffset: 40; } }
+  .flow-arrow-v { color: var(--rust); }
+  .flow-arrow-v .pulse-v {
+    stroke: var(--sun); stroke-width: 2.6; stroke-linecap: round;
+    stroke-dasharray: 10 120; animation: arrowFlowV 2s linear infinite;
+  }
+  @keyframes arrowFlowV { from { stroke-dashoffset: 130; } to { stroke-dashoffset: 20; } }
+
+  /* Laptop / ERP output mockup */
+  .laptop { width: 100%; max-width: 460px; }
+  .laptop-lid {
+    background: #0c0b0a; border-radius: 14px; padding: 12px;
+    box-shadow: 0 34px 64px -30px rgba(42,21,5,.55), 0 0 0 1px rgba(42,21,5,.12);
+  }
+  .laptop-screen { background: var(--paper); border-radius: 7px; overflow: hidden; border: 1px solid rgba(0,0,0,.06); }
+  .laptop-deck {
+    position: relative; height: 13px; width: 116%; margin: 0 -8%;
+    background: linear-gradient(180deg, #e3d8c6 0%, #b8a98d 100%);
+    border-radius: 0 0 13px 13px; box-shadow: 0 22px 30px -22px rgba(42,21,5,.5);
+  }
+  .laptop-deck::before {
+    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 6px; background: rgba(0,0,0,.18); border-radius: 0 0 7px 7px;
+  }
+  .erp-bar { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--rule); background: rgba(42,21,5,.025); }
+  .erp-dots { display: flex; gap: 5px; flex: 0 0 auto; }
+  .erp-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .erp-title { font-size: 11px; font-weight: 600; color: var(--ink); }
+  .erp-live { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); font-size: 8.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+  .erp-live i { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); animation: livePulse 1.7s ease-in-out infinite; }
+  @keyframes livePulse {
+    0%, 100% { opacity: .4; box-shadow: 0 0 0 0 rgba(22,163,74,.45); }
+    50% { opacity: 1; box-shadow: 0 0 0 5px rgba(22,163,74,0); }
+  }
+  .erp-scanwrap { height: 2px; overflow: hidden; background: rgba(42,21,5,.04); }
+  .erp-scan { height: 2px; width: 38%; background: linear-gradient(90deg, transparent, var(--sun), transparent); animation: erpScan 2.6s var(--ease) infinite; }
+  @keyframes erpScan { 0% { transform: translateX(-110%); } 100% { transform: translateX(360%); } }
+  .erp-label { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-soft); }
+  .erp-label svg { width: 15px; height: 15px; color: var(--rust); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow-arrow .pulse, .flow-arrow-v .pulse-v, .erp-live i, .erp-scan { animation: none !important; }
+    .erp-scan { opacity: 0; }
   }
 
   /* ---------- Comparison cards ---------- */
@@ -447,6 +558,18 @@
         <text x="0" y="0" text-anchor="middle" dominant-baseline="central" font-family="Inter, sans-serif" font-size="62" font-weight="600" fill="#2A1505" letter-spacing="-2.4">am</text>
       </g>
     </symbol>
+    <symbol id="bol-photo" viewBox="0 0 178 96">
+      <rect width="178" height="96" fill="#cdb89a"/>
+      <rect x="26" y="13" width="126" height="70" rx="2" fill="#fbf7ef" transform="rotate(-2 89 48)"/>
+      <g transform="rotate(-2 89 48)">
+        <rect x="34" y="20" width="64" height="7" rx="1.5" fill="#2A1505"/>
+        <rect x="34" y="33" width="110" height="3.4" rx="1.7" fill="#c9bda8"/>
+        <rect x="34" y="41" width="110" height="3.4" rx="1.7" fill="#c9bda8"/>
+        <rect x="34" y="49" width="86" height="3.4" rx="1.7" fill="#c9bda8"/>
+        <rect x="34" y="61" width="44" height="11" rx="1.5" fill="none" stroke="#9a8a70" stroke-width="1.4"/>
+        <text x="56" y="69" text-anchor="middle" font-family="monospace" font-size="7" fill="#5C3318">MH-12</text>
+      </g>
+    </symbol>
   </defs>
 </svg>
 
@@ -493,135 +616,382 @@
 <main id="main">
 
 <!-- ============ HERO ============ -->
-<section class="relative flex overflow-hidden">
+<section class="relative overflow-hidden">
   <div class="pointer-events-none absolute inset-0" aria-hidden="true"
-       style="background:radial-gradient(64% 52% at 38% 40%, rgba(252,211,77,0.20) 0%, rgba(249,115,22,0.06) 52%, transparent 100%)"></div>
+       style="background:radial-gradient(60% 50% at 50% 18%, rgba(252,211,77,0.22) 0%, rgba(249,115,22,0.06) 52%, transparent 100%)"></div>
 
-  <div class="relative z-10 mx-auto w-full max-w-content px-5 pt-32 pb-20 sm:px-8 sm:pt-36 lg:px-12">
-    <div class="grid grid-cols-1 items-center gap-14 lg:grid-cols-[3fr_2fr] lg:gap-12">
+  <div class="relative z-10 mx-auto w-full max-w-content px-5 pt-32 pb-14 sm:px-8 sm:pt-36 lg:px-12">
+    <div class="flex flex-col items-center gap-6 text-center">
+      <p class="reveal eyebrow">Field operations, managed</p>
 
-      <!-- Left: copy (60%) -->
-      <div class="flex flex-col items-start gap-7">
-        <p class="reveal eyebrow">Field operations, managed</p>
+      <h1 class="reveal reveal-d1 head max-w-[18ch]" style="font-size:var(--fs-display);line-height:1.04">
+        Manage Your Field Operations via WhatsApp.
+        <span class="sun-text" style="font-weight:700">Guaranteed.</span>
+      </h1>
 
-        <h1 class="reveal reveal-d1 head" style="font-size:var(--fs-display);line-height:1.04">
-          Manage Your Field Operations via WhatsApp.
-          <span class="sun-text" style="font-weight:700">Guaranteed.</span>
-        </h1>
+      <p class="reveal reveal-d2 max-w-[60ch] text-inksoft" style="font-size:var(--fs-body-lg);font-weight:500;line-height:1.6">
+        Your field updates instantly sync with SAP, Oracle, and your core ledgers, completely architected and maintained by your dedicated Fractional Chief AI Officer.
+      </p>
 
-        <p class="reveal reveal-d2 max-w-[54ch] text-inksoft" style="font-size:var(--fs-body-lg);font-weight:500;line-height:1.6">
-          Your field updates instantly sync with SAP, Oracle, and your core ledgers, completely architected and maintained by your dedicated Fractional Chief AI Officer.
-        </p>
-
-        <div class="reveal reveal-d2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-          <a href="https://cal.com/am2am-demo" class="btn btn-primary group">
-            Book consultation call
-            <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sun-light)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-          <a href="#get-started" class="btn btn-ghost group">
-            Launch 96-Hour Working Prototype
-            <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M12 5v14"/><path d="m5 12 7 7 7-7"/></svg>
-          </a>
-        </div>
-
-        <p class="reveal reveal-d3 flex items-center gap-2.5 text-sm font-medium text-inksoft">
-          <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M20 6 9 17l-5-5"/></svg>
-          Zero setup required by your team. 100% managed by us.
-        </p>
+      <div class="reveal reveal-d2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+        <a href="https://cal.com/am2am-demo" class="btn btn-primary group">
+          Schedule consultation call
+          <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sun-light)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        <a href="#get-started" class="btn btn-ghost group">
+          Launch 96-Hour Working Prototype
+          <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M12 5v14"/><path d="m5 12 7 7 7-7"/></svg>
+        </a>
       </div>
 
-      <!-- Right: phone + database loop animation (40%) -->
-      <div class="reveal reveal-d1 hero-stage" id="heroStage" aria-hidden="true">
-        <div class="pointer-events-none absolute left-1/2 top-1/2 h-[120%] w-[150%] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true"
-             style="background:radial-gradient(circle, rgba(252,211,77,0.26), transparent 64%)"></div>
+      <p class="reveal reveal-d3 flex items-center gap-2.5 text-sm font-medium text-inksoft">
+        <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M20 6 9 17l-5-5"/></svg>
+        Zero setup required by your team. 100% managed by us.
+      </p>
+    </div>
+  </div>
+</section>
 
-        <!-- Phone -->
-        <div class="phone relative z-[2]">
+<!-- ============ USE-CASE MATRIX ============ -->
+<section id="use-cases" class="border-t border-line py-20 md:py-28" style="background:var(--cream)">
+  <div class="mx-auto max-w-content px-5 sm:px-8 lg:px-12">
+    <div class="reveal mb-12 flex flex-col items-center text-center sm:mb-16">
+      <span class="eyebrow mb-4">Where it fits</span>
+      <h2 class="head" style="font-size:var(--fs-h2);line-height:1.08">
+        Not every field is built for autonomy.
+        <span class="sun-text" style="font-weight:700">Supply chain is.</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-3">
+
+      <!-- Column 1: Sales Field Entry (CRM) -->
+      <div class="reveal cmp-card">
+        <div class="cmp-inner">
+          <div class="flex items-center gap-2.5">
+            <span class="mx-emoji" aria-hidden="true">❌</span>
+            <span class="label text-ghost">Sales Field Entry</span>
+          </div>
+          <h3 class="mt-3 text-[1.3rem] font-semibold text-ink" style="letter-spacing:-0.02em">CRM</h3>
+          <div class="mt-2 flex flex-wrap gap-1.5">
+            <span class="cmp-tag">Salesforce</span>
+            <span class="cmp-tag">HubSpot</span>
+          </div>
+          <div class="cmp-divider"></div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">User Profile</p>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Reps on the move; highly distracted.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">Data Entry Friction</p>
+            <span class="mx-pill mx-pill-warn">High</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Reps hate filling out CRM fields; data is usually missing.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">Transaction Complexity</p>
+            <span class="mx-pill mx-pill-low">Low–Medium</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Mostly textual notes, deal stages, and call logs.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">Blame Liability Risk</p>
+            <span class="mx-pill mx-pill-low">Low</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">If a deal stage is wrong, sales forecasting is slightly off.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">Moat Potential</p>
+            <span class="mx-pill mx-pill-low">Low</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Easily replaced by a generic CRM voice-to-text tool.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: Construction PM -->
+      <div class="reveal reveal-d1 cmp-card">
+        <div class="cmp-inner">
+          <div class="flex items-center gap-2.5">
+            <span class="mx-emoji" aria-hidden="true">🟡</span>
+            <span class="label text-ghost">Construction PM</span>
+          </div>
+          <h3 class="mt-3 text-[1.3rem] font-semibold text-ink" style="letter-spacing:-0.02em">Jira / MS Project</h3>
+          <div class="mt-2 flex flex-wrap gap-1.5">
+            <span class="cmp-tag">Jira</span>
+            <span class="cmp-tag">MS Project</span>
+          </div>
+          <div class="cmp-divider"></div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">User Profile</p>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Site engineers, sub-contractors; hands dirty.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">Data Entry Friction</p>
+            <span class="mx-pill mx-pill-risk">Severe</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Forcing an engineer to open MS Project on a dusty laptop fails.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">Transaction Complexity</p>
+            <span class="mx-pill mx-pill-risk">Extremely High</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Complex dependencies — e.g. "if concrete curing is delayed, shift step 4."</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">Blame Liability Risk</p>
+            <span class="mx-pill mx-pill-risk">Severe</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">If a structural checklist entry is misparsed, it creates safety risks.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label text-muted">Moat Potential</p>
+            <span class="mx-pill mx-pill-warn">High</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Deeply custom semantic graphs required for site blueprints.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3: Supply Chain & Fleet Ops (winner) -->
+      <div class="reveal reveal-d2 cmp-card is-win lg:-translate-y-2">
+        <div class="cmp-inner">
+          <span class="inline-flex w-fit items-center gap-2 rounded-full px-3 py-1" style="background:rgba(249,115,22,.1)">
+            <span class="h-1.5 w-1.5 rounded-full" style="background:var(--sun)"></span>
+            <span class="label" style="color:var(--rust)">The am2am sweet spot</span>
+          </span>
+          <div class="mt-3 flex items-center gap-2.5">
+            <span class="mx-emoji" aria-hidden="true">🚀</span>
+            <span class="label" style="color:var(--rust)">Supply Chain &amp; Fleet Ops</span>
+          </div>
+          <h3 class="mt-2 text-[1.3rem] font-semibold text-ink" style="letter-spacing:-0.02em">ERP</h3>
+          <div class="mt-2 flex flex-wrap gap-1.5">
+            <span class="cmp-tag">SAP</span>
+            <span class="cmp-tag">Oracle</span>
+          </div>
+          <div class="cmp-divider"></div>
+          <div class="mx-attr">
+            <p class="cmp-line-label" style="color:var(--rust)">User Profile</p>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Warehouse managers, dock operators, drivers.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label" style="color:var(--rust)">Data Entry Friction</p>
+            <span class="mx-pill mx-pill-warn">Critical</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">High-velocity updates required to keep logistics moving.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label" style="color:var(--rust)">Transaction Complexity</p>
+            <span class="mx-pill mx-pill-win">Low · Deterministic</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Gate entry, stock count, dispatch verification.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label" style="color:var(--rust)">Blame Liability Risk</p>
+            <span class="mx-pill mx-pill-win">Low</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">Checked easily via cross-references — gate passes, barcodes.</p>
+          </div>
+          <div class="mx-attr">
+            <p class="cmp-line-label" style="color:var(--rust)">Moat Potential</p>
+            <span class="mx-pill mx-pill-win">Maximum</span>
+            <p class="text-[0.92rem] leading-relaxed text-inksoft">High transaction density embeds your node into the ledger.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS FLOW: INPUT -> AMY -> OUTPUT ============ -->
+<section class="relative overflow-hidden border-t border-line py-20 md:py-28">
+  <div class="pointer-events-none absolute left-1/2 top-1/2 h-[80%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full" aria-hidden="true"
+       style="background:radial-gradient(circle, rgba(252,211,77,0.18), transparent 66%)"></div>
+
+  <div class="relative z-10 mx-auto max-w-content px-5 sm:px-8 lg:px-12">
+    <div class="reveal mb-14 flex flex-col items-center text-center sm:mb-16">
+      <span class="eyebrow mb-4">How it works</span>
+      <h2 class="head" style="font-size:var(--fs-h2);line-height:1.08">
+        From a field message to a system of record.
+        <span class="sun-text" style="font-weight:700">In seconds.</span>
+      </h2>
+    </div>
+
+    <div id="heroFlow" class="flow-anim grid grid-cols-1 items-center gap-12 lg:grid-cols-[auto_minmax(80px,1fr)_auto] lg:gap-10">
+
+      <!-- Stage 1: Input -->
+      <div class="hero-stage">
+        <span class="label text-muted">01 · Input</span>
+        <div class="phone relative z-[2]" aria-hidden="true">
           <div class="phone-screen">
             <div class="phone-notch"></div>
-            <div class="wa-header">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,.85)"><path d="m15 18-6-6 6-6"/></svg>
-              <span class="wa-avatar">
-                <svg viewBox="0 0 240 240" width="22" height="22"><use href="#logo-mark" /></svg>
-              </span>
-              <span class="leading-tight">
-                <span class="block text-[12.5px] font-semibold">am2am Operations</span>
-                <span class="block text-[9.5px]" style="color:rgba(255,255,255,.7)">online</span>
-              </span>
-              <svg class="ml-auto" width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,.8)"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
-            </div>
-            <div class="wa-body">
-              <!-- Outgoing: photo of bill of lading + text -->
-              <div class="wa-msg wa-out" data-loop="msg1">
-                <span class="wa-photo">
-                  <svg width="178" height="96" viewBox="0 0 178 96" role="img" aria-label="Bill of lading photo">
-                    <rect width="178" height="96" fill="#cdb89a"/>
-                    <rect x="26" y="13" width="126" height="70" rx="2" fill="#fbf7ef" transform="rotate(-2 89 48)"/>
-                    <g transform="rotate(-2 89 48)">
-                      <rect x="34" y="20" width="64" height="7" rx="1.5" fill="#2A1505"/>
-                      <rect x="34" y="33" width="110" height="3.4" rx="1.7" fill="#c9bda8"/>
-                      <rect x="34" y="41" width="110" height="3.4" rx="1.7" fill="#c9bda8"/>
-                      <rect x="34" y="49" width="86" height="3.4" rx="1.7" fill="#c9bda8"/>
-                      <rect x="34" y="61" width="44" height="11" rx="1.5" fill="none" stroke="#9a8a70" stroke-width="1.4"/>
-                      <text x="56" y="69" text-anchor="middle" font-family="monospace" font-size="7" fill="#5C3318">MH-12</text>
-                    </g>
-                  </svg>
+
+            <!-- WhatsApp view -->
+            <div class="phone-view" data-view="whatsapp">
+              <div class="wa-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,.85)"><path d="m15 18-6-6 6-6"/></svg>
+                <span class="wa-avatar">
+                  <svg viewBox="0 0 240 240" width="22" height="22"><use href="#logo-mark" /></svg>
                 </span>
-                Truck MH-12 arrived. Unloaded 50 cartons, 2 damaged.
-                <span class="wa-time">09:14
-                  <svg width="14" height="11" viewBox="0 0 16 11" fill="none" stroke="#53bdeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.2 3.4L10 2"/><path d="M6 9.4 11.6 2"/></svg>
+                <span class="leading-tight">
+                  <span class="block text-[12.5px] font-semibold">am2am Operations</span>
+                  <span class="block text-[9.5px]" style="color:rgba(255,255,255,.7)">online</span>
                 </span>
+                <svg class="ml-auto" width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,.8)"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
               </div>
-              <!-- Processing pill -->
-              <div class="wa-proc" data-loop="proc">
-                <span class="spinner"></span>
-                <span class="shield-badge">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg>
-                </span>
-                Validating and syncing securely
-              </div>
-              <!-- Incoming: gate pass PDF receipt -->
-              <div class="wa-msg wa-in" data-loop="msg2">
-                <span class="wa-doc">
-                  <span class="wa-doc-ic">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+              <div class="wa-body">
+                <div class="wa-msg wa-out" data-loop="msg1">
+                  <span class="wa-photo">
+                    <svg width="178" height="96" viewBox="0 0 178 96" role="img" aria-label="Bill of lading photo"><use href="#bol-photo" /></svg>
                   </span>
-                  <span class="leading-tight">
-                    <span class="block text-[10.5px] font-semibold" style="color:#111b21">Gate-Pass-MH12.pdf</span>
-                    <span class="block text-[9px]" style="color:#667781">PDF Document, 1 page</span>
+                  Truck MH-12 arrived. Unloaded 50 cartons, 2 damaged.
+                  <span class="wa-time">09:14
+                    <svg width="14" height="11" viewBox="0 0 16 11" fill="none" stroke="#53bdeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.2 3.4L10 2"/><path d="M6 9.4 11.6 2"/></svg>
                   </span>
-                </span>
-                Digital gate pass issued. Inventory record updated.
-                <span class="wa-time">09:14</span>
+                </div>
+                <div class="wa-proc" data-loop="proc">
+                  <span class="spinner"></span>
+                  <span class="shield-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg>
+                  </span>
+                  Validating and syncing securely
+                </div>
+                <div class="wa-msg wa-in" data-loop="msg2">
+                  <span class="wa-doc">
+                    <span class="wa-doc-ic">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                    </span>
+                    <span class="leading-tight">
+                      <span class="block text-[10.5px] font-semibold" style="color:#111b21">Gate-Pass-MH12.pdf</span>
+                      <span class="block text-[9px]" style="color:#667781">PDF Document, 1 page</span>
+                    </span>
+                  </span>
+                  Digital gate pass issued. Inventory record updated.
+                  <span class="wa-time">09:14</span>
+                </div>
               </div>
             </div>
+
+            <!-- Teams view -->
+            <div class="phone-view" data-view="teams" hidden>
+              <div class="tm-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:rgba(255,255,255,.85)"><path d="m15 18-6-6 6-6"/></svg>
+                <span class="tm-avatar">
+                  <svg viewBox="0 0 240 240" width="22" height="22"><use href="#logo-mark" /></svg>
+                </span>
+                <span class="leading-tight">
+                  <span class="block text-[12.5px] font-semibold">am2am Operations</span>
+                  <span class="block text-[9.5px]" style="color:rgba(255,255,255,.75)">Teams · Logistics</span>
+                </span>
+                <svg class="ml-auto" width="15" height="15" viewBox="0 0 24 24" fill="rgba(255,255,255,.8)"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+              </div>
+              <div class="tm-body">
+                <div class="tm-msg tm-out" data-loop="msg1">
+                  <span class="tm-name">Dock Operator</span>
+                  <span class="wa-photo">
+                    <svg width="100%" height="92" viewBox="0 0 178 96" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Bill of lading photo"><use href="#bol-photo" /></svg>
+                  </span>
+                  Truck MH-12 arrived. Unloaded 50 cartons, 2 damaged.
+                  <span class="tm-time">09:14 · Sent</span>
+                </div>
+                <div class="tm-proc" data-loop="proc">
+                  <span class="spinner"></span>
+                  <span class="shield-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg>
+                  </span>
+                  Validating and syncing securely
+                </div>
+                <div class="tm-msg tm-in" data-loop="msg2">
+                  <span class="tm-name">AMY</span>
+                  <span class="tm-doc">
+                    <span class="tm-doc-ic">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+                    </span>
+                    <span class="leading-tight">
+                      <span class="block text-[10.5px] font-semibold" style="color:#242424">Gate-Pass-MH12.pdf</span>
+                      <span class="block text-[9px]" style="color:#616161">PDF Document · 1 page</span>
+                    </span>
+                  </span>
+                  Digital gate pass issued. Inventory record updated.
+                  <span class="tm-time">09:14</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <!-- Database panel -->
-        <div class="db-panel relative z-[1]">
-          <div class="db-head">
-            <span class="db-title">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
-              Central Inventory Database
-            </span>
-            <span class="db-sync"><i></i> Live sync</span>
+        <!-- Channel toggle -->
+        <div class="chan-toggle" role="group" aria-label="Messaging channel">
+          <button type="button" class="chan-btn" data-chan="whatsapp" aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            WhatsApp
+          </button>
+          <button type="button" class="chan-btn" data-chan="teams" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Teams
+          </button>
+        </div>
+      </div>
+
+      <!-- Stage 2: Processing (AMY) -->
+      <div class="flex flex-col items-center gap-3">
+        <span class="amy-badge">
+          <span class="amy-name">AMY</span>
+          <span class="amy-sub">AI middleware</span>
+        </span>
+        <svg class="flow-arrow hidden lg:block" viewBox="0 0 220 24" role="img" aria-label="processes into">
+          <line class="track" x1="6" y1="12" x2="198" y2="12" />
+          <path class="pulse" d="M6 12 H198" fill="none" />
+          <path class="head" d="M196 5 L212 12 L196 19 Z" />
+        </svg>
+        <svg class="flow-arrow-v lg:hidden" width="26" height="56" viewBox="0 0 26 56" role="img" aria-label="processes into">
+          <line class="track" x1="13" y1="4" x2="13" y2="44" stroke="var(--rule-strong)" stroke-width="2" />
+          <path class="pulse-v" d="M13 4 V44" fill="none" />
+          <path d="M7 43 L13 54 L19 43 Z" fill="currentColor" />
+        </svg>
+      </div>
+
+      <!-- Stage 3: Output (laptop / ERP) -->
+      <div class="flex flex-col items-center gap-5">
+        <span class="label text-muted">03 · Output</span>
+        <div class="laptop" aria-hidden="true">
+          <div class="laptop-lid">
+            <div class="laptop-screen">
+              <div class="erp-bar">
+                <span class="erp-dots">
+                  <span class="erp-dot" style="background:#ff5f56"></span>
+                  <span class="erp-dot" style="background:#ffbd2e"></span>
+                  <span class="erp-dot" style="background:#27c93f"></span>
+                </span>
+                <span class="erp-title">Central ERP · Inventory</span>
+                <span class="erp-live"><i></i> Live</span>
+              </div>
+              <div class="erp-scanwrap"><div class="erp-scan"></div></div>
+              <div class="db-row db-row-head">
+                <span>Truck ID</span><span>Cartons</span><span>Exceptions</span><span>Status</span>
+              </div>
+              <div class="db-row">
+                <span>MH-09</span><span>120</span><span style="color:var(--muted)">None</span><span><span class="db-pill db-pill-ok">Logged</span></span>
+              </div>
+              <div class="db-row">
+                <span>KA-04</span><span>88</span><span style="color:var(--muted)">1 short</span><span><span class="db-pill db-pill-ok">Logged</span></span>
+              </div>
+              <div class="db-row db-row-live">
+                <span class="dbcell" style="font-weight:600;color:var(--ink)">MH-12</span>
+                <span class="dbcell" style="font-weight:600;color:var(--ink)">50</span>
+                <span class="dbcell" style="color:var(--sun-deep);font-weight:600">2 damaged</span>
+                <span class="dbcell"><span class="db-pill db-pill-ok">Logged</span></span>
+              </div>
+            </div>
           </div>
-          <div class="db-row db-row-head">
-            <span>Truck ID</span><span>Cartons</span><span>Exceptions</span><span>Status</span>
-          </div>
-          <div class="db-row">
-            <span>MH-09</span><span>120</span><span style="color:var(--muted)">None</span><span><span class="db-pill db-pill-ok">Logged</span></span>
-          </div>
-          <div class="db-row">
-            <span>KA-04</span><span>88</span><span style="color:var(--muted)">1 short</span><span><span class="db-pill db-pill-ok">Logged</span></span>
-          </div>
-          <div class="db-row db-row-live">
-            <span class="dbcell" style="font-weight:600;color:var(--ink)">MH-12</span>
-            <span class="dbcell" style="font-weight:600;color:var(--ink)">50</span>
-            <span class="dbcell" style="color:var(--sun-deep);font-weight:600">2 damaged</span>
-            <span class="dbcell"><span class="db-pill db-pill-ok">Logged</span></span>
-          </div>
+          <div class="laptop-deck"></div>
+        </div>
+
+        <!-- Output destinations -->
+        <div class="flex items-center justify-center gap-6">
+          <span class="erp-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+            ERP
+          </span>
+          <span class="erp-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+            XLS
+          </span>
+          <span class="erp-label">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>
+            Custom
+          </span>
         </div>
       </div>
 
@@ -923,8 +1293,26 @@
     reveals.forEach(function (el) { io.observe(el); });
   }
 
+  /* --- Channel toggle: swap WhatsApp / Teams view inside the phone --- */
+  var chanToggle = document.querySelector('.chan-toggle');
+  if (chanToggle) {
+    var chanBtns = chanToggle.querySelectorAll('.chan-btn');
+    var phoneViews = document.querySelectorAll('.phone-view');
+    chanBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var chan = btn.getAttribute('data-chan');
+        chanBtns.forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b === btn));
+        });
+        phoneViews.forEach(function (v) {
+          v.hidden = (v.getAttribute('data-view') !== chan);
+        });
+      });
+    });
+  }
+
   /* --- Hero loop animation: photo -> processing -> database row -> PDF receipt --- */
-  var stage = document.getElementById('heroStage');
+  var stage = document.getElementById('heroFlow');
   if (stage) {
     function applyPhase(n) {
       stage.classList.remove('s1', 's2', 's3', 's4');

@@ -434,20 +434,21 @@
   @keyframes arrowFlowV { from { stroke-dashoffset: 130; } to { stroke-dashoffset: 20; } }
 
   /* Laptop / ERP output mockup */
-  .laptop { width: 100%; max-width: 580px; }
+  .laptop { width: 100%; max-width: 680px; }
   .laptop-lid {
-    background: #0c0b0a; border-radius: 16px; padding: 13px;
+    background: #0c0b0a; border-radius: 15px; padding: 11px;
     box-shadow: 0 38px 70px -32px rgba(42,21,5,.55), 0 0 0 1px rgba(42,21,5,.12);
   }
-  .laptop-screen { background: var(--paper); border-radius: 8px; overflow: hidden; border: 1px solid rgba(0,0,0,.06); height: 392px; display: flex; flex-direction: column; }
+  /* 16:10 MacBook aspect ratio (screen ≈ 658px wide / 1.6) */
+  .laptop-screen { background: var(--paper); border-radius: 7px; overflow: hidden; border: 1px solid rgba(0,0,0,.06); height: 412px; display: flex; flex-direction: column; }
   .laptop-deck {
-    position: relative; height: 13px; width: 116%; margin: 0 -8%;
+    position: relative; height: 15px; width: 122%; margin: 0 -11%;
     background: linear-gradient(180deg, #e3d8c6 0%, #b8a98d 100%);
-    border-radius: 0 0 13px 13px; box-shadow: 0 22px 30px -22px rgba(42,21,5,.5);
+    border-radius: 0 0 15px 15px; box-shadow: 0 22px 30px -22px rgba(42,21,5,.5);
   }
   .laptop-deck::before {
     content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: 80px; height: 6px; background: rgba(0,0,0,.18); border-radius: 0 0 7px 7px;
+    width: 96px; height: 6px; background: rgba(0,0,0,.18); border-radius: 0 0 7px 7px;
   }
   .erp-bar { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border-bottom: 1px solid var(--rule); background: rgba(42,21,5,.025); }
   .erp-dots { display: flex; gap: 5px; flex: 0 0 auto; }

@@ -432,7 +432,7 @@
   .conn-line-v { position: absolute; left: 50%; top: 5px; bottom: 5px; width: 2px; transform: translateX(-50%); background: var(--rule-strong); border-radius: 2px; }
 
   /* Arrowheads — both directions always present; the active leg is lit, the idle leg dimmed */
-  .conn-head, .conn-head-v { position: absolute; width: 13px; height: 13px; color: var(--rust); transition: opacity .4s var(--ease); }
+  .conn-head, .conn-head-v { position: absolute; width: 20px; height: 20px; color: var(--rust); transition: opacity .4s var(--ease); }
   .conn-head { top: 50%; transform: translateY(-50%); }
   .conn-head-fwd { right: -3px; }
   .conn-head-ret { left: -3px; opacity: .16; }
@@ -894,7 +894,6 @@
 
       <!-- Stage 1: Input (phone) -->
       <div class="hero-stage">
-        <span class="label text-muted">01 · Field input</span>
         <div class="phone relative z-[2]" aria-hidden="true">
           <div class="phone-screen" id="phoneScreen"><!-- rendered by JS --></div>
         </div>
@@ -914,7 +913,6 @@
       <div class="flex flex-col items-center gap-3">
         <span class="amy-badge">
           <span class="amy-name">AMY</span>
-          <span class="amy-sub">AI middleware</span>
         </span>
         <!-- Bidirectional connector: forward (phone -> AMY -> system), then return (system -> AMY -> phone) -->
         <div class="amy-conn hidden xl:block" role="img" aria-label="AMY sends the field update into the system of record, then returns the resulting file back to chat">
@@ -939,7 +937,6 @@
 
       <!-- Stage 3: Output (laptop / ERPNext) -->
       <div class="flex flex-col items-center gap-5">
-        <span class="label text-muted">03 · System of record</span>
         <div class="laptop" aria-hidden="true">
           <div class="laptop-lid">
             <div class="laptop-screen" id="erpScreen"><!-- rendered by JS --></div>
@@ -1199,9 +1196,9 @@
 
       <!-- Accordion -->
       <div class="reveal reveal-d1" id="faqList">
-        <div class="faq-item" data-state="open">
+        <div class="faq-item" data-state="closed">
           <h3 class="faq-q">
-            <button type="button" class="faq-trigger" id="faq-q-1" aria-expanded="true" aria-controls="faq-a-1">
+            <button type="button" class="faq-trigger" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
               <span>What is AMY, exactly?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </button>

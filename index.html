@@ -275,9 +275,10 @@
     transform: scale(1.14); display: block;
   }
   .wa-body {
-    flex: 1; padding: 12px 10px; display: flex; flex-direction: column;
-    gap: 9px; overflow: hidden;
+    flex: 1; min-height: 0; padding: 12px 10px; display: flex; flex-direction: column;
+    gap: 9px; overflow-y: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;
   }
+  .wa-body::-webkit-scrollbar, .tm-body::-webkit-scrollbar { display: none; }
   .wa-msg {
     max-width: 88%; padding: 6px 9px 16px; border-radius: 9px; font-size: 12px;
     line-height: 1.4; position: relative; color: #111b21;
@@ -350,13 +351,28 @@
   .flow-anim [data-loop] { transition: opacity .45s var(--ease), transform .45s var(--ease); }
   .flow-anim [data-loop="msg1"],
   .flow-anim [data-loop="proc"],
-  .flow-anim [data-loop="msg2"] { opacity: 0; transform: translateY(9px) scale(.97); }
+  .flow-anim [data-loop="msg2"],
+  .flow-anim [data-loop="msg3"],
+  .flow-anim [data-loop="proc2"],
+  .flow-anim [data-loop="msg4"] { opacity: 0; transform: translateY(9px) scale(.97); }
   .flow-anim.s1 [data-loop="msg1"] { opacity: 1; transform: none; }
   .flow-anim.s2 [data-loop="proc"] { opacity: 1; transform: none; }
   .flow-anim.s3 .db-row-live .dbcell { opacity: 1; }
   .flow-anim.s3 .db-row-live { background: rgba(22,163,74,.09); animation: rowFlash 1.2s var(--ease); }
   .flow-anim.s4 [data-loop="proc"] { opacity: 0; transform: translateY(-6px) scale(.97); }
   .flow-anim.s4 [data-loop="msg2"] { opacity: 1; transform: none; }
+  /* Exchange 2 reveals */
+  .flow-anim.s5 [data-loop="msg3"] { opacity: 1; transform: none; }
+  .flow-anim.s6 [data-loop="proc2"] { opacity: 1; transform: none; }
+  .flow-anim.s8 [data-loop="proc2"] { opacity: 0; transform: translateY(-6px) scale(.97); }
+  .flow-anim.s8 [data-loop="msg4"] { opacity: 1; transform: none; }
+  /* ERP live-row "updated" flash (exchange 2, amber) */
+  .db-row-update { animation: rowUpdate 1.2s var(--ease); }
+  @keyframes rowUpdate {
+    0% { background: rgba(249,115,22,0); }
+    30% { background: rgba(249,115,22,.28); }
+    100% { background: rgba(249,115,22,.10); }
+  }
   @keyframes rowFlash {
     0% { background: rgba(22,163,74,0); }
     30% { background: rgba(22,163,74,.30); }
@@ -404,7 +420,7 @@
   /* Teams chat view */
   .tm-header { background: #5B5FC7; color: #fff; padding: 13px 12px 9px; display: flex; align-items: center; gap: 9px; }
   .tm-avatar { width: 32px; height: 32px; border-radius: 7px; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
-  .tm-body { flex: 1; padding: 12px 10px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; background: #f5f5f5; }
+  .tm-body { flex: 1; min-height: 0; padding: 12px 10px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; background: #f5f5f5; }
   .tm-msg { max-width: 90%; padding: 8px 10px; border-radius: 5px; font-size: 12px; line-height: 1.4; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,.08); color: #242424; }
   .tm-out { align-self: flex-end; background: #E8EBFA; border: 1px solid #d6dbf5; }
   .tm-in  { align-self: flex-start; background: #fff; border: 1px solid #ededed; }
@@ -454,6 +470,11 @@
   .conn-head-ret-v { top: -3px; opacity: .16; }
   .flow-anim.s4 .conn-head-fwd, .flow-anim.s4 .conn-head-fwd-v { opacity: .16; }
   .flow-anim.s4 .conn-head-ret, .flow-anim.s4 .conn-head-ret-v { opacity: 1; }
+  /* Exchange 2: flip the heads forward again (s5), then back to return (s8) */
+  .flow-anim.s5 .conn-head-fwd, .flow-anim.s5 .conn-head-fwd-v { opacity: 1; }
+  .flow-anim.s5 .conn-head-ret, .flow-anim.s5 .conn-head-ret-v { opacity: .16; }
+  .flow-anim.s8 .conn-head-fwd, .flow-anim.s8 .conn-head-fwd-v { opacity: .16; }
+  .flow-anim.s8 .conn-head-ret, .flow-anim.s8 .conn-head-ret-v { opacity: 1; }
 
   /* Traveling packet chips (forward = chat bubble, return = document) */
   .conn-chip {
@@ -469,7 +490,7 @@
   .conn-chip.is-doc svg { color: #fff; }
 
   /* Horizontal motion: forward phone->laptop across s1..s3, return laptop->phone on s4 */
-  .conn-fwd, .conn-ret { top: 50%; margin: -13px 0 0 -13px; transition: left .85s var(--ease), opacity .4s var(--ease); }
+  .conn-fwd, .conn-ret, .conn-fwd2, .conn-ret2 { top: 50%; margin: -13px 0 0 -13px; transition: left .85s var(--ease), opacity .4s var(--ease); }
   .conn-fwd { left: 0; }
   .flow-anim.s1 .conn-fwd { opacity: 1; left: 8%; }
   .flow-anim.s2 .conn-fwd { opacity: 1; left: 50%; }
@@ -477,9 +498,18 @@
   .flow-anim.s4 .conn-fwd { opacity: 0; left: 100%; }
   .conn-ret { left: 100%; }
   .flow-anim.s4 .conn-ret { opacity: 1; left: 0; }
+  /* Exchange 2 — second forward trip (s5->s7) and return (s8); ret1 fades out at s5 */
+  .flow-anim.s5 .conn-ret { opacity: 0; left: 0; }
+  .conn-fwd2 { left: 0; }
+  .flow-anim.s5 .conn-fwd2 { opacity: 1; left: 8%; }
+  .flow-anim.s6 .conn-fwd2 { opacity: 1; left: 50%; }
+  .flow-anim.s7 .conn-fwd2 { opacity: 1; left: 100%; }
+  .flow-anim.s8 .conn-fwd2 { opacity: 0; left: 100%; }
+  .conn-ret2 { left: 100%; }
+  .flow-anim.s8 .conn-ret2 { opacity: 1; left: 0; }
 
   /* Vertical motion: forward top->bottom, return bottom->top */
-  .conn-fwd-v, .conn-ret-v { left: 50%; margin: -13px 0 0 -13px; transition: top .85s var(--ease), opacity .4s var(--ease); }
+  .conn-fwd-v, .conn-ret-v, .conn-fwd2-v, .conn-ret2-v { left: 50%; margin: -13px 0 0 -13px; transition: top .85s var(--ease), opacity .4s var(--ease); }
   .conn-fwd-v { top: 0; }
   .flow-anim.s1 .conn-fwd-v { opacity: 1; top: 12%; }
   .flow-anim.s2 .conn-fwd-v { opacity: 1; top: 50%; }
@@ -487,6 +517,15 @@
   .flow-anim.s4 .conn-fwd-v { opacity: 0; top: 100%; }
   .conn-ret-v { top: 100%; }
   .flow-anim.s4 .conn-ret-v { opacity: 1; top: 0; }
+  /* Exchange 2 (vertical) */
+  .flow-anim.s5 .conn-ret-v { opacity: 0; top: 0; }
+  .conn-fwd2-v { top: 0; }
+  .flow-anim.s5 .conn-fwd2-v { opacity: 1; top: 12%; }
+  .flow-anim.s6 .conn-fwd2-v { opacity: 1; top: 50%; }
+  .flow-anim.s7 .conn-fwd2-v { opacity: 1; top: 100%; }
+  .flow-anim.s8 .conn-fwd2-v { opacity: 0; top: 100%; }
+  .conn-ret2-v { top: 100%; }
+  .flow-anim.s8 .conn-ret2-v { opacity: 1; top: 0; }
 
   /* Laptop / ERP output mockup */
   .laptop { width: 100%; max-width: 550px; }
@@ -528,10 +567,11 @@
     .conn-chip, .conn-head, .conn-head-v, .amy-badge { transition: none !important; }
     .conn-head-ret, .conn-head-ret-v,
     .flow-anim.s4 .conn-head-fwd, .flow-anim.s4 .conn-head-fwd-v { opacity: 1 !important; }
-    .conn-fwd { left: 100% !important; opacity: 1 !important; }
-    .conn-fwd-v { top: 100% !important; opacity: 1 !important; }
-    .conn-ret { left: 0 !important; opacity: 1 !important; }
-    .conn-ret-v { top: 0 !important; opacity: 1 !important; }
+    .conn-fwd, .conn-ret, .conn-fwd-v, .conn-ret-v { opacity: 0 !important; }
+    .conn-fwd2 { left: 100% !important; opacity: 1 !important; }
+    .conn-fwd2-v { top: 100% !important; opacity: 1 !important; }
+    .conn-ret2 { left: 0 !important; opacity: 1 !important; }
+    .conn-ret2-v { top: 0 !important; opacity: 1 !important; }
     .flow-anim.s2 .amy-badge, .flow-anim.s4 .amy-badge { transform: none !important; }
   }
 
@@ -938,6 +978,8 @@
             <svg class="conn-head conn-head-ret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
             <span class="conn-chip is-msg conn-fwd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
             <span class="conn-chip is-doc conn-ret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+            <span class="conn-chip is-msg conn-fwd2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
+            <span class="conn-chip is-doc conn-ret2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
           </span>
         </div>
         <div class="amy-conn-v xl:hidden" role="img" aria-label="AMY sends the field update into the system of record, then returns the resulting file back to chat">
@@ -947,6 +989,8 @@
             <svg class="conn-head-v conn-head-ret-v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
             <span class="conn-chip is-msg conn-fwd-v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
             <span class="conn-chip is-doc conn-ret-v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+            <span class="conn-chip is-msg conn-fwd2-v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
+            <span class="conn-chip is-doc conn-ret2-v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
           </span>
         </div>
       </div>
@@ -1418,6 +1462,12 @@
       return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>';
     }
 
+    function waDoc(d) {
+      return '<span class="wa-doc"><span class="wa-doc-ic">' + docIcon(d.kind) + '</span><span class="leading-tight"><span class="block text-[10.5px] font-semibold" style="color:#111b21">' + d.name + '</span><span class="block text-[9px]" style="color:#667781">' + d.meta + '</span></span></span>';
+    }
+    function tmDoc(d) {
+      return '<span class="tm-doc"><span class="tm-doc-ic">' + docIcon(d.kind) + '</span><span class="leading-tight"><span class="block text-[10.5px] font-semibold" style="color:#242424">' + d.name + '</span><span class="block text-[9px]" style="color:#616161">' + d.meta + '</span></span></span>';
+    }
     function waPhone(a) {
       var m = a.msgs;
       return '<div class="phone-notch"></div>'
@@ -1426,7 +1476,10 @@
         + '<div class="wa-body">'
         + '<div class="wa-msg wa-out" data-loop="msg1">' + photo(m.photo) + m.out + '<span class="wa-time">' + m.time + ' ' + TICKS + '</span></div>'
         + '<div class="wa-proc" data-loop="proc"><span class="spinner"></span>' + SHIELD + m.proc + '</div>'
-        + '<div class="wa-msg wa-in" data-loop="msg2"><span class="wa-doc"><span class="wa-doc-ic">' + docIcon(m.doc.kind) + '</span><span class="leading-tight"><span class="block text-[10.5px] font-semibold" style="color:#111b21">' + m.doc.name + '</span><span class="block text-[9px]" style="color:#667781">' + m.doc.meta + '</span></span></span>' + m.reply + '<span class="wa-time">' + m.time + '</span></div>'
+        + '<div class="wa-msg wa-in" data-loop="msg2">' + waDoc(m.doc) + m.reply + '<span class="wa-time">' + m.time + '</span></div>'
+        + '<div class="wa-msg wa-out" data-loop="msg3">' + m.out2 + '<span class="wa-time">' + m.time2 + ' ' + TICKS + '</span></div>'
+        + '<div class="wa-proc" data-loop="proc2"><span class="spinner"></span>' + SHIELD + m.proc2 + '</div>'
+        + '<div class="wa-msg wa-in" data-loop="msg4">' + (m.doc2 ? waDoc(m.doc2) : '') + m.reply2 + '<span class="wa-time">' + m.time2 + '</span></div>'
         + '</div>';
     }
     function tmPhone(a) {
@@ -1437,7 +1490,10 @@
         + '<div class="tm-body">'
         + '<div class="tm-msg tm-out" data-loop="msg1"><span class="tm-name">' + a.head.role + '</span>' + photo(m.photo, 92) + m.out + '<span class="tm-time">' + m.time + ' · Sent</span></div>'
         + '<div class="tm-proc" data-loop="proc"><span class="spinner"></span>' + SHIELD + m.proc + '</div>'
-        + '<div class="tm-msg tm-in" data-loop="msg2"><span class="tm-name">AMY</span><span class="tm-doc"><span class="tm-doc-ic">' + docIcon(m.doc.kind) + '</span><span class="leading-tight"><span class="block text-[10.5px] font-semibold" style="color:#242424">' + m.doc.name + '</span><span class="block text-[9px]" style="color:#616161">' + m.doc.meta + '</span></span></span>' + m.reply + '<span class="tm-time">' + m.time + '</span></div>'
+        + '<div class="tm-msg tm-in" data-loop="msg2"><span class="tm-name">AMY</span>' + tmDoc(m.doc) + m.reply + '<span class="tm-time">' + m.time + '</span></div>'
+        + '<div class="tm-msg tm-out" data-loop="msg3"><span class="tm-name">' + a.head.role + '</span>' + m.out2 + '<span class="tm-time">' + m.time2 + ' · Sent</span></div>'
+        + '<div class="tm-proc" data-loop="proc2"><span class="spinner"></span>' + SHIELD + m.proc2 + '</div>'
+        + '<div class="tm-msg tm-in" data-loop="msg4"><span class="tm-name">AMY</span>' + (m.doc2 ? tmDoc(m.doc2) : '') + m.reply2 + '<span class="tm-time">' + m.time2 + '</span></div>'
         + '</div>';
     }
 
@@ -1477,7 +1533,12 @@
           out: 'Met Acme Corp — verbal yes on the ₹12L annual plan. Move stage to Negotiation, close target Friday.',
           proc: 'Updating CRM securely',
           doc: { kind: 'record', name: 'CRM-OPP-0042', meta: 'Opportunity · Negotiation' },
-          reply: 'Opportunity updated. Follow-up reminder set for Friday.'
+          reply: 'Opportunity updated. Follow-up reminder set for Friday.',
+          time2: '09:18',
+          out2: 'They want 10% off to sign today — can you send a revised quote?',
+          proc2: 'Drafting revised quote',
+          doc2: { kind: 'record', name: 'Quote-Acme-Rev1.pdf', meta: 'Quotation · ₹10.8L' },
+          reply2: 'Revised quote sent at ₹10.8L. Stage moved to Proposal Sent.'
         },
         erp: {
           title: 'Opportunity', count: '142', add: 'Add Opportunity',
@@ -1486,7 +1547,8 @@
             { id: 'CRM-OPP-0039', cells: ['Globex', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
             { id: 'CRM-OPP-0041', cells: ['Initech', 'Proposal'], ind: { cls: 'orange', label: 'Replied' } }
           ],
-          live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'blue', label: 'Open' } }
+          live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'blue', label: 'Open' } },
+          update: { cells: ['Acme Corp', 'Proposal Sent'], ind: { cls: 'orange', label: 'Quote Sent' } }
         },
         attrs: [
           { label: 'Data Entry Friction', cls: 'warn', pill: 'High', text: 'Reps hate filling out CRM fields; data is usually missing.' },
@@ -1502,7 +1564,11 @@
           out: "Foundation pour done at Tower B. Curing started — electricals can't start for 2 days.",
           proc: 'Recalculating dependencies',
           doc: { kind: 'pdf', name: 'Schedule-TowerB.pdf', meta: 'Gantt update · 3 tasks shifted' },
-          reply: 'Task TASK-0188 shifted +2 days. 3 dependent tasks rescheduled.'
+          reply: 'Task TASK-0188 shifted +2 days. 3 dependent tasks rescheduled.',
+          time2: '10:07',
+          out2: "We're short 2 electricians next week — flag the risk.",
+          proc2: 'Logging project risk',
+          reply2: 'Flagged TASK-0188 as At Risk and escalated to the PM. Resource request raised.'
         },
         erp: {
           title: 'Task', count: '1,204', add: 'Add Task',
@@ -1511,7 +1577,8 @@
             { id: 'TASK-0186', cells: ['Foundation – Tower B', '100%'], ind: { cls: 'green', label: 'Completed' } },
             { id: 'TASK-0189', cells: ['Plumbing – Tower B', '60%'], ind: { cls: 'blue', label: 'Working' } }
           ],
-          live: { id: 'TASK-0188', cells: ['Electricals – Tower B', '+2 days'], ind: { cls: 'orange', label: 'Open' } }
+          live: { id: 'TASK-0188', cells: ['Electricals – Tower B', '+2 days'], ind: { cls: 'orange', label: 'Open' } },
+          update: { cells: ['Electricals – Tower B', 'Blocked'], ind: { cls: 'red', label: 'At Risk' } }
         },
         attrs: [
           { label: 'Data Entry Friction', cls: 'risk', pill: 'Severe', text: 'Forcing an engineer to open MS Project on a dusty laptop fails.' },
@@ -1527,7 +1594,12 @@
           out: 'Truck MH-12 arrived. Unloaded 50 cartons, 2 damaged.',
           proc: 'Validating and syncing securely',
           doc: { kind: 'pdf', name: 'Gate-Pass-MH12.pdf', meta: 'PDF Document · 1 page' },
-          reply: 'Digital gate pass issued. Inventory record updated.'
+          reply: 'Digital gate pass issued. Inventory record updated.',
+          time2: '09:18',
+          out2: 'Raise a return for the 2 damaged cartons.',
+          proc2: 'Adjusting stock & raising debit note',
+          doc2: { kind: 'pdf', name: 'Debit-Note-0044.pdf', meta: 'Return · 2 cartons' },
+          reply2: 'Stock adjusted to 48 units. Debit note DN-0044 raised; supplier notified.'
         },
         erp: {
           title: 'Stock Entry', count: '3,981', add: 'Add Stock Entry',
@@ -1536,7 +1608,8 @@
             { id: 'MAT-STE-0091', cells: ['Cartons · MH-09', '120'], ind: { cls: 'green', label: 'Submitted' } },
             { id: 'MAT-STE-0092', cells: ['Cartons · KA-04', '88'], ind: { cls: 'green', label: 'Submitted' } }
           ],
-          live: { id: 'MAT-STE-0093', cells: ['Cartons · MH-12', '50'], ind: { cls: 'green', label: 'Submitted' } }
+          live: { id: 'MAT-STE-0093', cells: ['Cartons · MH-12', '50'], ind: { cls: 'green', label: 'Submitted' } },
+          update: { cells: ['Cartons · MH-12', '48'], ind: { cls: 'orange', label: 'Adjusted' } }
         },
         attrs: [
           { label: 'Data Entry Friction', cls: 'warn', pill: 'Critical', text: 'High-velocity updates required to keep logistics moving.' },
@@ -1552,22 +1625,50 @@
     function renderAttrs() { attrsEl.innerHTML = attrsHTML(AGENTS[activeAgent]); }
 
     var AGENT_ORDER = agentTabs.map(function (t) { return t.getAttribute('data-agent'); });
-    var ADVANCE_MS = 9000;
+    var ADVANCE_MS = 15500;
     var timers = [], autoTimer = null, paused = false;
 
     function applyPhase(n) {
-      flow.classList.remove('s1', 's2', 's3', 's4');
+      flow.classList.remove('s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8');
       for (var i = 1; i <= n; i++) flow.classList.add('s' + i);
     }
-    /* Play the phone -> AMY -> laptop animation once for the active agent. */
+    /* Exchange 2: update the ERP live row's cells + indicator in place, with a flash. */
+    function applyErpUpdate() {
+      var u = AGENTS[activeAgent].erp.update;
+      if (!u) return;
+      var liveRow = erpScreen.querySelector('.db-row-live');
+      if (!liveRow) return;
+      var cellEls = liveRow.querySelectorAll('.erp-cell');
+      u.cells.forEach(function (c, i) { if (cellEls[i]) cellEls[i].textContent = c; });
+      var indEl = liveRow.querySelector('.erp-ind');
+      if (indEl) { indEl.className = 'erp-ind erp-ind-' + u.ind.cls + ' dbcell'; indEl.textContent = u.ind.label; }
+      if (!reduceMotion) {
+        liveRow.classList.remove('db-row-update');
+        void liveRow.offsetWidth; /* restart the flash */
+        liveRow.classList.add('db-row-update');
+      }
+    }
+    /* Keep the newest chat bubble in view as the conversation grows. */
+    function scrollPhone(loop) {
+      var body = phoneScreen.querySelector('.wa-body, .tm-body');
+      if (!body) return;
+      var el = body.querySelector('[data-loop="' + loop + '"]');
+      if (!el) return;
+      body.scrollTop = Math.max(0, el.offsetTop + el.offsetHeight - body.clientHeight + 10);
+    }
+    /* Play the two-exchange conversation once for the active agent. */
     function playAnimation() {
       timers.forEach(clearTimeout); timers = [];
-      if (reduceMotion) { applyPhase(4); return; }
+      if (reduceMotion) { applyPhase(8); applyErpUpdate(); return; }
       applyPhase(0);
       timers.push(setTimeout(function () { applyPhase(1); }, 700));
       timers.push(setTimeout(function () { applyPhase(2); }, 2100));
       timers.push(setTimeout(function () { applyPhase(3); }, 3700));
       timers.push(setTimeout(function () { applyPhase(4); }, 5300));
+      timers.push(setTimeout(function () { applyPhase(5); scrollPhone('msg3'); }, 7300));
+      timers.push(setTimeout(function () { applyPhase(6); }, 8700));
+      timers.push(setTimeout(function () { applyPhase(7); applyErpUpdate(); }, 10300));
+      timers.push(setTimeout(function () { applyPhase(8); scrollPhone('msg4'); }, 11900));
     }
     /* Queue the automatic jump to the next tab (skipped when paused or reduced-motion). */
     function scheduleAdvance() {

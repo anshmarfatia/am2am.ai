@@ -410,28 +410,70 @@
   .tm-doc-ic { width: 30px; height: 30px; border-radius: 5px; background: #fff; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid rgba(0,0,0,.08); }
   .tm-proc { align-self: center; display: flex; align-items: center; gap: 7px; background: #fff; border: 1px solid #e3e1f5; border-radius: 999px; padding: 6px 12px; font-size: 10.5px; color: #444; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
 
-  /* AMY middleware + arrow */
+  /* AMY middleware + bidirectional connector */
   .amy-badge {
     display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
     padding: .7rem 1.45rem; border-radius: 13px; background: var(--grad); color: #fff;
     box-shadow: 0 16px 34px -14px rgba(249,115,22,.6); text-align: center;
+    transition: box-shadow .45s var(--ease), transform .45s var(--ease);
   }
   .amy-name { font-family: var(--font-body); font-weight: 700; font-size: 1.18rem; letter-spacing: -.02em; line-height: 1; }
   .amy-sub { font-family: var(--font-mono); font-size: 8px; text-transform: uppercase; letter-spacing: .2em; opacity: .92; }
-  .flow-arrow { width: 100%; min-width: 70px; max-width: 220px; height: 24px; display: block; }
-  .flow-arrow .track { stroke: var(--rule-strong); stroke-width: 2; }
-  .flow-arrow .head  { fill: var(--rust); }
-  .flow-arrow .pulse {
-    stroke: var(--sun); stroke-width: 2.6; stroke-linecap: round;
-    stroke-dasharray: 16 240; animation: arrowFlow 2.2s linear infinite;
+  /* AMY lights up while a packet is passing through it (forward at s2, return at s4) */
+  .flow-anim.s2 .amy-badge, .flow-anim.s4 .amy-badge {
+    box-shadow: 0 18px 40px -12px rgba(249,115,22,.85); transform: translateY(-1px) scale(1.03);
   }
-  @keyframes arrowFlow { from { stroke-dashoffset: 256; } to { stroke-dashoffset: 40; } }
-  .flow-arrow-v { color: var(--rust); }
-  .flow-arrow-v .pulse-v {
-    stroke: var(--sun); stroke-width: 2.6; stroke-linecap: round;
-    stroke-dasharray: 10 120; animation: arrowFlowV 2s linear infinite;
+
+  /* Connector rail */
+  .amy-conn { width: 100%; }
+  .conn-rail { display: block; position: relative; width: 100%; min-width: 70px; max-width: 220px; height: 26px; margin: 0 auto; }
+  .conn-line { position: absolute; top: 50%; left: 5px; right: 5px; height: 2px; transform: translateY(-50%); background: var(--rule-strong); border-radius: 2px; }
+  .conn-rail-v { display: block; position: relative; width: 26px; height: 58px; margin: 0 auto; }
+  .conn-line-v { position: absolute; left: 50%; top: 5px; bottom: 5px; width: 2px; transform: translateX(-50%); background: var(--rule-strong); border-radius: 2px; }
+
+  /* Arrowheads — both directions always present; the active leg is lit, the idle leg dimmed */
+  .conn-head, .conn-head-v { position: absolute; width: 13px; height: 13px; color: var(--rust); transition: opacity .4s var(--ease); }
+  .conn-head { top: 50%; transform: translateY(-50%); }
+  .conn-head-fwd { right: -3px; }
+  .conn-head-ret { left: -3px; opacity: .16; }
+  .conn-head-v { left: 50%; transform: translateX(-50%); }
+  .conn-head-fwd-v { bottom: -3px; }
+  .conn-head-ret-v { top: -3px; opacity: .16; }
+  .flow-anim.s4 .conn-head-fwd, .flow-anim.s4 .conn-head-fwd-v { opacity: .16; }
+  .flow-anim.s4 .conn-head-ret, .flow-anim.s4 .conn-head-ret-v { opacity: 1; }
+
+  /* Traveling packet chips (forward = chat bubble, return = document) */
+  .conn-chip {
+    position: absolute; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+    border-radius: 8px; opacity: 0; pointer-events: none; z-index: 2;
   }
-  @keyframes arrowFlowV { from { stroke-dashoffset: 130; } to { stroke-dashoffset: 20; } }
+  .conn-chip svg { width: 14px; height: 14px; }
+  /* Forward packet (field message) — light card with a rust ring so it reads on the cream backdrop */
+  .conn-chip.is-msg { background: var(--paper); box-shadow: 0 5px 14px -4px rgba(42,21,5,.30), 0 0 0 1.5px rgba(194,65,12,.45); }
+  .conn-chip.is-msg svg { color: var(--rust); }
+  /* Return packet (file from AMY) — branded gradient */
+  .conn-chip.is-doc { background: var(--grad); box-shadow: 0 5px 14px -4px rgba(249,115,22,.7), 0 0 0 1px rgba(249,115,22,.35); }
+  .conn-chip.is-doc svg { color: #fff; }
+
+  /* Horizontal motion: forward phone->laptop across s1..s3, return laptop->phone on s4 */
+  .conn-fwd, .conn-ret { top: 50%; margin: -13px 0 0 -13px; transition: left .85s var(--ease), opacity .4s var(--ease); }
+  .conn-fwd { left: 0; }
+  .flow-anim.s1 .conn-fwd { opacity: 1; left: 8%; }
+  .flow-anim.s2 .conn-fwd { opacity: 1; left: 50%; }
+  .flow-anim.s3 .conn-fwd { opacity: 1; left: 100%; }
+  .flow-anim.s4 .conn-fwd { opacity: 0; left: 100%; }
+  .conn-ret { left: 100%; }
+  .flow-anim.s4 .conn-ret { opacity: 1; left: 0; }
+
+  /* Vertical motion: forward top->bottom, return bottom->top */
+  .conn-fwd-v, .conn-ret-v { left: 50%; margin: -13px 0 0 -13px; transition: top .85s var(--ease), opacity .4s var(--ease); }
+  .conn-fwd-v { top: 0; }
+  .flow-anim.s1 .conn-fwd-v { opacity: 1; top: 12%; }
+  .flow-anim.s2 .conn-fwd-v { opacity: 1; top: 50%; }
+  .flow-anim.s3 .conn-fwd-v { opacity: 1; top: 100%; }
+  .flow-anim.s4 .conn-fwd-v { opacity: 0; top: 100%; }
+  .conn-ret-v { top: 100%; }
+  .flow-anim.s4 .conn-ret-v { opacity: 1; top: 0; }
 
   /* Laptop / ERP output mockup */
   .laptop { width: 100%; max-width: 680px; }
@@ -467,8 +509,17 @@
   .erp-label svg { width: 15px; height: 15px; color: var(--rust); }
 
   @media (prefers-reduced-motion: reduce) {
-    .flow-arrow .pulse, .flow-arrow-v .pulse-v, .erp-live i, .erp-scan { animation: none !important; }
+    .erp-live i, .erp-scan { animation: none !important; }
     .erp-scan { opacity: 0; }
+    /* Static bidirectional state: both arrowheads lit, both packets resting at their delivered ends */
+    .conn-chip, .conn-head, .conn-head-v, .amy-badge { transition: none !important; }
+    .conn-head-ret, .conn-head-ret-v,
+    .flow-anim.s4 .conn-head-fwd, .flow-anim.s4 .conn-head-fwd-v { opacity: 1 !important; }
+    .conn-fwd { left: 100% !important; opacity: 1 !important; }
+    .conn-fwd-v { top: 100% !important; opacity: 1 !important; }
+    .conn-ret { left: 0 !important; opacity: 1 !important; }
+    .conn-ret-v { top: 0 !important; opacity: 1 !important; }
+    .flow-anim.s2 .amy-badge, .flow-anim.s4 .amy-badge { transform: none !important; }
   }
 
   /* ---------- Use-case tabs ---------- */
@@ -865,16 +916,25 @@
           <span class="amy-name">AMY</span>
           <span class="amy-sub">AI middleware</span>
         </span>
-        <svg class="flow-arrow hidden xl:block" viewBox="0 0 220 24" role="img" aria-label="processes into">
-          <line class="track" x1="6" y1="12" x2="198" y2="12" />
-          <path class="pulse" d="M6 12 H198" fill="none" />
-          <path class="head" d="M196 5 L212 12 L196 19 Z" />
-        </svg>
-        <svg class="flow-arrow-v xl:hidden" width="26" height="56" viewBox="0 0 26 56" role="img" aria-label="processes into">
-          <line class="track" x1="13" y1="4" x2="13" y2="44" stroke="var(--rule-strong)" stroke-width="2" />
-          <path class="pulse-v" d="M13 4 V44" fill="none" />
-          <path d="M7 43 L13 54 L19 43 Z" fill="currentColor" />
-        </svg>
+        <!-- Bidirectional connector: forward (phone -> AMY -> system), then return (system -> AMY -> phone) -->
+        <div class="amy-conn hidden xl:block" role="img" aria-label="AMY sends the field update into the system of record, then returns the resulting file back to chat">
+          <span class="conn-rail">
+            <span class="conn-line"></span>
+            <svg class="conn-head conn-head-fwd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+            <svg class="conn-head conn-head-ret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+            <span class="conn-chip is-msg conn-fwd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
+            <span class="conn-chip is-doc conn-ret"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+          </span>
+        </div>
+        <div class="amy-conn-v xl:hidden" role="img" aria-label="AMY sends the field update into the system of record, then returns the resulting file back to chat">
+          <span class="conn-rail-v">
+            <span class="conn-line-v"></span>
+            <svg class="conn-head-v conn-head-fwd-v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            <svg class="conn-head-v conn-head-ret-v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+            <span class="conn-chip is-msg conn-fwd-v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
+            <span class="conn-chip is-doc conn-ret-v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+          </span>
+        </div>
       </div>
 
       <!-- Stage 3: Output (laptop / ERPNext) -->

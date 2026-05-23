@@ -927,7 +927,7 @@
     <!-- Agent tabs -->
     <div class="reveal mb-12 flex justify-center sm:mb-14">
       <div class="agent-tabs" role="tablist" aria-label="Agent use cases">
-        <button type="button" class="agent-tab" role="tab" data-agent="sales" aria-selected="false">
+        <button type="button" class="agent-tab" role="tab" data-agent="sales" aria-selected="true">
           <span class="at-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span>
           <span class="at-txt"><span class="at-title">Sales Field Entry</span><span class="at-sub">CRM</span></span>
         </button>
@@ -935,7 +935,7 @@
           <span class="at-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h6"/></svg></span>
           <span class="at-txt"><span class="at-title">Project Management</span><span class="at-sub">Jira / MS Project</span></span>
         </button>
-        <button type="button" class="agent-tab" role="tab" data-agent="supply" aria-selected="true">
+        <button type="button" class="agent-tab" role="tab" data-agent="supply" aria-selected="false">
           <span class="at-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1"/><path d="M14 9h4l3 3v5a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span>
           <span class="at-txt"><span class="at-title">Supply Chain &amp; Fleet</span><span class="at-sub">ERP</span></span>
         </button>
@@ -1443,7 +1443,7 @@
     var attrsEl = document.getElementById('agentAttrs');
     var agentTabs = Array.prototype.slice.call(document.querySelectorAll('.agent-tab'));
     var chanBtns = Array.prototype.slice.call(document.querySelectorAll('.chan-btn'));
-    var activeAgent = 'supply';
+    var activeAgent = 'sales';
     var activeChan = 'whatsapp';
 
     var TICKS = '<svg width="14" height="11" viewBox="0 0 16 11" fill="none" stroke="#53bdeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.2 3.4L10 2"/><path d="M6 9.4 11.6 2"/></svg>';

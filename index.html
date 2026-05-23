@@ -1551,44 +1551,60 @@
     function renderErp() { erpScreen.innerHTML = erpHTML(AGENTS[activeAgent]); }
     function renderAttrs() { attrsEl.innerHTML = attrsHTML(AGENTS[activeAgent]); }
 
-    var timers = [], interval = null;
+    var AGENT_ORDER = agentTabs.map(function (t) { return t.getAttribute('data-agent'); });
+    var ADVANCE_MS = 9000;
+    var timers = [], autoTimer = null, paused = false;
+
     function applyPhase(n) {
       flow.classList.remove('s1', 's2', 's3', 's4');
       for (var i = 1; i <= n; i++) flow.classList.add('s' + i);
     }
-    function clearLoop() {
+    /* Play the phone -> AMY -> laptop animation once for the active agent. */
+    function playAnimation() {
       timers.forEach(clearTimeout); timers = [];
-      if (interval) { clearInterval(interval); interval = null; }
-    }
-    function startLoop() {
-      clearLoop();
       if (reduceMotion) { applyPhase(4); return; }
-      function run() {
-        applyPhase(0);
-        timers.push(setTimeout(function () { applyPhase(1); }, 700));
-        timers.push(setTimeout(function () { applyPhase(2); }, 2100));
-        timers.push(setTimeout(function () { applyPhase(3); }, 3700));
-        timers.push(setTimeout(function () { applyPhase(4); }, 5300));
-      }
-      run();
-      interval = setInterval(run, 9000);
+      applyPhase(0);
+      timers.push(setTimeout(function () { applyPhase(1); }, 700));
+      timers.push(setTimeout(function () { applyPhase(2); }, 2100));
+      timers.push(setTimeout(function () { applyPhase(3); }, 3700));
+      timers.push(setTimeout(function () { applyPhase(4); }, 5300));
+    }
+    /* Queue the automatic jump to the next tab (skipped when paused or reduced-motion). */
+    function scheduleAdvance() {
+      if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
+      if (reduceMotion || paused) return;
+      autoTimer = setTimeout(advance, ADVANCE_MS);
+    }
+    function advance() {
+      var i = AGENT_ORDER.indexOf(activeAgent);
+      selectAgent(AGENT_ORDER[(i + 1) % AGENT_ORDER.length]);
     }
 
     function selectAgent(id) {
       activeAgent = id;
       agentTabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-agent') === id)); });
-      renderPhone(); renderErp(); renderAttrs(); startLoop();
+      renderPhone(); renderErp(); renderAttrs();
+      playAnimation(); scheduleAdvance();
     }
     function selectChan(c) {
       activeChan = c;
       chanBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-chan') === c)); });
-      renderPhone(); startLoop();
+      renderPhone();
+      playAnimation(); scheduleAdvance();
     }
 
     agentTabs.forEach(function (t) { t.addEventListener('click', function () { selectAgent(t.getAttribute('data-agent')); }); });
     chanBtns.forEach(function (b) { b.addEventListener('click', function () { selectChan(b.getAttribute('data-chan')); }); });
 
-    renderPhone(); renderErp(); renderAttrs(); startLoop();
+    /* Pause auto-rotation while the user is hovering the tabs or the demo, so it doesn't change mid-read/click. */
+    [document.querySelector('.agent-tabs'), flow].forEach(function (el) {
+      if (!el) return;
+      el.addEventListener('mouseenter', function () { paused = true; if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; } });
+      el.addEventListener('mouseleave', function () { paused = false; scheduleAdvance(); });
+    });
+
+    renderPhone(); renderErp(); renderAttrs();
+    playAnimation(); scheduleAdvance();
   }
 
   /* --- Wizard --- */

@@ -24,7 +24,7 @@
       "name": "What is AMY, exactly?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AMY is your dedicated Fractional Chief AI Officer and intelligent middleware. Instead of a standard chatbot, AMY operates directly via WhatsApp to manage your field operations, instantly validating and syncing field data back to your core ledgers."
+        "text": "AMY is the AI middleware that sits between the chat apps your team already uses and the systems you actually run on. A message comes in over WhatsApp or Teams — \"Met Acme Corp, verbal yes on the ₹12L plan, move to Negotiation.\" AMY reads it, pulls out the structured data, writes it into the right system of record (your CRM, ERP, or project tool), and sends a confirmation — or the file you asked for — back to the same chat. It's not another app to log into. It works inside the tools your team already lives in, and every action it takes is logged and reversible."
       }
     },
     {
@@ -32,7 +32,7 @@
       "name": "How is AMY different from generic voice-to-text tools or ChatGPT?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Generic tools generate text. AMY executes deterministic updates. AMY understands complex transaction density and semantic graphs (like site blueprints), securely mapping conversational input directly into structural fields within SAP, Oracle, Jira, or MS Project without manual data entry."
+        "text": "Voice-to-text transcribes. ChatGPT answers questions. Neither writes anything back into your systems. AMY closes the full loop: it understands a message in the context of your business, writes a structured, validated record into your actual system of record, and sends the result back to the person who sent it. It remembers context across days, projects, and people — so \"move it to next Friday\" knows what \"it\" is. And it's a managed service: nothing to configure, no prompts to write, no integrations to maintain. We deploy it, we tune it, you use it."
       }
     },
     {
@@ -40,7 +40,7 @@
       "name": "What workflows can AMY actually handle?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AMY eliminates high-friction field data entry. Use cases include Sales Field Entry (logging deal stages and call notes for distracted reps), Construction PM (shifting project dependencies for engineers with dirty hands), and Supply Chain Ops (verifying gate entry, stock counts, and dispatch)."
+        "text": "AMY runs one workflow end-to-end at a time, properly — not ten at once, half-working. Today that covers sales field entry (deal updates, stage changes, and follow-ups into your CRM), project management (status updates, risk flags, and task logging into Jira or MS Project), and supply chain & fleet (deliveries, vendor coordination, and asset updates into your ERP). If a workflow happens in chat and needs to land in a system of record, it's a candidate. We scope the exact fit during onboarding rather than promising everything."
       }
     },
     {
@@ -48,23 +48,23 @@
       "name": "What systems does AMY integrate with?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AMY instantly syncs with SAP, Oracle, Jira, MS Project, standard CRMs, and custom ERPs. We embed our nodes directly into your system's ledger."
+        "text": "On the chat side: WhatsApp Business API, Microsoft Teams, Slack, and Rocket.Chat. On the system-of-record side: ERP (ERPNext at launch), CRM, project tools, spreadsheets, and custom internal systems through their APIs. We use official business APIs only — no scraping, no unofficial workarounds. If you run something that isn't on this list, we evaluate it during onboarding; most systems with an API can be connected."
       }
     },
     {
       "@type": "Question",
-      "name": "How long does setup take and what is the required effort?",
+      "name": "How long does setup take, and what effort is required from us?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Zero setup is required by your team—it is 100% managed by us. We will architect, build, and launch a working prototype for your operations in just 96 hours."
+        "text": "Days, not months — and almost none of the effort is yours. You tell us the workflow you want automated and give us access to the relevant systems. We build, connect, and deploy the agent. For the first few weeks it runs with a human-approval step so we can tune it on your real messages until the output is reliable, then we hand over a working agent. Your team keeps using chat exactly as they do now. There's nothing to install and nothing to configure."
       }
     },
     {
       "@type": "Question",
-      "name": "How does AMY handle high-liability risks like construction safety or fleet tracking?",
+      "name": "How does AMY handle high-liability work like construction safety or fleet tracking?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AMY utilizes deterministic logic (e.g., cross-referencing gate passes or barcodes) and custom semantic graphs to ensure data is parsed flawlessly. This eliminates the severe risks of misparsed structural checklists or skipped dependencies."
+        "text": "We scale verification to the stakes. A wrong deal stage is a minor forecasting error; a wrong safety log or fleet dispatch is not — so those workflows don't get auto-committed. AMY extracts the data and flags it, but a human approves before it becomes a record. Every action carries a timestamp and the source message ID, and every action is reversible, so there's always a clear audit trail of who said what and when. Low-confidence extractions are surfaced for review rather than guessed. For regulated sectors, we add the contractual and compliance terms the industry requires."
       }
     }
   ]
@@ -1208,7 +1208,7 @@
           </h3>
           <div class="faq-panel" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
             <div class="faq-panel-inner">
-              <p>AMY is your dedicated Fractional Chief AI Officer and intelligent middleware. Instead of a standard chatbot, AMY operates directly via WhatsApp to manage your field operations, instantly validating and syncing field data back to your core ledgers.</p>
+              <p>AMY is the AI middleware that sits between the chat apps your team already uses and the systems you actually run on. A message comes in over WhatsApp or Teams — "Met Acme Corp, verbal yes on the ₹12L plan, move to Negotiation." AMY reads it, pulls out the structured data, writes it into the right system of record (your CRM, ERP, or project tool), and sends a confirmation — or the file you asked for — back to the same chat. It's not another app to log into. It works inside the tools your team already lives in, and every action it takes is logged and reversible.</p>
             </div>
           </div>
         </div>
@@ -1222,7 +1222,7 @@
           </h3>
           <div class="faq-panel" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
             <div class="faq-panel-inner">
-              <p>Generic tools generate text. AMY executes deterministic updates. AMY understands complex transaction density and semantic graphs (like site blueprints), securely mapping conversational input directly into structural fields within SAP, Oracle, Jira, or MS Project without manual data entry.</p>
+              <p>Voice-to-text transcribes. ChatGPT answers questions. Neither writes anything back into your systems. AMY closes the full loop: it understands a message in the context of your business, writes a structured, validated record into your actual system of record, and sends the result back to the person who sent it. It remembers context across days, projects, and people — so "move it to next Friday" knows what "it" is. And it's a managed service: nothing to configure, no prompts to write, no integrations to maintain. We deploy it, we tune it, you use it.</p>
             </div>
           </div>
         </div>
@@ -1236,7 +1236,7 @@
           </h3>
           <div class="faq-panel" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
             <div class="faq-panel-inner">
-              <p>AMY eliminates high-friction field data entry. Use cases include Sales Field Entry (logging deal stages and call notes for distracted reps), Construction PM (shifting project dependencies for engineers with dirty hands), and Supply Chain Ops (verifying gate entry, stock counts, and dispatch).</p>
+              <p>AMY runs one workflow end-to-end at a time, properly — not ten at once, half-working. Today that covers sales field entry (deal updates, stage changes, and follow-ups into your CRM), project management (status updates, risk flags, and task logging into Jira or MS Project), and supply chain &amp; fleet (deliveries, vendor coordination, and asset updates into your ERP). If a workflow happens in chat and needs to land in a system of record, it's a candidate. We scope the exact fit during onboarding rather than promising everything.</p>
             </div>
           </div>
         </div>
@@ -1250,7 +1250,7 @@
           </h3>
           <div class="faq-panel" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
             <div class="faq-panel-inner">
-              <p>AMY instantly syncs with SAP, Oracle, Jira, MS Project, standard CRMs, and custom ERPs. We embed our nodes directly into your system's ledger.</p>
+              <p>On the chat side: WhatsApp Business API, Microsoft Teams, Slack, and Rocket.Chat. On the system-of-record side: ERP (ERPNext at launch), CRM, project tools, spreadsheets, and custom internal systems through their APIs. We use official business APIs only — no scraping, no unofficial workarounds. If you run something that isn't on this list, we evaluate it during onboarding; most systems with an API can be connected.</p>
             </div>
           </div>
         </div>
@@ -1258,13 +1258,13 @@
         <div class="faq-item" data-state="closed">
           <h3 class="faq-q">
             <button type="button" class="faq-trigger" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
-              <span>How long does setup take and what is the required effort?</span>
+              <span>How long does setup take, and what effort is required from us?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </button>
           </h3>
           <div class="faq-panel" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
             <div class="faq-panel-inner">
-              <p>Zero setup is required by your team&mdash;it is 100% managed by us. We will architect, build, and launch a working prototype for your operations in just 96 hours.</p>
+              <p>Days, not months — and almost none of the effort is yours. You tell us the workflow you want automated and give us access to the relevant systems. We build, connect, and deploy the agent. For the first few weeks it runs with a human-approval step so we can tune it on your real messages until the output is reliable, then we hand over a working agent. Your team keeps using chat exactly as they do now. There's nothing to install and nothing to configure.</p>
             </div>
           </div>
         </div>
@@ -1272,13 +1272,13 @@
         <div class="faq-item" data-state="closed">
           <h3 class="faq-q">
             <button type="button" class="faq-trigger" id="faq-q-6" aria-expanded="false" aria-controls="faq-a-6">
-              <span>How does AMY handle high-liability risks like construction safety or fleet tracking?</span>
+              <span>How does AMY handle high-liability work like construction safety or fleet tracking?</span>
               <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </button>
           </h3>
           <div class="faq-panel" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
             <div class="faq-panel-inner">
-              <p>AMY utilizes deterministic logic (e.g., cross-referencing gate passes or barcodes) and custom semantic graphs to ensure data is parsed flawlessly. This eliminates the severe risks of misparsed structural checklists or skipped dependencies.</p>
+              <p>We scale verification to the stakes. A wrong deal stage is a minor forecasting error; a wrong safety log or fleet dispatch is not — so those workflows don't get auto-committed. AMY extracts the data and flags it, but a human approves before it becomes a record. Every action carries a timestamp and the source message ID, and every action is reversible, so there's always a clear audit trail of who said what and when. Low-confidence extractions are surfaced for review rather than guessed. For regulated sectors, we add the contractual and compliance terms the industry requires.</p>
             </div>
           </div>
         </div>

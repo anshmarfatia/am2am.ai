@@ -937,7 +937,7 @@
         </button>
         <button type="button" class="agent-tab" role="tab" data-agent="supply" aria-selected="false">
           <span class="at-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h1"/><path d="M14 9h4l3 3v5a1 1 0 0 1-1 1h-1"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span>
-          <span class="at-txt"><span class="at-title">Supply Chain &amp; Fleet</span><span class="at-sub">ERP</span></span>
+          <span class="at-txt"><span class="at-title">Supply Chain &amp; Fleet Operations</span><span class="at-sub">ERP</span></span>
         </button>
       </div>
     </div>
@@ -1023,8 +1023,9 @@
 
     </div>
 
-    <!-- Per-agent use-case attributes -->
-    <div id="agentAttrs" class="reveal mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:mt-16"><!-- rendered by JS --></div>
+    <!-- Per-agent use-case attributes (4 cards per tab) — hidden for now. Data is preserved in the AGENTS[].attrs arrays below and will render via renderAttrs() if this div is uncommented.
+    <div id="agentAttrs" class="reveal mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:mt-16"></div>
+    -->
   </div>
 </section>
 
@@ -1622,7 +1623,7 @@
 
     function renderPhone() { phoneScreen.innerHTML = (activeChan === 'teams' ? tmPhone : waPhone)(AGENTS[activeAgent]); }
     function renderErp() { erpScreen.innerHTML = erpHTML(AGENTS[activeAgent]); }
-    function renderAttrs() { attrsEl.innerHTML = attrsHTML(AGENTS[activeAgent]); }
+    function renderAttrs() { if (!attrsEl) return; attrsEl.innerHTML = attrsHTML(AGENTS[activeAgent]); }
 
     var AGENT_ORDER = agentTabs.map(function (t) { return t.getAttribute('data-agent'); });
     var ADVANCE_MS = 15500;

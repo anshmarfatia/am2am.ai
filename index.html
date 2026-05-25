@@ -278,7 +278,7 @@
     width: 32px; height: 32px; border-radius: 50%; background: #fff; overflow: hidden;
     display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
   }
-  .wa-avatar img, .tm-avatar img {
+  .wa-avatar img, .tg-avatar img {
     width: 100%; height: 100%; object-fit: cover; object-position: center top;
     transform: scale(1.14); display: block;
   }
@@ -286,7 +286,7 @@
     flex: 1; min-height: 0; padding: 12px 10px; display: flex; flex-direction: column;
     gap: 9px; overflow-y: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none;
   }
-  .wa-body::-webkit-scrollbar, .tm-body::-webkit-scrollbar { display: none; }
+  .wa-body::-webkit-scrollbar, .tg-body::-webkit-scrollbar { display: none; }
   .wa-msg {
     max-width: 88%; padding: 6px 9px 16px; border-radius: 9px; font-size: 12px;
     line-height: 1.4; position: relative; color: #111b21;
@@ -425,18 +425,18 @@
   .phone-view { flex: 1; display: flex; flex-direction: column; min-height: 0; }
   .phone-view[hidden] { display: none; }
 
-  /* Teams chat view */
-  .tm-header { background: #5B5FC7; color: #fff; padding: 13px 12px 9px; display: flex; align-items: center; gap: 9px; }
-  .tm-avatar { width: 32px; height: 32px; border-radius: 7px; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
-  .tm-body { flex: 1; min-height: 0; padding: 12px 10px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; background: #f5f5f5; }
-  .tm-msg { max-width: 90%; padding: 8px 10px; border-radius: 5px; font-size: 12px; line-height: 1.4; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,.08); color: #242424; }
-  .tm-out { align-self: flex-end; background: #E8EBFA; border: 1px solid #d6dbf5; }
-  .tm-in  { align-self: flex-start; background: #fff; border: 1px solid #ededed; }
-  .tm-name { font-size: 10px; font-weight: 700; color: #5B5FC7; margin-bottom: 3px; }
-  .tm-time { display: block; margin-top: 5px; font-size: 9px; color: #616161; }
-  .tm-doc { display: flex; align-items: center; gap: 8px; background: #faf9ff; border: 1px solid #e3e1f5; border-radius: 6px; padding: 8px 9px; margin-bottom: 6px; }
-  .tm-doc-ic { width: 30px; height: 30px; border-radius: 5px; background: #fff; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid rgba(0,0,0,.08); }
-  .tm-proc { align-self: center; display: flex; align-items: center; gap: 7px; background: #fff; border: 1px solid #e3e1f5; border-radius: 999px; padding: 6px 12px; font-size: 10.5px; color: #444; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  /* Telegram chat view */
+  .tg-header { background: linear-gradient(135deg, #2AABEE, #229ED9); color: #fff; padding: 13px 12px 9px; display: flex; align-items: center; gap: 9px; }
+  .tg-avatar { width: 34px; height: 34px; border-radius: 50%; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .tg-body { flex: 1; min-height: 0; padding: 12px 10px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; background-color: #cfe0ed; background-image: radial-gradient(rgba(255,255,255,.5) 1px, transparent 1.5px); background-size: 18px 18px; }
+  .tg-msg { max-width: 88%; padding: 7px 10px 8px; border-radius: 12px; font-size: 12px; line-height: 1.4; position: relative; box-shadow: 0 1px 1.5px rgba(16,35,47,.14); color: #1d2733; }
+  .tg-out { align-self: flex-end; background: #EEFFDE; border-bottom-right-radius: 4px; }
+  .tg-in  { align-self: flex-start; background: #fff; border-bottom-left-radius: 4px; }
+  .tg-time { display: block; text-align: right; margin-top: 3px; font-size: 9px; color: #6a8499; }
+  .tg-out .tg-time { color: #5aaa5e; }
+  .tg-doc { display: flex; align-items: center; gap: 8px; background: rgba(42,171,238,.08); border: 1px solid rgba(42,171,238,.22); border-radius: 8px; padding: 8px 9px; margin-bottom: 6px; }
+  .tg-doc-ic { width: 30px; height: 30px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; border: 1px solid rgba(0,0,0,.06); }
+  .tg-proc { align-self: center; display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,.94); border-radius: 999px; padding: 6px 12px; font-size: 10.5px; color: #3b4a54; font-weight: 500; box-shadow: 0 1px 3px rgba(16,35,47,.14); }
 
   /* AMY middleware + bidirectional connector */
   .amy-badge {
@@ -963,9 +963,9 @@
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
             WhatsApp
           </button>
-          <button type="button" class="chan-btn" data-chan="teams" aria-pressed="false">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Teams
+          <button type="button" class="chan-btn" data-chan="telegram" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+            Telegram
           </button>
         </div>
       </div>
@@ -1458,7 +1458,7 @@
     reveals.forEach(function (el) { io.observe(el); });
   }
 
-  /* --- Use-case showcase: tab-driven phone (WhatsApp/Teams) + ERPNext + attributes --- */
+  /* --- Use-case showcase: tab-driven phone (WhatsApp/Telegram) + ERPNext + attributes --- */
   var flow = document.getElementById('heroFlow');
   if (flow) {
     var phoneScreen = document.getElementById('phoneScreen');
@@ -1470,6 +1470,7 @@
     var activeChan = 'whatsapp';
 
     var TICKS = '<svg width="14" height="11" viewBox="0 0 16 11" fill="none" stroke="#53bdeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.2 3.4L10 2"/><path d="M6 9.4 11.6 2"/></svg>';
+    var TG_TICK = '<svg width="14" height="10" viewBox="0 0 16 11" fill="none" stroke="#62b95a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-1px"><path d="M1 6l3.2 3.4L10 2"/><path d="M6 9.4 11.6 2"/></svg>';
     var SHIELD = '<span class="shield-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg></span>';
     var LOGO = '<svg viewBox="0 0 240 240" width="22" height="22"><use href="#logo-mark"/></svg>';
     var AMY_PIC = '<img src="Amy%20dp.png" alt="AMY" loading="lazy" decoding="async" />';
@@ -1488,8 +1489,8 @@
     function waDoc(d) {
       return '<span class="wa-doc"><span class="wa-doc-ic">' + docIcon(d.kind) + '</span><span class="leading-tight"><span class="block text-[10.5px] font-semibold" style="color:#111b21">' + d.name + '</span><span class="block text-[9px]" style="color:#667781">' + d.meta + '</span></span></span>';
     }
-    function tmDoc(d) {
-      return '<span class="tm-doc"><span class="tm-doc-ic">' + docIcon(d.kind) + '</span><span class="leading-tight"><span class="block text-[10.5px] font-semibold" style="color:#242424">' + d.name + '</span><span class="block text-[9px]" style="color:#616161">' + d.meta + '</span></span></span>';
+    function tgDoc(d) {
+      return '<span class="tg-doc"><span class="tg-doc-ic">' + docIcon(d.kind) + '</span><span class="leading-tight"><span class="block text-[10.5px] font-semibold" style="color:#1d2733">' + d.name + '</span><span class="block text-[9px]" style="color:#6a8499">' + d.meta + '</span></span></span>';
     }
     function waPhone(a) {
       var m = a.msgs;
@@ -1505,18 +1506,18 @@
         + '<div class="wa-msg wa-in" data-loop="msg4">' + (m.doc2 ? waDoc(m.doc2) : '') + m.reply2 + '<span class="wa-time">' + m.time2 + '</span></div>'
         + '</div>';
     }
-    function tmPhone(a) {
+    function tgPhone(a) {
       var m = a.msgs;
       return '<div class="phone-notch"></div>'
-        + '<div class="tm-header">' + BACK + '<span class="tm-avatar">' + AMY_PIC + '</span>'
-        + '<span class="leading-tight"><span class="block text-[12.5px] font-semibold">' + a.head.name + '</span><span class="block text-[9.5px]" style="color:rgba(255,255,255,.75)">Teams · ' + a.head.team + '</span></span>' + DOTS + '</div>'
-        + '<div class="tm-body">'
-        + '<div class="tm-msg tm-out" data-loop="msg1"><span class="tm-name">' + a.head.role + '</span>' + photo(m.photo, 92) + m.out + '<span class="tm-time">' + m.time + ' · Sent</span></div>'
-        + '<div class="tm-proc" data-loop="proc"><span class="spinner"></span>' + SHIELD + m.proc + '</div>'
-        + '<div class="tm-msg tm-in" data-loop="msg2"><span class="tm-name">AMY</span>' + tmDoc(m.doc) + m.reply + '<span class="tm-time">' + m.time + '</span></div>'
-        + '<div class="tm-msg tm-out" data-loop="msg3"><span class="tm-name">' + a.head.role + '</span>' + m.out2 + '<span class="tm-time">' + m.time2 + ' · Sent</span></div>'
-        + '<div class="tm-proc" data-loop="proc2"><span class="spinner"></span>' + SHIELD + m.proc2 + '</div>'
-        + '<div class="tm-msg tm-in" data-loop="msg4"><span class="tm-name">AMY</span>' + (m.doc2 ? tmDoc(m.doc2) : '') + m.reply2 + '<span class="tm-time">' + m.time2 + '</span></div>'
+        + '<div class="tg-header">' + BACK + '<span class="tg-avatar">' + AMY_PIC + '</span>'
+        + '<span class="leading-tight"><span class="block text-[12.5px] font-semibold">' + a.head.name + '</span><span class="block text-[9.5px]" style="color:rgba(255,255,255,.8)">online</span></span>' + DOTS + '</div>'
+        + '<div class="tg-body">'
+        + '<div class="tg-msg tg-out" data-loop="msg1">' + photo(m.photo, 92) + m.out + '<span class="tg-time">' + m.time + ' ' + TG_TICK + '</span></div>'
+        + '<div class="tg-proc" data-loop="proc"><span class="spinner"></span>' + SHIELD + m.proc + '</div>'
+        + '<div class="tg-msg tg-in" data-loop="msg2">' + tgDoc(m.doc) + m.reply + '<span class="tg-time">' + m.time + '</span></div>'
+        + '<div class="tg-msg tg-out" data-loop="msg3">' + m.out2 + '<span class="tg-time">' + m.time2 + ' ' + TG_TICK + '</span></div>'
+        + '<div class="tg-proc" data-loop="proc2"><span class="spinner"></span>' + SHIELD + m.proc2 + '</div>'
+        + '<div class="tg-msg tg-in" data-loop="msg4">' + (m.doc2 ? tgDoc(m.doc2) : '') + m.reply2 + '<span class="tg-time">' + m.time2 + '</span></div>'
         + '</div>';
     }
 
@@ -1643,7 +1644,7 @@
       }
     };
 
-    function renderPhone() { phoneScreen.innerHTML = (activeChan === 'teams' ? tmPhone : waPhone)(AGENTS[activeAgent]); }
+    function renderPhone() { phoneScreen.innerHTML = (activeChan === 'telegram' ? tgPhone : waPhone)(AGENTS[activeAgent]); }
     function renderErp() { erpScreen.innerHTML = erpHTML(AGENTS[activeAgent]); }
     function renderAttrs() { if (!attrsEl) return; attrsEl.innerHTML = attrsHTML(AGENTS[activeAgent]); }
 
@@ -1673,7 +1674,7 @@
     }
     /* Keep the newest chat bubble in view as the conversation grows. */
     function scrollPhone(loop) {
-      var body = phoneScreen.querySelector('.wa-body, .tm-body');
+      var body = phoneScreen.querySelector('.wa-body, .tg-body');
       if (!body) return;
       var el = body.querySelector('[data-loop="' + loop + '"]');
       if (!el) return;

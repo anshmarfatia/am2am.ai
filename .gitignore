@@ -1,0 +1,9 @@
+# Google OAuth client secret files
+client_secret_*.json
+*.apps.googleusercontent.com.json
+
+# Environment / secrets
+.env
+.env.*
+*.pem
+*.key

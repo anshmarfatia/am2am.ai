@@ -404,20 +404,20 @@
   .flow-anim { position: relative; }
 
   /* Channel toggle */
-  .chan-toggle {
+  .chan-toggle, .view-toggle {
     display: inline-flex; gap: 4px; padding: 4px; border-radius: 11px;
     background: var(--paper); border: 1px solid var(--rule-strong);
     box-shadow: 0 2px 8px -3px rgba(42,21,5,.18);
   }
-  .chan-btn {
+  .chan-btn, .view-btn {
     display: inline-flex; align-items: center; gap: 7px; cursor: pointer; border: 0;
     padding: .55rem .95rem; border-radius: 8px; background: transparent;
     font-family: var(--font-body); font-size: .82rem; font-weight: 600; color: var(--muted);
     transition: background .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
   }
-  .chan-btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
-  .chan-btn:hover { color: var(--ink); }
-  .chan-btn[aria-pressed="true"] {
+  .chan-btn svg, .view-btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
+  .chan-btn:hover, .view-btn:hover { color: var(--ink); }
+  .chan-btn[aria-pressed="true"], .view-btn[aria-pressed="true"] {
     background: var(--ink); color: var(--cream-warm);
     box-shadow: 0 3px 10px -3px rgba(42,21,5,.5);
   }
@@ -639,6 +639,56 @@
   .erp-ind-orange { color: #f0921f; }
   .erp-ind-red { color: #e24c4c; }
   .erp-ind-gray { color: #9aa2ab; }
+
+  /* ---------- Google Sheets view ---------- */
+  .sheets { display: flex; flex-direction: column; height: 100%; background: #fff; font-size: 11px; color: #202124; }
+  .sheets-bar { display: flex; align-items: center; gap: 8px; padding: 7px 11px; background: #188038; color: #fff; flex: 0 0 auto; }
+  .sheets-bar svg { width: 16px; height: 16px; flex: 0 0 auto; }
+  .sheets-name { font-size: 12px; font-weight: 600; }
+  .sheets-sub { font-size: 9px; opacity: .85; margin-left: auto; }
+  .sheets-fbar { display: flex; align-items: center; gap: 9px; padding: 4px 11px; border-bottom: 1px solid #e0e0e0; background: #fff; flex: 0 0 auto; }
+  .sheets-ref { font-size: 9.5px; color: #5f6368; border: 1px solid #e0e0e0; border-radius: 3px; padding: 2px 8px; text-align: center; min-width: 30px; }
+  .sheets-formula { font-size: 9.5px; color: #9aa0a6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sheets-grid { flex: 1; min-height: 0; overflow: auto; }
+  .sheets-colletters, .sheets-row { display: grid; align-items: stretch; }
+  .sheets-colletters { position: sticky; top: 0; z-index: 1; background: #f8f9fa; border-bottom: 1px solid #c0c0c0; }
+  .sheets-corner, .sheets-cl { font-size: 9px; color: #5f6368; text-align: center; padding: 3px 0; border-right: 1px solid #e0e0e0; }
+  .sheets-corner { background: #f1f3f4; }
+  .sheets-rownum { font-size: 9px; color: #5f6368; text-align: center; padding: 6px 0; background: #f8f9fa; border-right: 1px solid #e0e0e0; }
+  .sheets-row { border-bottom: 1px solid #e6e6e6; }
+  .sheets-cell { padding: 6px 8px; border-right: 1px solid #e6e6e6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #202124; display: flex; align-items: center; }
+  .sheets-id { padding: 6px 8px; border-right: 1px solid #e6e6e6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #1a73e8; font-weight: 500; display: flex; align-items: center; }
+  .sheets-th { font-weight: 700; color: #202124; background: #f8f9fa; }
+  .sheets-row-h .sheets-rownum { background: #f1f3f4; }
+  .sheets-sel { box-shadow: inset 0 0 0 2px #1a73e8; }
+  .sheets .erp-ind { display: inline-flex; align-items: center; font-weight: 600; }
+  .sheets .erp-ind::before { display: none; }
+
+  /* ---------- TallyPrime view ---------- */
+  .tally { display: flex; flex-direction: column; height: 100%; background: #f4efe2; font-size: 11px; color: #1f2733; }
+  .tally-titlebar { display: flex; align-items: center; gap: 10px; padding: 5px 10px; background: linear-gradient(#2f4f86, #26416e); color: #fff; flex: 0 0 auto; }
+  .tally-logo { font-weight: 700; letter-spacing: .02em; }
+  .tally-tbmid { font-size: 10px; color: rgba(255,255,255,.85); }
+  .tally-win { margin-left: auto; letter-spacing: 2px; font-size: 10px; color: rgba(255,255,255,.8); }
+  .tally-cobar { display: flex; align-items: center; justify-content: space-between; padding: 4px 10px; background: #dfe8f5; color: #26416e; font-weight: 600; font-size: 10px; border-bottom: 1px solid #b9c8de; flex: 0 0 auto; }
+  .tally-date { font-weight: 500; color: #5a6b85; }
+  .tally-body { flex: 1; min-height: 0; display: flex; }
+  .tally-main { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 9px 11px; overflow: auto; }
+  .tally-rtitle { text-align: center; font-weight: 700; color: #1f2733; font-size: 12px; }
+  .tally-rsub { text-align: center; color: #6b7689; font-size: 9px; margin-bottom: 8px; }
+  .tally-table { border-top: 1.5px solid #26416e; }
+  .tally-row { display: grid; gap: 8px; padding: 6px 4px; align-items: center; }
+  .tally-thead { color: #26416e; font-weight: 700; border-bottom: 1.5px solid #26416e; padding-top: 4px; padding-bottom: 5px; }
+  .tally-row:not(.tally-thead) { border-bottom: 1px dotted #cdbf9f; }
+  .tally-id { color: #1f2733; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tally-cell { color: #3a4453; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tally-status { justify-self: start; }
+  .tally .erp-ind { display: inline-flex; align-items: center; font-weight: 700; }
+  .tally .erp-ind::before { display: none; }
+  .tally-rail { flex: 0 0 84px; background: #f7ead0; border-left: 1px solid #d9c79c; display: flex; flex-direction: column; gap: 3px; padding: 6px 5px; overflow: hidden; }
+  .tally-btn { display: flex; flex-direction: column; line-height: 1.25; background: #fff7e6; border: 1px solid #e4d3a6; border-radius: 3px; padding: 3px 5px; }
+  .tally-btn b { color: #9a2b2b; font-weight: 700; font-size: 8.5px; }
+  .tally-btn i { font-style: normal; color: #6b5a30; font-size: 8px; }
 
   /* ---------- Comparison cards ---------- */
   .cmp-card { border-radius: 13px; height: 100%; }
@@ -1012,20 +1062,20 @@
           <div class="laptop-deck"></div>
         </div>
 
-        <!-- Output destinations -->
-        <div class="flex items-center justify-center gap-6">
-          <span class="erp-label">
+        <!-- System-of-record view toggle (mirrors the phone's channel toggle) -->
+        <div class="view-toggle" role="group" aria-label="System of record">
+          <button type="button" class="view-btn" data-view="erp" aria-pressed="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
             ERP
-          </span>
-          <span class="erp-label">
+          </button>
+          <button type="button" class="view-btn" data-view="sheets" aria-pressed="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
-            XLS
-          </span>
-          <span class="erp-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></svg>
-            Custom
-          </span>
+            Google Sheets
+          </button>
+          <button type="button" class="view-btn" data-view="tally" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Tally
+          </button>
         </div>
       </div>
 
@@ -1466,8 +1516,10 @@
     var attrsEl = document.getElementById('agentAttrs');
     var agentTabs = Array.prototype.slice.call(document.querySelectorAll('.agent-tab'));
     var chanBtns = Array.prototype.slice.call(document.querySelectorAll('.chan-btn'));
+    var viewBtns = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
     var activeAgent = 'sales';
     var activeChan = 'whatsapp';
+    var activeView = 'erp';
 
     var TICKS = '<svg width="14" height="11" viewBox="0 0 16 11" fill="none" stroke="#53bdeb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.2 3.4L10 2"/><path d="M6 9.4 11.6 2"/></svg>';
     var TG_TICK = '<svg width="14" height="10" viewBox="0 0 16 11" fill="none" stroke="#62b95a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:-1px"><path d="M1 6l3.2 3.4L10 2"/><path d="M6 9.4 11.6 2"/></svg>';
@@ -1541,6 +1593,68 @@
         + '<div class="erp-nav">' + ERP_LOGO + '<span class="erp-search">' + ERP_SEARCH + '</span><span class="erp-navend"><span class="erp-navdot"></span><span class="erp-ava"></span></span></div>'
         + '<div class="erp-main"><div class="erp-titlerow"><div><span class="erp-h">' + e.title + '</span><span class="erp-count">' + e.count + '</span></div><span class="erp-add">+ ' + e.add + '</span></div>'
         + '<div class="erp-list">' + head + rows + '</div></div></div>';
+    }
+
+    /* Google Sheets skin of the same record. Live row keeps the .db-row-live / .erp-cell /
+       .erp-ind / dbcell contract so applyErpUpdate() + the s3/s7 flash CSS work unchanged. */
+    function sheetsHTML(a) {
+      var e = a.erp;
+      var gridCols = '30px 1.15fr 1fr 0.78fr 0.95fr';
+      var ncol = 1 + e.live.cells.length + 1;
+      var letters = '<span class="sheets-corner"></span>';
+      for (var li = 0; li < ncol; li++) letters += '<span class="sheets-cl">' + String.fromCharCode(65 + li) + '</span>';
+      var titles = e.cols.concat(['Status']);
+      function srow(r, n, live) {
+        var dc = live ? ' dbcell' : '';
+        var s = '<div class="sheets-row' + (live ? ' db-row-live' : '') + '" style="grid-template-columns:' + gridCols + '">';
+        s += '<span class="sheets-rownum">' + n + '</span>';
+        s += '<span class="sheets-id' + dc + (live ? ' sheets-sel' : '') + '">' + r.id + '</span>';
+        s += r.cells.map(function (c) { return '<span class="sheets-cell erp-cell' + dc + '">' + c + '</span>'; }).join('');
+        s += '<span class="sheets-cell"><span class="erp-ind erp-ind-' + r.ind.cls + dc + '">' + r.ind.label + '</span></span>';
+        return s + '</div>';
+      }
+      var body = '<div class="sheets-row sheets-row-h" style="grid-template-columns:' + gridCols + '"><span class="sheets-rownum">1</span>'
+        + titles.map(function (t) { return '<span class="sheets-cell sheets-th">' + t + '</span>'; }).join('') + '</div>';
+      var n = 2;
+      e.rows.forEach(function (r) { body += srow(r, n++, false); });
+      body += srow(e.live, n, true);
+      return '<div class="sheets">'
+        + '<div class="sheets-bar"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M4 9h16M4 14h16M10 3v18"/></svg><span class="sheets-name">' + e.title + ' Tracker</span><span class="sheets-sub">Shared &middot; Live</span></div>'
+        + '<div class="sheets-fbar"><span class="sheets-ref">A' + n + '</span><span class="sheets-formula">' + e.live.id + '</span></div>'
+        + '<div class="sheets-grid"><div class="sheets-colletters" style="grid-template-columns:' + gridCols + '">' + letters + '</div>' + body + '</div></div>';
+    }
+
+    /* TallyPrime skin of the same record (same live-row contract). */
+    function tallyHTML(a) {
+      var e = a.erp;
+      var company = 'Vega Industries Pvt Ltd';
+      var gridCols = '1.25fr 1.1fr 0.7fr 0.85fr';
+      var heads = e.cols.concat(['Status']);
+      function trow(r, live) {
+        var dc = live ? ' dbcell' : '';
+        var s = '<div class="tally-row' + (live ? ' db-row-live' : '') + '" style="grid-template-columns:' + gridCols + '">';
+        s += '<span class="tally-id' + dc + '">' + r.id + '</span>';
+        s += r.cells.map(function (c) { return '<span class="tally-cell erp-cell' + dc + '">' + c + '</span>'; }).join('');
+        s += '<span class="tally-cell tally-status"><span class="erp-ind erp-ind-' + r.ind.cls + dc + '">' + r.ind.label + '</span></span>';
+        return s + '</div>';
+      }
+      var headRow = '<div class="tally-row tally-thead" style="grid-template-columns:' + gridCols + '">'
+        + heads.map(function (h) { return '<span>' + h + '</span>'; }).join('') + '</div>';
+      var rows = '';
+      e.rows.forEach(function (r) { rows += trow(r, false); });
+      rows += trow(e.live, true);
+      var rail = ['F1: Help', 'F2: Date', 'F4: Filter', 'F8: Print', 'F9: Export', 'Ctrl+A: Accept'].map(function (b) {
+        var p = b.split(': ');
+        return '<span class="tally-btn"><b>' + p[0] + '</b><i>' + p[1] + '</i></span>';
+      }).join('');
+      return '<div class="tally">'
+        + '<div class="tally-titlebar"><span class="tally-logo">TallyPrime</span><span class="tally-tbmid">' + company + '</span><span class="tally-win">&minus; &#9744; &times;</span></div>'
+        + '<div class="tally-cobar"><span>' + e.title + ' Register</span><span class="tally-date">1-Apr-26 to 31-Mar-27</span></div>'
+        + '<div class="tally-body"><div class="tally-main">'
+        + '<div class="tally-rtitle">' + company + '</div>'
+        + '<div class="tally-rsub">' + e.title + ' Register &middot; ' + e.count + ' entries</div>'
+        + '<div class="tally-table">' + headRow + rows + '</div>'
+        + '</div><div class="tally-rail">' + rail + '</div></div></div>';
     }
 
     function attrsHTML(a) {
@@ -1645,7 +1759,10 @@
     };
 
     function renderPhone() { phoneScreen.innerHTML = (activeChan === 'telegram' ? tgPhone : waPhone)(AGENTS[activeAgent]); }
-    function renderErp() { erpScreen.innerHTML = erpHTML(AGENTS[activeAgent]); }
+    function renderErp() {
+      var fn = activeView === 'sheets' ? sheetsHTML : activeView === 'tally' ? tallyHTML : erpHTML;
+      erpScreen.innerHTML = fn(AGENTS[activeAgent]);
+    }
     function renderAttrs() { if (!attrsEl) return; attrsEl.innerHTML = attrsHTML(AGENTS[activeAgent]); }
 
     var AGENT_ORDER = agentTabs.map(function (t) { return t.getAttribute('data-agent'); });
@@ -1717,9 +1834,16 @@
       renderPhone();
       playAnimation(); scheduleAdvance();
     }
+    function selectView(v) {
+      activeView = v;
+      viewBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-view') === v)); });
+      renderErp();
+      playAnimation(); scheduleAdvance();
+    }
 
     agentTabs.forEach(function (t) { t.addEventListener('click', function () { selectAgent(t.getAttribute('data-agent')); }); });
     chanBtns.forEach(function (b) { b.addEventListener('click', function () { selectChan(b.getAttribute('data-chan')); }); });
+    viewBtns.forEach(function (b) { b.addEventListener('click', function () { selectView(b.getAttribute('data-view')); }); });
 
     /* Pause auto-rotation while the user is hovering the tabs or the demo, so it doesn't change mid-read/click. */
     [document.querySelector('.agent-tabs'), flow].forEach(function (el) {

@@ -723,6 +723,19 @@
   .logo-chip .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sun); opacity: .55; }
   .logo-chip .logo-mark { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; display: inline-block; }
 
+  /* ---------- Spinning logo ring ---------- */
+  .logo-ring { --d: 460px; --r: 180px; --tile: 60px; position: relative; width: var(--d); height: var(--d); border-radius: 50%; background: var(--paper); border: 1px solid var(--rule-strong); box-shadow: 0 28px 60px -40px rgba(42,21,5,.45), inset 0 0 0 1px rgba(255,255,255,.55); }
+  @media (max-width: 640px) { .logo-ring { --d: 320px; --r: 124px; --tile: 46px; } }
+  .ring-spin { position: absolute; inset: 0; animation: ring-spin 40s linear infinite; }
+  .ring-tile { position: absolute; width: var(--tile); height: var(--tile); border-radius: 50%; background: #fff; border: 1px solid var(--rule); box-shadow: 0 6px 16px -8px rgba(42,21,5,.28); display: flex; align-items: center; justify-content: center; top: calc(50% - var(--tile)/2 + var(--r) * var(--sin)); left: calc(50% - var(--tile)/2 + var(--r) * var(--cos)); animation: ring-spin-rev 40s linear infinite; }
+  .ring-logo { width: 62%; height: 62%; object-fit: contain; display: block; }
+  .ring-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 54%; height: 54%; border-radius: 50%; background: var(--cream-warm); border: 4px solid var(--rule-strong); box-shadow: inset 0 8px 20px -10px rgba(42,21,5,.28); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 8px; text-align: center; }
+  .ring-center .ring-mark { width: clamp(38px, 28%, 64px); height: auto; flex-shrink: 0; }
+  .ring-center .ring-wordmark { font-family: var(--font-body); font-weight: 700; letter-spacing: -.025em; font-size: clamp(0.95rem, 1.6vw, 1.35rem); color: var(--ink); line-height: 1; }
+  .logo-ring:hover .ring-spin, .logo-ring:hover .ring-tile { animation-play-state: paused; }
+  @keyframes ring-spin { to { transform: rotate(360deg); } }
+  @keyframes ring-spin-rev { to { transform: rotate(-360deg); } }
+
   /* ---------- Wizard ---------- */
   .wizard { border: 1px solid var(--rule-strong); border-radius: 16px; background: var(--paper); overflow: hidden; box-shadow: 0 30px 70px -40px rgba(42,21,5,.4); }
   .wiz-rail { display: flex; border-bottom: 1px solid var(--rule); }
@@ -1100,35 +1113,28 @@
       </h2>
     </div>
 
-    <!-- Logo marquee -->
-    <div class="reveal marquee mt-12 border-y border-line py-8">
-      <div class="marquee-track">
-        <span class="logo-chip"><img class="logo-mark" src="https://cdn.simpleicons.org/googlesheets" alt="" loading="lazy">Google Sheets</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://cdn.simpleicons.org/googledrive" alt="" loading="lazy">Google Drive</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://cdn.simpleicons.org/googledocs" alt="" loading="lazy">Google Docs</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy">Microsoft 365</span>
-        <span class="logo-chip"><svg class="logo-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#DC2626"/><text x="12" y="17.2" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="15" fill="#fff">T</text></svg>Tally</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://cdn.simpleicons.org/erpnext" alt="" loading="lazy">ERPNext</span>
-        <span class="logo-chip"><svg class="logo-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 2h9l5 5v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" fill="#E11D48"/><path d="M14 2v5h5z" fill="#9F1239"/><text x="11.5" y="18" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="6" fill="#fff">PDF</text></svg>PDF</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://cdn.simpleicons.org/sap" alt="" loading="lazy">SAP</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="" loading="lazy">Oracle</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy">Microsoft Dynamics</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://cdn.simpleicons.org/zoho" alt="" loading="lazy">Zoho</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://cdn.simpleicons.org/airtable" alt="" loading="lazy">Airtable</span>
-        <span class="logo-chip"><img class="logo-mark" src="https://cdn.simpleicons.org/clickup" alt="" loading="lazy">ClickUp</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://cdn.simpleicons.org/googlesheets" alt="" loading="lazy">Google Sheets</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://cdn.simpleicons.org/googledrive" alt="" loading="lazy">Google Drive</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://cdn.simpleicons.org/googledocs" alt="" loading="lazy">Google Docs</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy">Microsoft 365</span>
-        <span class="logo-chip" aria-hidden="true"><svg class="logo-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#DC2626"/><text x="12" y="17.2" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="15" fill="#fff">T</text></svg>Tally</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://cdn.simpleicons.org/erpnext" alt="" loading="lazy">ERPNext</span>
-        <span class="logo-chip" aria-hidden="true"><svg class="logo-mark" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 2h9l5 5v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" fill="#E11D48"/><path d="M14 2v5h5z" fill="#9F1239"/><text x="11.5" y="18" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="6" fill="#fff">PDF</text></svg>PDF</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://cdn.simpleicons.org/sap" alt="" loading="lazy">SAP</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="" loading="lazy">Oracle</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy">Microsoft Dynamics</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://cdn.simpleicons.org/zoho" alt="" loading="lazy">Zoho</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://cdn.simpleicons.org/airtable" alt="" loading="lazy">Airtable</span>
-        <span class="logo-chip" aria-hidden="true"><img class="logo-mark" src="https://cdn.simpleicons.org/clickup" alt="" loading="lazy">ClickUp</span>
+    <!-- Spinning logo ring -->
+    <div class="reveal mt-12 flex justify-center">
+      <div class="logo-ring" role="img" aria-label="Integrates with Google Sheets, Google Drive, Google Docs, Microsoft 365, Tally, ERPNext, PDF, SAP, Oracle, Microsoft Dynamics, Zoho, Airtable, and ClickUp">
+        <div class="ring-spin" aria-hidden="true">
+          <div class="ring-tile" style="--sin:0;--cos:1"><img class="ring-logo" src="https://cdn.simpleicons.org/googlesheets" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:.4647;--cos:.8855"><img class="ring-logo" src="https://cdn.simpleicons.org/googledrive" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:.8230;--cos:.5681"><img class="ring-logo" src="https://cdn.simpleicons.org/googledocs" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:.9927;--cos:.1205"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:.9350;--cos:-.3546"><svg class="ring-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#DC2626"/><text x="12" y="17.2" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="15" fill="#fff">T</text></svg></div>
+          <div class="ring-tile" style="--sin:.6631;--cos:-.7485"><img class="ring-logo" src="https://cdn.simpleicons.org/erpnext" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:.2393;--cos:-.9709"><svg class="ring-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 2h9l5 5v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" fill="#E11D48"/><path d="M14 2v5h5z" fill="#9F1239"/><text x="11.5" y="18" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="6" fill="#fff">PDF</text></svg></div>
+          <div class="ring-tile" style="--sin:-.2393;--cos:-.9709"><img class="ring-logo" src="https://cdn.simpleicons.org/sap" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:-.6631;--cos:-.7485"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:-.9350;--cos:-.3546"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:-.9927;--cos:.1205"><img class="ring-logo" src="https://cdn.simpleicons.org/zoho" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:-.8230;--cos:.5681"><img class="ring-logo" src="https://cdn.simpleicons.org/airtable" alt="" loading="lazy"></div>
+          <div class="ring-tile" style="--sin:-.4647;--cos:.8855"><img class="ring-logo" src="https://cdn.simpleicons.org/clickup" alt="" loading="lazy"></div>
+        </div>
+        <div class="ring-center">
+          <svg class="ring-mark" viewBox="0 0 240 240" aria-hidden="true"><use href="#logo-mark" /></svg>
+          <span class="ring-wordmark">am2am.ai</span>
+        </div>
       </div>
     </div>
 

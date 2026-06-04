@@ -773,6 +773,7 @@
   }
   .amy-orbit:hover .ring-spin, .amy-orbit:hover .ring-tile { animation-play-state: paused; }
   @media (max-width: 640px) { .amy-orbit { --d: 320px; --r: 134px; --tile: 46px; } }
+  @media (min-width: 1280px) { .amy-orbit { --d: 440px; --r: 188px; } }
 
   .orbit-center {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -1066,10 +1067,10 @@
   <div class="pointer-events-none absolute inset-0" aria-hidden="true"
        style="background:radial-gradient(48% 44% at 70% 30%, rgba(252,211,77,0.20) 0%, rgba(249,115,22,0.07) 50%, transparent 100%)"></div>
 
-  <div class="relative z-10 mx-auto w-full max-w-content px-5 pt-32 pb-16 sm:px-8 sm:pt-36 lg:px-12">
+  <div class="relative z-10 mx-auto w-full max-w-[1440px] px-5 pt-32 pb-16 sm:px-8 sm:pt-36 lg:px-8">
 
     <!-- Row 1: copy | orbital Amy visual | feature card -->
-    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_auto_300px] xl:gap-10">
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 xl:grid-cols-[minmax(440px,1fr)_auto_minmax(280px,320px)] xl:gap-6">
 
       <!-- Left: copy -->
       <div class="reveal flex flex-col items-start text-left">
@@ -1077,7 +1078,7 @@
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.7 6.8L20.5 10l-6.8 1.2L12 18l-1.7-6.8L3.5 10l6.8-1.2z"/></svg>
           Amy — Your WhatsApp AI Agent
         </span>
-        <h1 class="head" style="font-size:var(--fs-display);line-height:1.04">
+        <h1 class="head" style="font-size:clamp(1.95rem, 2.6vw, 3.1rem);line-height:1.06">
           Your WhatsApp.<br>
           <span class="sun-text" style="font-weight:700">Amy</span> Handles the Rest.
         </h1>

@@ -736,6 +736,97 @@
   @keyframes ring-spin { to { transform: rotate(360deg); } }
   @keyframes ring-spin-rev { to { transform: rotate(-360deg); } }
 
+  /* ---------- Hero (new two-column layout) ---------- */
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .5rem .9rem; border-radius: 999px;
+    border: 1px solid var(--rule-strong); background: rgba(255,255,255,.6);
+    font-family: var(--font-mono); text-transform: uppercase;
+    letter-spacing: .14em; font-size: .66rem; font-weight: 500; color: var(--rust);
+  }
+  .hero-badge svg { width: 13px; height: 13px; color: var(--sun); }
+
+  /* Orange-gradient primary CTA (distinct from the dark ink .btn-primary) */
+  .btn-sun {
+    color: #fff; background: var(--grad-h); border: 1px solid transparent;
+    box-shadow: 0 14px 30px -12px rgba(249,115,22,.6);
+  }
+  .btn-sun:hover {
+    box-shadow: 0 20px 40px -14px rgba(249,115,22,.78);
+    transform: translateY(-1px);
+  }
+
+  .hero-check { display: flex; align-items: center; gap: .8rem; font-weight: 500; color: var(--ink); }
+  .hero-check svg { width: 22px; height: 22px; flex: 0 0 auto; color: var(--rust); }
+
+  /* ---------- Hero orbital visual (reuses .ring-spin / .ring-tile rotation mechanics only) ---------- */
+  .amy-orbit {
+    --d: 460px; --r: 196px; --tile: 56px;
+    position: relative; width: var(--d); height: var(--d);
+    max-width: 100%; flex: 0 0 auto; border-radius: 50%;
+  }
+  .amy-orbit::before {
+    content: ""; position: absolute; top: 50%; left: 50%;
+    width: calc(var(--r) * 2 + var(--tile)); height: calc(var(--r) * 2 + var(--tile));
+    transform: translate(-50%, -50%); border-radius: 50%;
+    border: 1.5px dashed rgba(249,115,22,.32);
+  }
+  .amy-orbit:hover .ring-spin, .amy-orbit:hover .ring-tile { animation-play-state: paused; }
+  @media (max-width: 640px) { .amy-orbit { --d: 320px; --r: 134px; --tile: 46px; } }
+
+  .orbit-center {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 52%; height: 52%; border-radius: 50%; overflow: hidden; z-index: 2;
+    box-shadow: 0 0 0 10px rgba(255,255,255,.72), 0 24px 50px -18px rgba(249,115,22,.5);
+  }
+  .orbit-center img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+
+  /* Overlapping "Amy / WhatsApp AI Agent" card + WhatsApp Business chip (layered like the reference) */
+  .orbit-overlay {
+    position: absolute; left: 50%; top: 58%; transform: translateX(-50%); z-index: 3;
+    display: flex; flex-direction: column; align-items: center; gap: .5rem; width: max-content;
+  }
+  .orbit-card {
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 13px;
+    box-shadow: 0 16px 34px -16px rgba(42,21,5,.4); padding: .5rem 1.25rem; text-align: center;
+  }
+  .orbit-card .oc-name { font-weight: 700; font-size: 1.2rem; line-height: 1.1; letter-spacing: -.02em; }
+  .orbit-card .oc-sub { display: block; margin-top: 2px; font-size: .72rem; font-weight: 500; color: var(--ink-soft); }
+  .orbit-chip {
+    display: inline-flex; flex-direction: column; align-items: center; gap: 4px;
+    background: var(--paper); border: 1px solid var(--rule); border-radius: 12px;
+    box-shadow: 0 14px 30px -16px rgba(42,21,5,.4); padding: .55rem .95rem;
+  }
+  .orbit-chip .wa-ic { width: 34px; height: 34px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; }
+  .orbit-chip .wa-ic svg { width: 20px; height: 20px; color: #fff; }
+  .orbit-chip .wa-label { font-size: .76rem; font-weight: 600; line-height: 1.15; text-align: center; color: var(--ink); }
+
+  /* Feature card / trust strip / testimonials shells */
+  .hero-card { background: var(--paper); border: 1px solid var(--rule); border-radius: 16px; box-shadow: 0 24px 54px -34px rgba(42,21,5,.42); }
+  .feat-ic, .trust-ic {
+    width: 34px; height: 34px; border-radius: 9px; flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(165deg, rgba(252,211,77,.22), rgba(220,38,38,.12)); color: var(--rust);
+  }
+  .feat-ic svg, .trust-ic svg { width: 18px; height: 18px; }
+  .testi-chev {
+    width: 40px; height: 40px; border-radius: 50%; flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--rule-strong); background: var(--paper); color: var(--ink-soft);
+    transition: color .25s var(--ease), border-color .25s var(--ease);
+  }
+  .testi-chev:hover { color: var(--ink); border-color: var(--ink); }
+  .testi-chev svg { width: 18px; height: 18px; }
+
+  /* Static integrations logo row (replaces the spinning ring) */
+  .logo-static { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  .logo-static-tile {
+    width: 64px; height: 64px; border-radius: 50%; background: #fff;
+    border: 1px solid var(--rule); box-shadow: 0 6px 16px -8px rgba(42,21,5,.28);
+    display: flex; align-items: center; justify-content: center; flex: 0 0 auto;
+  }
+  .logo-static-tile img, .logo-static-tile svg { width: 60%; height: 60%; object-fit: contain; display: block; }
+
   /* ---------- Wizard ---------- */
   .wizard { border: 1px solid var(--rule-strong); border-radius: 16px; background: var(--paper); overflow: hidden; box-shadow: 0 30px 70px -40px rgba(42,21,5,.4); }
   .wiz-rail { display: flex; border-bottom: 1px solid var(--rule); }
@@ -895,6 +986,34 @@
       <rect x="70" y="70" width="20" height="6" rx="1" fill="#F97316"/>
       <circle cx="74" cy="78" r="3" fill="#2A1505"/><circle cx="86" cy="78" r="3" fill="#2A1505"/>
     </symbol>
+
+    <!-- Integration logos (current Google Workspace + TallyPrime + PDF) — reused by the hero orbit and the integrations static row -->
+    <symbol id="li-sheets" viewBox="0 0 48 48">
+      <path d="M29 4H11a3 3 0 0 0-3 3v34a3 3 0 0 0 3 3h26a3 3 0 0 0 3-3V15L29 4z" fill="#0F9D58"/>
+      <path d="M29 4l11 11H29z" fill="#0C7C44"/>
+      <rect x="15" y="21.5" width="18" height="15" rx="1.2" fill="#fff"/>
+      <path d="M15 26.5h18M15 31.5h18M21 21.5v15M27 21.5v15" stroke="#0F9D58" stroke-width="1.3"/>
+    </symbol>
+    <symbol id="li-docs" viewBox="0 0 48 48">
+      <path d="M29 4H11a3 3 0 0 0-3 3v34a3 3 0 0 0 3 3h26a3 3 0 0 0 3-3V15L29 4z" fill="#4285F4"/>
+      <path d="M29 4l11 11H29z" fill="#1A6FE0"/>
+      <g stroke="#fff" stroke-width="2.1" stroke-linecap="round">
+        <line x1="15" y1="23" x2="33" y2="23"/>
+        <line x1="15" y1="28" x2="33" y2="28"/>
+        <line x1="15" y1="33" x2="27" y2="33"/>
+      </g>
+    </symbol>
+    <symbol id="li-tally" viewBox="0 0 24 24">
+      <rect width="24" height="24" rx="5" fill="#C8202E"/>
+      <path d="M6.5 7.4h11" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M12 7.9v8.1" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+      <circle cx="12" cy="17.6" r="1.5" fill="#fff"/>
+    </symbol>
+    <symbol id="li-pdf" viewBox="0 0 24 24">
+      <path d="M5 2h9l5 5v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" fill="#E11D48"/>
+      <path d="M14 2v5h5z" fill="#9F1239"/>
+      <text x="11.5" y="18" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="6" fill="#fff">PDF</text>
+    </symbol>
   </defs>
 </svg>
 
@@ -943,39 +1062,134 @@
 <main id="main">
 
 <!-- ============ HERO ============ -->
-<section class="relative overflow-hidden">
+<section class="relative overflow-hidden" style="background:linear-gradient(180deg,#FFFDFB 0%,#FFF8F0 100%)">
   <div class="pointer-events-none absolute inset-0" aria-hidden="true"
-       style="background:radial-gradient(60% 50% at 50% 18%, rgba(252,211,77,0.22) 0%, rgba(249,115,22,0.06) 52%, transparent 100%)"></div>
+       style="background:radial-gradient(48% 44% at 70% 30%, rgba(252,211,77,0.20) 0%, rgba(249,115,22,0.07) 50%, transparent 100%)"></div>
 
-  <div class="relative z-10 mx-auto w-full max-w-content px-5 pt-32 pb-14 sm:px-8 sm:pt-36 lg:px-12">
-    <div class="flex flex-col items-center gap-6 text-center">
-      <p class="reveal eyebrow">Field operations, managed</p>
+  <div class="relative z-10 mx-auto w-full max-w-content px-5 pt-32 pb-16 sm:px-8 sm:pt-36 lg:px-12">
 
-      <h1 class="reveal reveal-d1 head max-w-[18ch]" style="font-size:var(--fs-display);line-height:1.04">
-        Manage Your Field Operations via Chat.
-        <span class="sun-text" style="font-weight:700">Guaranteed.</span>
-      </h1>
+    <!-- Row 1: copy | orbital Amy visual | feature card -->
+    <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 xl:grid-cols-[minmax(0,1fr)_auto_300px] xl:gap-10">
 
-      <p class="reveal reveal-d2 max-w-[60ch] text-inksoft" style="font-size:var(--fs-body-lg);font-weight:500;line-height:1.6">
-        Your field updates instantly sync with SAP, Oracle, and your core ledgers, completely architected and maintained by your dedicated Fractional Chief AI Officer.
-      </p>
+      <!-- Left: copy -->
+      <div class="reveal flex flex-col items-start text-left">
+        <span class="hero-badge mb-6">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.7 6.8L20.5 10l-6.8 1.2L12 18l-1.7-6.8L3.5 10l6.8-1.2z"/></svg>
+          Amy — Your WhatsApp AI Agent
+        </span>
+        <h1 class="head" style="font-size:var(--fs-display);line-height:1.04">
+          Your WhatsApp.<br>
+          <span class="sun-text" style="font-weight:700">Amy</span> Handles the Rest.
+        </h1>
+        <p class="mt-6 max-w-[46ch] text-inksoft" style="font-size:var(--fs-body-lg);font-weight:500;line-height:1.6">
+          Amy is your AI agent for WhatsApp. She talks to your customers, understands their needs, and gets work done across all your business systems.
+        </p>
 
-      <div class="reveal reveal-d2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-        <a href="https://cal.com/am2am-demo" class="btn btn-primary group">
-          Schedule consultation call
-          <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sun-light)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-        </a>
-        <a href="#use-cases" class="btn btn-ghost group">
-          See what AMY builds
-          <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M12 5v14"/><path d="m5 12 7 7 7-7"/></svg>
-        </a>
+        <div class="mt-8 flex flex-col gap-4">
+          <span class="hero-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>Talks naturally on WhatsApp</span>
+          <span class="hero-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Takes action across your systems</span>
+          <span class="hero-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg>Automates workflows end-to-end</span>
+        </div>
+
+        <div class="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+          <a href="https://cal.com/am2am-demo" class="btn btn-sun group">
+            Schedule Consultation
+            <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#use-cases" class="btn btn-ghost group">
+            <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:var(--rust)"><path d="M8 5v14l11-7z"/></svg>
+            Watch Amy in Action
+          </a>
+        </div>
       </div>
 
-      <p class="reveal reveal-d3 flex items-center gap-2.5 text-sm font-medium text-inksoft">
-        <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M20 6 9 17l-5-5"/></svg>
-        Zero setup required by your team. 100% managed by us.
-      </p>
+      <!-- Center: orbital Amy visual (logos orbit via reused .ring-spin/.ring-tile mechanics) -->
+      <div class="reveal reveal-d1 flex justify-center">
+        <div class="amy-orbit" role="img" aria-label="Amy connects WhatsApp with Google Sheets, Google Drive, Google Docs, Microsoft 365, TallyPrime, ERPNext, PDF, SAP, Oracle, Zoho, Airtable and ClickUp">
+          <div class="ring-spin" aria-hidden="true">
+            <div class="ring-tile" style="--sin:.2588;--cos:.9659"><svg class="ring-logo"><use href="#li-sheets"/></svg></div>
+            <div class="ring-tile" style="--sin:.7071;--cos:.7071"><img class="ring-logo" src="https://cdn.simpleicons.org/googledrive" alt="" loading="lazy"></div>
+            <div class="ring-tile" style="--sin:.9659;--cos:.2588"><svg class="ring-logo"><use href="#li-docs"/></svg></div>
+            <div class="ring-tile" style="--sin:.9659;--cos:-.2588"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy"></div>
+            <div class="ring-tile" style="--sin:.7071;--cos:-.7071"><svg class="ring-logo"><use href="#li-tally"/></svg></div>
+            <div class="ring-tile" style="--sin:.2588;--cos:-.9659"><img class="ring-logo" src="https://cdn.simpleicons.org/erpnext" alt="" loading="lazy"></div>
+            <div class="ring-tile" style="--sin:-.2588;--cos:-.9659"><svg class="ring-logo"><use href="#li-pdf"/></svg></div>
+            <div class="ring-tile" style="--sin:-.7071;--cos:-.7071"><img class="ring-logo" src="https://cdn.simpleicons.org/sap" alt="" loading="lazy"></div>
+            <div class="ring-tile" style="--sin:-.9659;--cos:-.2588"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="" loading="lazy"></div>
+            <div class="ring-tile" style="--sin:-.9659;--cos:.2588"><img class="ring-logo" src="https://cdn.simpleicons.org/zoho" alt="" loading="lazy"></div>
+            <div class="ring-tile" style="--sin:-.7071;--cos:.7071"><img class="ring-logo" src="https://cdn.simpleicons.org/airtable" alt="" loading="lazy"></div>
+            <div class="ring-tile" style="--sin:-.2588;--cos:.9659"><img class="ring-logo" src="https://cdn.simpleicons.org/clickup" alt="" loading="lazy"></div>
+          </div>
+          <span class="orbit-center"><img src="Amy%20dp.png" alt="Amy, your am2am.ai WhatsApp agent" loading="lazy" decoding="async"></span>
+          <div class="orbit-overlay">
+            <div class="orbit-card"><span class="oc-name sun-text">Amy</span><span class="oc-sub">WhatsApp AI Agent</span></div>
+            <div class="orbit-chip">
+              <span class="wa-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.748-.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+              <span class="wa-label">WhatsApp<br>Business</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: feature card (drops full-width below on lg, sits as 3rd column on xl) -->
+      <div class="reveal reveal-d2 hero-card p-6 lg:col-span-2 xl:col-span-1">
+        <h2 class="head text-[1.3rem] leading-tight">Amy Gets Work Done So You Can <span class="sun-text" style="font-weight:700">Focus</span>.</h2>
+        <div class="mt-5 flex flex-col gap-5">
+          <div class="flex gap-3.5">
+            <span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
+            <div><p class="font-semibold leading-tight text-ink">Understands Conversations</p><p class="mt-0.5 text-[0.82rem] text-muted">Just like a human</p></div>
+          </div>
+          <div class="flex gap-3.5">
+            <span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+            <div><p class="font-semibold leading-tight text-ink">Takes Action</p><p class="mt-0.5 text-[0.82rem] text-muted">Creates quotes, invoices, tickets &amp; more</p></div>
+          </div>
+          <div class="flex gap-3.5">
+            <span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+            <div><p class="font-semibold leading-tight text-ink">Automates Workflows</p><p class="mt-0.5 text-[0.82rem] text-muted">Across CRM, ERP, Tally and your tools</p></div>
+          </div>
+          <div class="flex gap-3.5">
+            <span class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="11" width="3" height="7"/><rect x="12" y="7" width="3" height="11"/><rect x="17" y="4" width="3" height="14"/></svg></span>
+            <div><p class="font-semibold leading-tight text-ink">Keeps You Updated</p><p class="mt-0.5 text-[0.82rem] text-muted">Real-time updates that matter</p></div>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    <!-- Row 2: trust strip -->
+    <div class="reveal reveal-d1 hero-card mt-10 grid grid-cols-2 gap-x-4 gap-y-6 p-6 lg:grid-cols-4">
+      <div class="flex items-center gap-3">
+        <span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div><p class="font-semibold leading-tight text-ink">Works 24x7</p><p class="mt-0.5 text-[0.78rem] text-muted">Always available</p></div>
+      </div>
+      <div class="flex items-center gap-3 lg:border-l lg:border-line lg:pl-5">
+        <span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 10-12h-7z"/></svg></span>
+        <div><p class="font-semibold leading-tight text-ink">Instant Response</p><p class="mt-0.5 text-[0.78rem] text-muted">Never miss a message</p></div>
+      </div>
+      <div class="flex items-center gap-3 lg:border-l lg:border-line lg:pl-5">
+        <span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.4 8.4 8 10 4.6-1.6 8-5 8-10V5z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><p class="font-semibold leading-tight text-ink">Smart &amp; Secure</p><p class="mt-0.5 text-[0.78rem] text-muted">Enterprise-grade security</p></div>
+      </div>
+      <div class="flex items-center gap-3 lg:border-l lg:border-line lg:pl-5">
+        <span class="trust-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <div><p class="font-semibold leading-tight text-ink">Adapts to You</p><p class="mt-0.5 text-[0.78rem] text-muted">Fits your stack, your way</p></div>
+      </div>
+    </div>
+
+    <!-- Row 3: testimonials placeholder -->
+    <div class="reveal reveal-d2 mt-5 flex items-center gap-4 rounded-2xl border border-line p-6 sm:p-8" style="background:var(--cream)">
+      <button type="button" class="testi-chev" aria-label="Previous testimonial (coming soon)" tabindex="-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <div class="flex-1 text-center">
+        <p class="font-semibold text-ink">Testimonials will appear here</p>
+        <p class="mt-1 text-sm text-muted">Real stories from businesses that trust Amy</p>
+      </div>
+      <button type="button" class="testi-chev" aria-label="Next testimonial (coming soon)" tabindex="-1">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+
   </div>
 </section>
 
@@ -1113,28 +1327,21 @@
       </h2>
     </div>
 
-    <!-- Spinning logo ring -->
+    <!-- Static logo row (the rotating orbit now lives in the hero) -->
     <div class="reveal mt-12 flex justify-center">
-      <div class="logo-ring" role="img" aria-label="Integrates with Google Sheets, Google Drive, Google Docs, Microsoft 365, Tally, ERPNext, PDF, SAP, Oracle, Microsoft Dynamics, Zoho, Airtable, and ClickUp">
-        <div class="ring-spin" aria-hidden="true">
-          <div class="ring-tile" style="--sin:0;--cos:1"><img class="ring-logo" src="https://cdn.simpleicons.org/googlesheets" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:.4647;--cos:.8855"><img class="ring-logo" src="https://cdn.simpleicons.org/googledrive" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:.8230;--cos:.5681"><img class="ring-logo" src="https://cdn.simpleicons.org/googledocs" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:.9927;--cos:.1205"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:.9350;--cos:-.3546"><svg class="ring-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="24" height="24" rx="4" fill="#DC2626"/><text x="12" y="17.2" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="15" fill="#fff">T</text></svg></div>
-          <div class="ring-tile" style="--sin:.6631;--cos:-.7485"><img class="ring-logo" src="https://cdn.simpleicons.org/erpnext" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:.2393;--cos:-.9709"><svg class="ring-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 2h9l5 5v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z" fill="#E11D48"/><path d="M14 2v5h5z" fill="#9F1239"/><text x="11.5" y="18" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-weight="800" font-size="6" fill="#fff">PDF</text></svg></div>
-          <div class="ring-tile" style="--sin:-.2393;--cos:-.9709"><img class="ring-logo" src="https://cdn.simpleicons.org/sap" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:-.6631;--cos:-.7485"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:-.9350;--cos:-.3546"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:-.9927;--cos:.1205"><img class="ring-logo" src="https://cdn.simpleicons.org/zoho" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:-.8230;--cos:.5681"><img class="ring-logo" src="https://cdn.simpleicons.org/airtable" alt="" loading="lazy"></div>
-          <div class="ring-tile" style="--sin:-.4647;--cos:.8855"><img class="ring-logo" src="https://cdn.simpleicons.org/clickup" alt="" loading="lazy"></div>
-        </div>
-        <div class="ring-center">
-          <svg class="ring-mark" viewBox="0 0 240 240" aria-hidden="true"><use href="#logo-mark" /></svg>
-          <span class="ring-wordmark">am2am.ai</span>
-        </div>
+      <div class="logo-static" role="img" aria-label="Integrates with Google Sheets, Google Drive, Google Docs, Microsoft 365, TallyPrime, ERPNext, PDF, SAP, Oracle, Zoho, Airtable, and ClickUp">
+        <span class="logo-static-tile"><svg class="ring-logo"><use href="#li-sheets"/></svg></span>
+        <span class="logo-static-tile"><img class="ring-logo" src="https://cdn.simpleicons.org/googledrive" alt="" loading="lazy"></span>
+        <span class="logo-static-tile"><svg class="ring-logo"><use href="#li-docs"/></svg></span>
+        <span class="logo-static-tile"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/microsoft/microsoft-icon.svg" alt="" loading="lazy"></span>
+        <span class="logo-static-tile"><svg class="ring-logo"><use href="#li-tally"/></svg></span>
+        <span class="logo-static-tile"><img class="ring-logo" src="https://cdn.simpleicons.org/erpnext" alt="" loading="lazy"></span>
+        <span class="logo-static-tile"><svg class="ring-logo"><use href="#li-pdf"/></svg></span>
+        <span class="logo-static-tile"><img class="ring-logo" src="https://cdn.simpleicons.org/sap" alt="" loading="lazy"></span>
+        <span class="logo-static-tile"><img class="ring-logo" src="https://www.vectorlogo.zone/logos/oracle/oracle-icon.svg" alt="" loading="lazy"></span>
+        <span class="logo-static-tile"><img class="ring-logo" src="https://cdn.simpleicons.org/zoho" alt="" loading="lazy"></span>
+        <span class="logo-static-tile"><img class="ring-logo" src="https://cdn.simpleicons.org/airtable" alt="" loading="lazy"></span>
+        <span class="logo-static-tile"><img class="ring-logo" src="https://cdn.simpleicons.org/clickup" alt="" loading="lazy"></span>
       </div>
     </div>
 

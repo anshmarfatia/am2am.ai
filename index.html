@@ -194,20 +194,19 @@
   .wm-2  { font-weight: 700; }
   .wm-ai { color: var(--tech-gray); font-weight: 300; }
 
-  /* Nav */
+  /* Nav — full-width white bar */
   .nav-pill {
-    display: flex; align-items: center; gap: 0.4rem;
-    padding: 0.5rem 0.6rem; border-radius: 6px;
-    background: var(--nav-bg); border: 1px solid var(--nav-border);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    box-shadow: var(--nav-shadow);
+    display: block; width: 100%; padding: 0.7rem 0;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(42,21,5,.05), 0 6px 22px -16px rgba(42,21,5,.28);
     transition: box-shadow .35s var(--ease);
   }
-  .nav-scrolled .nav-pill { box-shadow: 0 18px 48px -18px rgba(42,21,5,.42); }
+  .nav-scrolled .nav-pill { box-shadow: 0 1px 0 rgba(42,21,5,.07), 0 12px 30px -14px rgba(42,21,5,.34); }
   .nav-link {
-    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em;
-    text-transform: uppercase; font-weight: 500; color: var(--muted);
-    padding: 0.55rem 0.7rem; transition: color .25s var(--ease); white-space: nowrap;
+    font-family: var(--font-body); font-size: 0.95rem; letter-spacing: -0.01em;
+    font-weight: 500; color: var(--ink-soft);
+    padding: 0.5rem 0.85rem; border-radius: 6px;
+    transition: color .25s var(--ease); white-space: nowrap;
   }
   .nav-link:hover { color: var(--ink); }
 
@@ -1021,41 +1020,42 @@
 <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:left-4 focus:top-4 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-cream">Skip to content</a>
 
 <!-- ============ NAV ============ -->
-<div id="navWrap" class="fixed left-1/2 top-[18px] z-50 w-[calc(100%-1.5rem)] max-w-[1000px] -translate-x-1/2">
+<div id="navWrap" class="fixed left-0 top-0 z-50 w-full">
   <nav class="nav-pill" aria-label="Primary">
-    <a href="#main" aria-label="am2am.ai home" class="flex shrink-0 items-center gap-2.5 pl-1">
-      <svg viewBox="0 0 240 240" class="h-8 w-8" role="img" aria-label="am2am.ai clock mark"><use href="#logo-mark" /></svg>
-      <span class="wordmark text-[1.16rem]" aria-hidden="true">
-        <span class="wm-am">am</span><span class="wm-2 sun-text">2</span><span class="wm-am">am</span><span class="wm-ai">.ai</span>
-      </span>
-    </a>
+    <div class="mx-auto flex w-full max-w-[1440px] items-center gap-6 px-5 sm:px-8 lg:px-8">
+      <a href="#main" aria-label="am2am.ai home" class="flex shrink-0 items-center gap-2.5">
+        <svg viewBox="0 0 240 240" class="h-8 w-8" role="img" aria-label="am2am.ai clock mark"><use href="#logo-mark" /></svg>
+        <span class="wordmark text-[1.16rem]" aria-hidden="true">
+          <span class="wm-am">am</span><span class="wm-2 sun-text">2</span><span class="wm-am">am</span><span class="wm-ai">.ai</span>
+        </span>
+      </a>
 
-    <span role="status" aria-label="Platform operational" class="relative ml-1 flex shrink-0 items-center justify-center">
-      <span class="status-ping"></span>
-      <span class="relative z-[1] h-[5px] w-[5px] rounded-full" style="background:#F97316;box-shadow:0 0 6px rgba(249,115,22,.75)"></span>
-    </span>
+      <div class="ml-2 hidden items-center gap-1 lg:flex">
+        <a href="#use-cases" class="nav-link">How It Works</a>
+        <a href="#integrations" class="nav-link">Integrations</a>
+        <a href="#get-started" class="nav-link">Get Started</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
 
-    <div class="ml-1 hidden items-center lg:flex">
-      <a href="#integrations" class="nav-link">Integrations</a>
-      <a href="#get-started" class="nav-link">Get started</a>
-      <a href="#faq" class="nav-link">FAQ</a>
-    </div>
-
-    <div class="ml-auto flex items-center gap-2">
-      <a href="https://cal.com/am2am-demo" class="btn btn-mono btn-sm btn-primary hidden sm:inline-flex">Schedule consultation</a>
-      <button id="menuBtn" aria-label="Open menu" aria-expanded="false"
-        class="flex h-[38px] w-[38px] items-center justify-center rounded-[4px] border border-line bg-paper text-inksoft transition-colors hover:text-ink lg:hidden">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
+      <div class="ml-auto flex items-center gap-2.5">
+        <a href="https://cal.com/am2am-demo" class="btn btn-sm btn-ghost hidden sm:inline-flex">Book a Demo</a>
+        <a href="https://cal.com/am2am-demo" class="btn btn-sm btn-sun hidden sm:inline-flex">Schedule Consultation</a>
+        <button id="menuBtn" aria-label="Open menu" aria-expanded="false"
+          class="flex h-[38px] w-[38px] items-center justify-center rounded-[6px] border border-line bg-paper text-inksoft transition-colors hover:text-ink lg:hidden">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <div id="mobileMenu" class="mt-2 hidden rounded-[6px] border lg:hidden" style="border-color:var(--nav-border);background:rgba(255,251,245,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)">
-    <nav aria-label="Mobile" class="flex flex-col p-2">
-      <a href="#integrations" class="nav-link !text-[0.74rem] px-3 py-3">Integrations</a>
-      <a href="#get-started" class="nav-link !text-[0.74rem] px-3 py-3">Get started</a>
-      <a href="#faq" class="nav-link !text-[0.74rem] px-3 py-3">FAQ</a>
-      <a href="https://cal.com/am2am-demo" class="btn btn-mono btn-sm btn-primary mt-1">Schedule consultation</a>
+  <div id="mobileMenu" class="hidden border-t lg:hidden" style="border-color:var(--line);background:#fff;box-shadow:0 12px 28px -16px rgba(42,21,5,.3)">
+    <nav aria-label="Mobile" class="mx-auto flex w-full max-w-[1440px] flex-col gap-1 px-5 py-3 sm:px-8">
+      <a href="#use-cases" class="nav-link !px-3 !py-3">How It Works</a>
+      <a href="#integrations" class="nav-link !px-3 !py-3">Integrations</a>
+      <a href="#get-started" class="nav-link !px-3 !py-3">Get Started</a>
+      <a href="#faq" class="nav-link !px-3 !py-3">FAQ</a>
+      <a href="https://cal.com/am2am-demo" class="btn btn-sm btn-ghost mt-2">Book a Demo</a>
+      <a href="https://cal.com/am2am-demo" class="btn btn-sm btn-sun mt-1">Schedule Consultation</a>
     </nav>
   </div>
 </div>
@@ -1663,7 +1663,7 @@
 </footer>
 
 <!-- Floating CTA -->
-<a id="floatCta" href="https://cal.com/am2am-demo" class="btn btn-mono btn-sm btn-primary fixed bottom-6 right-6 z-40 hidden">Schedule consultation</a>
+<a id="floatCta" href="https://cal.com/am2am-demo" class="btn btn-sm btn-sun fixed bottom-6 right-6 z-40 hidden">Schedule Consultation</a>
 
 <script>
 (function () {

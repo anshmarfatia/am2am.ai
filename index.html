@@ -464,11 +464,12 @@
   .amy-conn { width: 100%; }
   .conn-rail { display: block; position: relative; width: 100%; min-width: 70px; max-width: 320px; height: 26px; margin: 0 auto; }
   .conn-line { position: absolute; top: 50%; left: 5px; right: 5px; height: 2px; transform: translateY(-50%); background: var(--rule-strong); border-radius: 2px; }
-  .conn-rail-v { display: block; position: relative; width: 26px; height: 58px; margin: 0 auto; }
+  .conn-rail-v { display: block; position: relative; width: 26px; height: 160px; margin: 0 auto; }
   .conn-line-v { position: absolute; left: 50%; top: 5px; bottom: 5px; width: 2px; transform: translateX(-50%); background: var(--rule-strong); border-radius: 2px; }
 
   /* Arrowheads — both directions always present; the active leg is lit, the idle leg dimmed */
   .conn-head, .conn-head-v { position: absolute; width: 20px; height: 20px; color: var(--rust); transition: opacity .4s var(--ease); }
+  .conn-head-v { width: 24px; height: 24px; }
   .conn-head { top: 50%; transform: translateY(-50%); }
   .conn-head-fwd { right: -3px; }
   .conn-head-ret { left: -3px; opacity: .16; }
@@ -516,9 +517,9 @@
   .flow-anim.s8 .conn-ret2 { opacity: 1; left: 0; }
 
   /* Vertical motion: forward top->bottom, return bottom->top */
-  .conn-fwd-v, .conn-ret-v, .conn-fwd2-v, .conn-ret2-v { left: 50%; margin: -13px 0 0 -13px; transition: top .85s var(--ease), opacity .4s var(--ease); }
+  .conn-fwd-v, .conn-ret-v, .conn-fwd2-v, .conn-ret2-v { width: 30px; height: 30px; left: 50%; margin: -15px 0 0 -15px; transition: top .85s var(--ease), opacity .4s var(--ease); }
   .conn-fwd-v { top: 0; }
-  .flow-anim.s1 .conn-fwd-v { opacity: 1; top: 12%; }
+  .flow-anim.s1 .conn-fwd-v { opacity: 1; top: 8%; }
   .flow-anim.s2 .conn-fwd-v { opacity: 1; top: 50%; }
   .flow-anim.s3 .conn-fwd-v { opacity: 1; top: 100%; }
   .flow-anim.s4 .conn-fwd-v { opacity: 0; top: 100%; }
@@ -527,7 +528,7 @@
   /* Exchange 2 (vertical) */
   .flow-anim.s5 .conn-ret-v { opacity: 0; top: 0; }
   .conn-fwd2-v { top: 0; }
-  .flow-anim.s5 .conn-fwd2-v { opacity: 1; top: 12%; }
+  .flow-anim.s5 .conn-fwd2-v { opacity: 1; top: 8%; }
   .flow-anim.s6 .conn-fwd2-v { opacity: 1; top: 50%; }
   .flow-anim.s7 .conn-fwd2-v { opacity: 1; top: 100%; }
   .flow-anim.s8 .conn-fwd2-v { opacity: 0; top: 100%; }

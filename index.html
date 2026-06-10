@@ -468,6 +468,16 @@
     box-shadow: 0 12px 26px -12px rgba(249,115,22,.8); transform: translateY(-1px) scale(1.04);
   }
 
+  /* xl: lay the bidirectional arrow through Amy's vertical center so she sits in the middle of it.
+     Photo + badge float on top (z1); the arrow spans the full middle column behind them (z0).
+     Badge is centred with auto-margins (not transform) so the s2/s4 lift + reduced-motion rules don't shift it. */
+  @media (min-width: 1280px) {
+    .amy-stage { position: relative; }
+    .amy-stage .amy-conn { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 0; margin: 0; }
+    .amy-stage .amy-photo { position: relative; z-index: 1; }
+    .amy-stage .amy-badge { position: absolute; left: 0; right: 0; top: calc(50% + 58px); width: fit-content; margin: 0 auto; z-index: 1; }
+  }
+
   /* Connector rail */
   .amy-conn { width: 100%; }
   .conn-rail { display: block; position: relative; width: 100%; min-width: 70px; max-width: 320px; height: 26px; margin: 0 auto; }
@@ -544,7 +554,7 @@
   .flow-anim.s8 .conn-ret2-v { opacity: 1; top: 0; }
 
   /* Laptop / ERP output mockup */
-  .laptop { width: 100%; max-width: 500px; }
+  .laptop { width: 100%; max-width: 440px; }
   .laptop-lid {
     background: #0c0b0a; border-radius: 15px; padding: 11px;
     box-shadow: 0 38px 70px -32px rgba(42,21,5,.55), 0 0 0 1px rgba(42,21,5,.12);
@@ -1219,7 +1229,7 @@
     <div id="agentInfo" class="uc-info reveal"></div>
 
     <!-- Flow: input -> AMY -> output -->
-    <div id="heroFlow" class="flow-anim grid grid-cols-1 items-center gap-12 xl:grid-cols-[auto_minmax(80px,1fr)_500px] xl:gap-8">
+    <div id="heroFlow" class="flow-anim grid grid-cols-1 items-center gap-12 xl:grid-cols-[auto_minmax(80px,1fr)_440px] xl:gap-8">
 
       <!-- Stage 1: Input (phone) -->
       <div class="hero-stage">
@@ -1239,7 +1249,7 @@
       </div>
 
       <!-- Stage 2: Processing (AMY) -->
-      <div class="flex flex-col items-center gap-3">
+      <div class="amy-stage flex flex-col items-center gap-3">
         <span class="amy-photo">
           <img src="Amy%20dp.png" alt="Amy, your am2am.ai agent" loading="lazy" decoding="async" />
         </span>

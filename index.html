@@ -619,6 +619,20 @@
   /* ---------- Use-case attribute cells ---------- */
   .attr-cell { border: 1px solid var(--rule-strong); border-radius: 12px; background: var(--paper); padding: 1.1rem 1.15rem; }
 
+  /* ---------- Use-case left descriptive column (per active agent) ---------- */
+  .uc-info { display: flex; flex-direction: column; }
+  .uc-headline { font-weight: 600; letter-spacing: -.03em; color: var(--ink); line-height: 1.05; font-size: clamp(1.7rem, 2.4vw, 2.3rem); }
+  .uc-sub { color: var(--ink-soft); font-size: var(--fs-body-lg); font-weight: 500; line-height: 1.55; }
+  .uc-stage {
+    display: inline-flex; align-items: flex-start; gap: .55rem;
+    border: 1px solid var(--rule-strong); border-radius: 10px; background: var(--paper);
+    padding: .6rem .8rem; font-size: .82rem; font-weight: 500; color: var(--ink-soft); line-height: 1.35;
+  }
+  .uc-stage svg { width: 15px; height: 15px; flex: 0 0 auto; color: var(--rust); margin-top: 1px; }
+  .uc-benefit { display: flex; gap: .8rem; }
+  .uc-benefit .uc-lead { font-weight: 600; color: var(--ink); line-height: 1.25; }
+  .uc-benefit .uc-text { margin-top: 2px; font-size: .86rem; color: var(--muted); line-height: 1.45; }
+
   /* ---------- ERPNext-style desk ---------- */
   .erp { display: flex; flex-direction: column; height: 100%; background: #fff; font-size: 11px; color: #1f272e; }
   .erp-nav { display: flex; align-items: center; gap: 9px; padding: 7px 11px; border-bottom: 1px solid #ededed; flex: 0 0 auto; }
@@ -1198,6 +1212,12 @@
       </div>
     </div>
 
+    <!-- Per-agent left descriptive column + flow row -->
+    <div class="uc-grid grid grid-cols-1 items-center gap-10 xl:grid-cols-[minmax(260px,300px)_1fr] xl:gap-8">
+
+    <!-- Left: per-agent descriptive column (rendered by JS, swaps with the active tab) -->
+    <div id="agentInfo" class="uc-info reveal"></div>
+
     <!-- Flow: input -> AMY -> output -->
     <div id="heroFlow" class="flow-anim grid grid-cols-1 items-center gap-12 xl:grid-cols-[auto_minmax(80px,1fr)_550px] xl:gap-8">
 
@@ -1277,6 +1297,7 @@
         </div>
       </div>
 
+    </div>
     </div>
 
     <!-- Per-agent use-case attributes (4 cards per tab) — hidden for now. Data is preserved in the AGENTS[].attrs arrays below and will render via renderAttrs() if this div is uncommented.
@@ -1699,7 +1720,7 @@
   if (flow) {
     var phoneScreen = document.getElementById('phoneScreen');
     var erpScreen = document.getElementById('erpScreen');
-    var attrsEl = document.getElementById('agentAttrs');
+    var infoEl = document.getElementById('agentInfo');
     var agentTabs = Array.prototype.slice.call(document.querySelectorAll('.agent-tab'));
     var chanBtns = Array.prototype.slice.call(document.querySelectorAll('.chan-btn'));
     var viewBtns = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
@@ -1849,8 +1870,40 @@
       }).join('');
     }
 
+    /* Left descriptive column per agent (mirrors the active tab via the same render path). */
+    var ICONS = {
+      insight: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1h6c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>',
+      clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+      lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+      spark: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6z"/></svg>',
+      check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>'
+    };
+    function infoHTML(a) {
+      var i = a.info;
+      if (!i) return '';
+      var rows = i.benefits.map(function (b) {
+        return '<div class="uc-benefit"><span class="feat-ic">' + (ICONS[b.icon] || ICONS.check) + '</span>'
+          + '<div><p class="uc-lead">' + b.lead + '</p><p class="uc-text">' + b.text + '</p></div></div>';
+      }).join('');
+      return '<span class="eyebrow mb-4">Use cases</span>'
+        + '<h3 class="uc-headline">' + i.headline + '</h3>'
+        + '<p class="uc-sub mt-3">' + i.sub + '</p>'
+        + '<div class="uc-stage mt-5">' + ICONS.spark + '<span>' + i.stage + '</span></div>'
+        + '<div class="mt-6 flex flex-col gap-5">' + rows + '</div>';
+    }
+
     var AGENTS = {
       sales: {
+        info: {
+          headline: 'Sales Management',
+          sub: 'From meeting prep to CRM updates – Amy handles it all.',
+          stage: 'Amy handles every stage — pre-meeting prep, live capture, and follow-up.',
+          benefits: [
+            { icon: 'insight', lead: 'Prepare better. Win more.', text: 'Amy gathers insights, company data, and past interactions before your meeting at 7 AM.' },
+            { icon: 'clock', lead: 'Save 4–6 Hours / Day', text: 'Automate notes, follow-ups & CRM updates.' },
+            { icon: 'lock', lead: 'Zero Data Retention', text: 'Your data is never stored. Ever.' }
+          ]
+        },
         head: { name: 'AMY', team: 'Revenue', role: 'Field Sales Rep' },
         msgs: {
           time: '09:14', photo: null,
@@ -1882,6 +1935,16 @@
         ]
       },
       pm: {
+        info: {
+          headline: 'Project Management',
+          sub: 'Real-time updates. Clear visibility. Better outcomes.',
+          stage: 'Amy handles every stage — daily reports, escalations, and forward planning.',
+          benefits: [
+            { icon: 'insight', lead: 'Field updates made simple.', text: 'Amy collects site updates, photos and progress from your team.' },
+            { icon: 'clock', lead: 'Save 5–8 Hours / Day', text: 'Reduce manual reporting and follow-ups.' },
+            { icon: 'lock', lead: 'Zero Data Retention', text: 'Your data is never stored. Ever.' }
+          ]
+        },
         head: { name: 'AMY', team: 'Site Ops', role: 'Site Engineer' },
         msgs: {
           time: '10:02', photo: 'site-photo',
@@ -1912,6 +1975,16 @@
         ]
       },
       supply: {
+        info: {
+          headline: 'Operations Management',
+          sub: 'Smart document processing for finance & operations.',
+          stage: 'Amy handles every stage — capture, validation, and recorded entries.',
+          benefits: [
+            { icon: 'insight', lead: 'Extract. Verify. Record.', text: 'Amy reads documents, extracts data and creates verified entries.' },
+            { icon: 'clock', lead: 'Save 6–10 Hours / Day', text: 'Automate data entry and reconciliation.' },
+            { icon: 'lock', lead: 'Zero Data Retention', text: 'Your data is never stored. Ever.' }
+          ]
+        },
         head: { name: 'AMY', team: 'Logistics', role: 'Dock Operator' },
         msgs: {
           time: '09:14', photo: 'bol-photo',
@@ -1949,7 +2022,7 @@
       var fn = activeView === 'sheets' ? sheetsHTML : activeView === 'tally' ? tallyHTML : erpHTML;
       erpScreen.innerHTML = fn(AGENTS[activeAgent]);
     }
-    function renderAttrs() { if (!attrsEl) return; attrsEl.innerHTML = attrsHTML(AGENTS[activeAgent]); }
+    function renderInfo() { if (!infoEl) return; infoEl.innerHTML = infoHTML(AGENTS[activeAgent]); }
 
     var AGENT_ORDER = agentTabs.map(function (t) { return t.getAttribute('data-agent'); });
     var ADVANCE_MS = 15500;
@@ -2011,7 +2084,7 @@
     function selectAgent(id) {
       activeAgent = id;
       agentTabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-agent') === id)); });
-      renderPhone(); renderErp(); renderAttrs();
+      renderPhone(); renderErp(); renderInfo();
       playAnimation(); scheduleAdvance();
     }
     function selectChan(c) {
@@ -2032,13 +2105,13 @@
     viewBtns.forEach(function (b) { b.addEventListener('click', function () { selectView(b.getAttribute('data-view')); }); });
 
     /* Pause auto-rotation while the user is hovering the tabs or the demo, so it doesn't change mid-read/click. */
-    [document.querySelector('.agent-tabs'), flow].forEach(function (el) {
+    [document.querySelector('.agent-tabs'), flow, infoEl].forEach(function (el) {
       if (!el) return;
       el.addEventListener('mouseenter', function () { paused = true; if (autoTimer) { clearTimeout(autoTimer); autoTimer = null; } });
       el.addEventListener('mouseleave', function () { paused = false; scheduleAdvance(); });
     });
 
-    renderPhone(); renderErp(); renderAttrs();
+    renderPhone(); renderErp(); renderInfo();
     playAnimation(); scheduleAdvance();
   }
 

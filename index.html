@@ -759,8 +759,15 @@
   .logo-ring { --d: 460px; --r: 180px; --tile: 60px; position: relative; width: var(--d); height: var(--d); border-radius: 50%; background: var(--paper); border: 1px solid var(--rule-strong); box-shadow: 0 28px 60px -40px rgba(42,21,5,.45), inset 0 0 0 1px rgba(255,255,255,.55); }
   @media (max-width: 640px) { .logo-ring { --d: 320px; --r: 124px; --tile: 46px; } }
   .ring-spin { position: absolute; inset: 0; animation: ring-spin 40s linear infinite; }
-  .ring-tile { position: absolute; width: var(--tile); height: var(--tile); border-radius: 50%; background: #fff; border: 1px solid var(--rule); box-shadow: 0 6px 16px -8px rgba(42,21,5,.28); display: flex; align-items: center; justify-content: center; top: calc(50% - var(--tile)/2 + var(--r) * var(--sin)); left: calc(50% - var(--tile)/2 + var(--r) * var(--cos)); animation: ring-spin-rev 40s linear infinite; }
+  .ring-tile { position: absolute; width: var(--tile); height: var(--tile); top: calc(50% - var(--tile)/2 + var(--r) * var(--sin)); left: calc(50% - var(--tile)/2 + var(--r) * var(--cos)); animation: ring-spin-rev 40s linear infinite; }
+  /* Inner wrapper holds the visible chip + logo + label; hover scale goes here so it never fights the outer ring-spin-rev rotate */
+  .ring-tile-inner { position: relative; width: 100%; height: 100%; border-radius: 50%; background: #fff; border: 1px solid var(--rule); box-shadow: 0 6px 16px -8px rgba(42,21,5,.28); display: flex; align-items: center; justify-content: center; transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
   .ring-logo { width: 62%; height: 62%; object-fit: contain; display: block; }
+  /* Name label — below the upright inner (renders below on screen at any orbit angle); pill bg keeps it readable */
+  .ring-name { position: absolute; top: 100%; left: 50%; margin-top: 6px; transform: translateX(-50%) translateY(2px); opacity: 0; pointer-events: none; white-space: nowrap; background: var(--paper); border: 1px solid var(--rule); border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 600; color: var(--ink); box-shadow: 0 4px 12px -4px rgba(42,21,5,.3); transition: opacity .2s var(--ease), transform .2s var(--ease); }
+  .ring-tile:hover { z-index: 5; }
+  .ring-tile:hover .ring-tile-inner { transform: scale(1.18); box-shadow: 0 10px 22px -8px rgba(42,21,5,.4); }
+  .ring-tile:hover .ring-name { opacity: 1; transform: translateX(-50%) translateY(6px); }
   .ring-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 54%; height: 54%; border-radius: 50%; background: var(--cream-warm); border: 4px solid var(--rule-strong); box-shadow: inset 0 8px 20px -10px rgba(42,21,5,.28); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 8px; text-align: center; }
   .ring-center .ring-mark { width: clamp(38px, 28%, 64px); height: auto; flex-shrink: 0; }
   .ring-center .ring-wordmark { font-family: var(--font-body); font-weight: 700; letter-spacing: -.025em; font-size: clamp(0.95rem, 1.6vw, 1.35rem); color: var(--ink); line-height: 1; }
@@ -1101,18 +1108,18 @@
       <div class="reveal reveal-d1 flex justify-center">
         <div class="amy-orbit" role="img" aria-label="Amy connects your chat apps with Google Sheets, Google Drive, Google Docs, Microsoft 365, TallyPrime, ERPNext, PDF, SAP, Oracle, Zoho, Airtable and ClickUp">
           <div class="ring-spin" aria-hidden="true">
-            <div class="ring-tile" style="--sin:.2588;--cos:.9659"><img class="ring-logo" src="logos/gsheets.png" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:.7071;--cos:.7071"><img class="ring-logo" src="logos/gdrive.png" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:.9659;--cos:.2588"><img class="ring-logo" src="logos/gdocs.png" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:.9659;--cos:-.2588"><img class="ring-logo" src="logos/ms365.png" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:.7071;--cos:-.7071"><img class="ring-logo" src="logos/tally.png" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:.2588;--cos:-.9659"><img class="ring-logo" src="logos/erpnext.svg" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:-.2588;--cos:-.9659"><img class="ring-logo" src="logos/pdf.svg" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:-.7071;--cos:-.7071"><img class="ring-logo" src="logos/sap.svg" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:-.9659;--cos:-.2588"><img class="ring-logo" src="logos/oracle.png" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:-.9659;--cos:.2588"><img class="ring-logo" src="logos/zoho.png" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:-.7071;--cos:.7071"><img class="ring-logo" src="logos/airtable.png" alt="" loading="lazy"></div>
-            <div class="ring-tile" style="--sin:-.2588;--cos:.9659"><img class="ring-logo" src="logos/clickup.png" alt="" loading="lazy"></div>
+            <div class="ring-tile" style="--sin:.2588;--cos:.9659" data-name="Google Sheets"><span class="ring-tile-inner"><img class="ring-logo" src="logos/gsheets.png" alt="" loading="lazy"><span class="ring-name">Google Sheets</span></span></div>
+            <div class="ring-tile" style="--sin:.7071;--cos:.7071" data-name="Google Drive"><span class="ring-tile-inner"><img class="ring-logo" src="logos/gdrive.png" alt="" loading="lazy"><span class="ring-name">Google Drive</span></span></div>
+            <div class="ring-tile" style="--sin:.9659;--cos:.2588" data-name="Google Docs"><span class="ring-tile-inner"><img class="ring-logo" src="logos/gdocs.png" alt="" loading="lazy"><span class="ring-name">Google Docs</span></span></div>
+            <div class="ring-tile" style="--sin:.9659;--cos:-.2588" data-name="Microsoft 365"><span class="ring-tile-inner"><img class="ring-logo" src="logos/ms365.png" alt="" loading="lazy"><span class="ring-name">Microsoft 365</span></span></div>
+            <div class="ring-tile" style="--sin:.7071;--cos:-.7071" data-name="Tally"><span class="ring-tile-inner"><img class="ring-logo" src="logos/tally.png" alt="" loading="lazy"><span class="ring-name">Tally</span></span></div>
+            <div class="ring-tile" style="--sin:.2588;--cos:-.9659" data-name="ERPNext"><span class="ring-tile-inner"><img class="ring-logo" src="logos/erpnext.svg" alt="" loading="lazy"><span class="ring-name">ERPNext</span></span></div>
+            <div class="ring-tile" style="--sin:-.2588;--cos:-.9659" data-name="PDF"><span class="ring-tile-inner"><img class="ring-logo" src="logos/pdf.svg" alt="" loading="lazy"><span class="ring-name">PDF</span></span></div>
+            <div class="ring-tile" style="--sin:-.7071;--cos:-.7071" data-name="SAP"><span class="ring-tile-inner"><img class="ring-logo" src="logos/sap.svg" alt="" loading="lazy"><span class="ring-name">SAP</span></span></div>
+            <div class="ring-tile" style="--sin:-.9659;--cos:-.2588" data-name="Oracle"><span class="ring-tile-inner"><img class="ring-logo" src="logos/oracle.png" alt="" loading="lazy"><span class="ring-name">Oracle</span></span></div>
+            <div class="ring-tile" style="--sin:-.9659;--cos:.2588" data-name="Zoho"><span class="ring-tile-inner"><img class="ring-logo" src="logos/zoho.png" alt="" loading="lazy"><span class="ring-name">Zoho</span></span></div>
+            <div class="ring-tile" style="--sin:-.7071;--cos:.7071" data-name="Airtable"><span class="ring-tile-inner"><img class="ring-logo" src="logos/airtable.png" alt="" loading="lazy"><span class="ring-name">Airtable</span></span></div>
+            <div class="ring-tile" style="--sin:-.2588;--cos:.9659" data-name="ClickUp"><span class="ring-tile-inner"><img class="ring-logo" src="logos/clickup.png" alt="" loading="lazy"><span class="ring-name">ClickUp</span></span></div>
           </div>
           <span class="orbit-center"><img src="Amy%20dp.png" alt="Amy, your am2am.ai AI agent" loading="lazy" decoding="async"></span>
           <div class="orbit-overlay">

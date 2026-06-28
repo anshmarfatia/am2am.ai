@@ -56,7 +56,7 @@
       "name": "Is our enterprise data safe when interacting with Amy?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Absolutely. We employ a zero-retention data architecture where information is processed strictly in flight and never stored on our servers. Amy enforces rigorous user permission mapping via encrypted channels, ensuring complete database integrity and enterprise-grade compliance."
+        "text": "Yes. Your data and Amy's memory are isolated per organization, processed over encrypted channels with strict per-user permission mapping. Nothing is ever shared across clients, and your organization's memory is not exportable — Amy learns only your operations, giving you enterprise-grade privacy and control."
       }
     },
     {
@@ -425,6 +425,23 @@
   .chan-btn svg, .view-btn svg { width: 16px; height: 16px; flex: 0 0 auto; }
   .chan-btn:hover, .view-btn:hover { color: var(--ink); }
   .chan-btn[aria-pressed="true"], .view-btn[aria-pressed="true"] {
+    background: var(--ink); color: var(--cream-warm);
+    box-shadow: 0 3px 10px -3px rgba(42,21,5,.5);
+  }
+
+  /* Per-agent scenario sub-tabs (smaller sibling of the channel toggle) */
+  .scn-toggle {
+    display: inline-flex; flex-wrap: wrap; gap: 3px; padding: 3px; border-radius: 9px;
+    background: var(--paper); border: 1px solid var(--rule-strong);
+    box-shadow: 0 2px 8px -3px rgba(42,21,5,.18);
+  }
+  .scn-btn {
+    cursor: pointer; border: 0; padding: .34rem .62rem; border-radius: 7px; background: transparent;
+    font-family: var(--font-body); font-size: .72rem; font-weight: 600; color: var(--muted);
+    transition: background .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .scn-btn:hover { color: var(--ink); }
+  .scn-btn[aria-pressed="true"] {
     background: var(--ink); color: var(--cream-warm);
     box-shadow: 0 3px 10px -3px rgba(42,21,5,.5);
   }
@@ -1407,7 +1424,7 @@
           </h3>
           <div class="faq-panel" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
             <div class="faq-panel-inner">
-              <p>Absolutely. We employ a zero-retention data architecture where information is processed strictly in flight and never stored on our servers. Amy enforces rigorous user permission mapping via encrypted channels, ensuring complete database integrity and enterprise-grade compliance.</p>
+              <p>Yes. Your data and Amy's memory are isolated per organization, processed over encrypted channels with strict per-user permission mapping. Nothing is ever shared across clients, and your organization's memory is not exportable — Amy learns only your operations, giving you enterprise-grade privacy and control.</p>
             </div>
           </div>
         </div>
@@ -1557,6 +1574,7 @@
     var chanBtns = Array.prototype.slice.call(document.querySelectorAll('.chan-btn'));
     var viewBtns = Array.prototype.slice.call(document.querySelectorAll('.view-btn'));
     var activeAgent = 'sales';
+    var activeScenario = 'pre'; /* set to AGENTS[activeAgent].tabs[0].id at init */
     var activeChan = 'whatsapp';
     var activeView = 'erp';
 
@@ -1717,8 +1735,12 @@
         return '<div class="uc-benefit"><span class="feat-ic">' + (ICONS[b.icon] || ICONS.check) + '</span>'
           + '<div><p class="uc-lead">' + b.lead + '</p><p class="uc-text">' + b.text + '</p></div></div>';
       }).join('');
+      var pills = (a.tabs || []).map(function (t) {
+        return '<button type="button" class="scn-btn" data-scn="' + t.id + '" aria-pressed="' + String(t.id === activeScenario) + '">' + t.label + '</button>';
+      }).join('');
       return '<h3 class="uc-headline">' + i.headline + '</h3>'
         + '<p class="uc-sub mt-3">' + i.sub + '</p>'
+        + '<div class="scn-toggle mt-4" role="group" aria-label="Scenario">' + pills + '</div>'
         + '<div class="uc-stage mt-5">' + ICONS.spark + '<span>' + i.stage + '</span></div>'
         + '<div class="mt-6 flex flex-col gap-5">' + rows + '</div>';
     }
@@ -1732,31 +1754,90 @@
           benefits: [
             { icon: 'insight', lead: 'Prepare better. Win more.', text: 'Amy gathers insights, company data, and past interactions before your meeting at 7 AM.' },
             { icon: 'clock', lead: 'Save 4–6 Hours / Day', text: 'Automate notes, follow-ups & CRM updates.' },
-            { icon: 'lock', lead: 'Zero Data Retention', text: 'Your data is never stored. Ever.' }
+            { icon: 'lock', lead: 'Private Memory', text: 'Amy learns your operations — and only yours. Isolated per organization, never shared.' }
           ]
         },
-        head: { name: 'AMY', team: 'Revenue', role: 'Field Sales Rep' },
-        msgs: {
-          time: '09:14', photo: null,
-          out: 'Met Acme Corp — verbal yes on the ₹12L annual plan. Move stage to Negotiation, close target Friday.',
-          proc: 'Updating CRM securely',
-          doc: { kind: 'record', name: 'CRM-OPP-0042', meta: 'Opportunity · Negotiation' },
-          reply: 'Opportunity updated. Follow-up reminder set for Friday.',
-          time2: '09:18',
-          out2: 'They want 10% off to sign today — can you send a revised quote?',
-          proc2: 'Drafting revised quote',
-          doc2: { kind: 'record', name: 'Quote-Acme-Rev1.pdf', meta: 'Quotation · ₹10.8L' },
-          reply2: 'Revised quote sent at ₹10.8L. Stage moved to Proposal Sent.'
-        },
-        erp: {
-          title: 'Opportunity', count: '142', add: 'Add Opportunity',
-          grid: '14px 1.1fr 1fr 0.95fr auto', cols: ['Opportunity', 'Customer', 'Stage'],
-          rows: [
-            { id: 'CRM-OPP-0039', cells: ['Globex', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
-            { id: 'CRM-OPP-0041', cells: ['Initech', 'Proposal'], ind: { cls: 'orange', label: 'Replied' } }
-          ],
-          live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'blue', label: 'Open' } },
-          update: { cells: ['Acme Corp', 'Proposal Sent'], ind: { cls: 'orange', label: 'Quote Sent' } }
+        tabs: [
+          { id: 'pre', label: 'Pre Meeting' },
+          { id: 'during', label: 'During Meeting' },
+          { id: 'post', label: 'Post Meeting' }
+        ],
+        scenarios: {
+          pre: {
+            head: { name: 'AMY', team: 'Revenue', role: 'Field Sales Rep' },
+            msgs: {
+              time: '07:02', photo: null,
+              out: 'Prep me for the Acme Corp meeting at 11 — pull their account history and decision makers.',
+              proc: 'Compiling account briefing',
+              doc: { kind: 'record', name: 'Acme-Brief.pdf', meta: 'Briefing · 4 pages' },
+              reply: 'Briefing ready: 2 open tickets, last order ₹8L, renewal due. Key contact: VP Ops.',
+              time2: '07:05',
+              out2: 'Great — give me 3 talking points to open with.',
+              proc2: 'Drafting talking points',
+              doc2: { kind: 'record', name: 'Talking-Points.pdf', meta: 'Notes · 3 points' },
+              reply2: 'Sent. Lead with their downtime issue, then ROI, then the renewal discount.'
+            },
+            erp: {
+              title: 'Opportunity', count: '142', add: 'Add Opportunity',
+              grid: '14px 1.1fr 1fr 0.95fr auto', cols: ['Opportunity', 'Customer', 'Stage'],
+              rows: [
+                { id: 'CRM-OPP-0039', cells: ['Globex', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
+                { id: 'CRM-OPP-0041', cells: ['Initech', 'Proposal'], ind: { cls: 'orange', label: 'Replied' } }
+              ],
+              live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
+              update: { cells: ['Acme Corp', 'Qualification'], ind: { cls: 'orange', label: 'Meeting Set' } }
+            }
+          },
+          during: {
+            head: { name: 'AMY', team: 'Revenue', role: 'Field Sales Rep' },
+            msgs: {
+              time: '09:14', photo: null,
+              out: 'Met Acme Corp — verbal yes on the ₹12L annual plan. Move stage to Negotiation, close target Friday.',
+              proc: 'Updating CRM securely',
+              doc: { kind: 'record', name: 'CRM-OPP-0042', meta: 'Opportunity · Negotiation' },
+              reply: 'Opportunity updated. Follow-up reminder set for Friday.',
+              time2: '09:18',
+              out2: 'They mentioned evaluating a competitor — log it and set a callback for tomorrow.',
+              proc2: 'Logging note & reminder',
+              doc2: { kind: 'record', name: 'Call-Note-0042', meta: 'Activity · Callback' },
+              reply2: 'Competitor note saved. Callback reminder set for 10 AM tomorrow.'
+            },
+            erp: {
+              title: 'Opportunity', count: '142', add: 'Add Opportunity',
+              grid: '14px 1.1fr 1fr 0.95fr auto', cols: ['Opportunity', 'Customer', 'Stage'],
+              rows: [
+                { id: 'CRM-OPP-0039', cells: ['Globex', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
+                { id: 'CRM-OPP-0041', cells: ['Initech', 'Proposal'], ind: { cls: 'orange', label: 'Replied' } }
+              ],
+              live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'blue', label: 'Open' } },
+              update: { cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'orange', label: 'Callback Set' } }
+            }
+          },
+          post: {
+            head: { name: 'AMY', team: 'Revenue', role: 'Field Sales Rep' },
+            msgs: {
+              time: '09:18', photo: null,
+              out: 'They want 10% off to sign today — can you send a revised quote?',
+              proc: 'Drafting revised quote',
+              doc: { kind: 'record', name: 'Quote-Acme-Rev1.pdf', meta: 'Quotation · ₹10.8L' },
+              reply: 'Revised quote sent at ₹10.8L. Stage moved to Proposal Sent.',
+              time2: '09:24',
+              out2: 'Perfect — share the e-sign link and set a reminder to follow up Monday.',
+              proc2: 'Sending e-sign link',
+              doc2: { kind: 'record', name: 'eSign-Acme.pdf', meta: 'Contract · Sent' },
+              reply2: 'E-sign link sent. Follow-up reminder set for Monday 9 AM.'
+            },
+            erp: {
+              title: 'Opportunity', count: '142', add: 'Add Opportunity',
+              grid: '14px 1.1fr 1fr 0.95fr auto', cols: ['Opportunity', 'Customer', 'Stage'],
+              rows: [
+                { id: 'CRM-OPP-0039', cells: ['Globex', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
+                { id: 'CRM-OPP-0041', cells: ['Initech', 'Proposal'], ind: { cls: 'orange', label: 'Replied' } }
+              ],
+              live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'blue', label: 'Open' } },
+              update: { cells: ['Acme Corp', 'Proposal Sent'], ind: { cls: 'orange', label: 'Quote Sent' } }
+            }
+          }
         },
         attrs: [
           { label: 'Data Entry Friction', cls: 'warn', pill: 'High', text: 'Reps hate filling out CRM fields; data is usually missing.' },
@@ -1773,30 +1854,90 @@
           benefits: [
             { icon: 'insight', lead: 'Field updates made simple.', text: 'Amy collects site updates, photos and progress from your team.' },
             { icon: 'clock', lead: 'Save 5–8 Hours / Day', text: 'Reduce manual reporting and follow-ups.' },
-            { icon: 'lock', lead: 'Zero Data Retention', text: 'Your data is never stored. Ever.' }
+            { icon: 'lock', lead: 'Private Memory', text: 'Amy learns your operations — and only yours. Isolated per organization, never shared.' }
           ]
         },
-        head: { name: 'AMY', team: 'Site Ops', role: 'Site Engineer' },
-        msgs: {
-          time: '10:02', photo: 'site-photo',
-          out: "Foundation pour done at Tower B. Curing started — electricals can't start for 2 days.",
-          proc: 'Recalculating dependencies',
-          doc: { kind: 'pdf', name: 'Schedule-TowerB.pdf', meta: 'Gantt update · 3 tasks shifted' },
-          reply: 'Task TASK-0188 shifted +2 days. 3 dependent tasks rescheduled.',
-          time2: '10:07',
-          out2: "We're short 2 electricians next week — flag the risk.",
-          proc2: 'Logging project risk',
-          reply2: 'Flagged TASK-0188 as At Risk and escalated to the PM. Resource request raised.'
-        },
-        erp: {
-          title: 'Task', count: '1,204', add: 'Add Task',
-          grid: '14px 0.9fr 1.2fr 0.7fr auto', cols: ['Task', 'Subject', 'Progress'],
-          rows: [
-            { id: 'TASK-0186', cells: ['Foundation – Tower B', '100%'], ind: { cls: 'green', label: 'Completed' } },
-            { id: 'TASK-0189', cells: ['Plumbing – Tower B', '60%'], ind: { cls: 'blue', label: 'Working' } }
-          ],
-          live: { id: 'TASK-0188', cells: ['Electricals – Tower B', '+2 days'], ind: { cls: 'orange', label: 'Open' } },
-          update: { cells: ['Electricals – Tower B', 'Blocked'], ind: { cls: 'red', label: 'At Risk' } }
+        tabs: [
+          { id: 'daily', label: 'Daily Report' },
+          { id: 'issues', label: 'Issues & Escalations' },
+          { id: 'planning', label: 'Forward Planning' }
+        ],
+        scenarios: {
+          daily: {
+            head: { name: 'AMY', team: 'Site Ops', role: 'Site Engineer' },
+            msgs: {
+              time: '08:30', photo: 'site-photo',
+              out: 'Morning update — slab work at Tower B is 80% done. Sharing site photos.',
+              proc: 'Updating task progress',
+              doc: { kind: 'pdf', name: 'DPR-TowerB.pdf', meta: 'Daily report · 6 tasks' },
+              reply: 'Daily progress report logged. TASK-0190 updated to 80%.',
+              time2: '08:35',
+              out2: 'Plastering crew started on floor 3 — mark it in progress.',
+              proc2: 'Updating task status',
+              doc2: { kind: 'pdf', name: 'Task-Update.pdf', meta: 'Status · Working' },
+              reply2: 'TASK-0190 marked Working. Daily summary shared with the PM.'
+            },
+            erp: {
+              title: 'Task', count: '1,204', add: 'Add Task',
+              grid: '14px 0.9fr 1.2fr 0.7fr auto', cols: ['Task', 'Subject', 'Progress'],
+              rows: [
+                { id: 'TASK-0186', cells: ['Foundation – Tower B', '100%'], ind: { cls: 'green', label: 'Completed' } },
+                { id: 'TASK-0189', cells: ['Plumbing – Tower B', '60%'], ind: { cls: 'blue', label: 'Working' } }
+              ],
+              live: { id: 'TASK-0190', cells: ['Slab – Tower B', '80%'], ind: { cls: 'blue', label: 'Working' } },
+              update: { cells: ['Slab – Tower B', '85%'], ind: { cls: 'green', label: 'On Track' } }
+            }
+          },
+          issues: {
+            head: { name: 'AMY', team: 'Site Ops', role: 'Site Engineer' },
+            msgs: {
+              time: '10:07', photo: null,
+              out: "We're short 2 electricians next week — flag the risk on the electrical works.",
+              proc: 'Logging project risk',
+              doc: { kind: 'pdf', name: 'Risk-Log-TowerB.pdf', meta: 'Risk · Resourcing' },
+              reply: 'Flagged TASK-0188 as At Risk. Resource request raised.',
+              time2: '10:11',
+              out2: 'Escalate to the PM and request 2 electricians from the Tower A crew.',
+              proc2: 'Escalating to PM',
+              doc2: { kind: 'pdf', name: 'Escalation-0188.pdf', meta: 'Escalation · PM' },
+              reply2: 'Escalated to the PM. Transfer request for 2 electricians sent to Tower A.'
+            },
+            erp: {
+              title: 'Task', count: '1,204', add: 'Add Task',
+              grid: '14px 0.9fr 1.2fr 0.7fr auto', cols: ['Task', 'Subject', 'Progress'],
+              rows: [
+                { id: 'TASK-0186', cells: ['Foundation – Tower B', '100%'], ind: { cls: 'green', label: 'Completed' } },
+                { id: 'TASK-0189', cells: ['Plumbing – Tower B', '60%'], ind: { cls: 'blue', label: 'Working' } }
+              ],
+              live: { id: 'TASK-0188', cells: ['Electricals – Tower B', 'Pending'], ind: { cls: 'orange', label: 'Open' } },
+              update: { cells: ['Electricals – Tower B', 'Blocked'], ind: { cls: 'red', label: 'At Risk' } }
+            }
+          },
+          planning: {
+            head: { name: 'AMY', team: 'Site Ops', role: 'Site Engineer' },
+            msgs: {
+              time: '10:02', photo: 'site-photo',
+              out: "Foundation pour done at Tower B. Curing started — electricals can't start for 2 days.",
+              proc: 'Recalculating dependencies',
+              doc: { kind: 'pdf', name: 'Schedule-TowerB.pdf', meta: 'Gantt update · 3 tasks shifted' },
+              reply: 'Task TASK-0188 shifted +2 days. 3 dependent tasks rescheduled.',
+              time2: '10:06',
+              out2: "Share next week's look-ahead so the crews can plan.",
+              proc2: 'Building look-ahead plan',
+              doc2: { kind: 'pdf', name: 'LookAhead-Wk14.pdf', meta: '7-day plan · 12 tasks' },
+              reply2: '7-day look-ahead shared. Electricals now start Thursday; crews notified.'
+            },
+            erp: {
+              title: 'Task', count: '1,204', add: 'Add Task',
+              grid: '14px 0.9fr 1.2fr 0.7fr auto', cols: ['Task', 'Subject', 'Progress'],
+              rows: [
+                { id: 'TASK-0186', cells: ['Foundation – Tower B', '100%'], ind: { cls: 'green', label: 'Completed' } },
+                { id: 'TASK-0189', cells: ['Plumbing – Tower B', '60%'], ind: { cls: 'blue', label: 'Working' } }
+              ],
+              live: { id: 'TASK-0188', cells: ['Electricals – Tower B', '+2 days'], ind: { cls: 'orange', label: 'Open' } },
+              update: { cells: ['Electricals – Tower B', 'Thu start'], ind: { cls: 'blue', label: 'Rescheduled' } }
+            }
+          }
         },
         attrs: [
           { label: 'Data Entry Friction', cls: 'risk', pill: 'Severe', text: 'Forcing an engineer to open MS Project on a dusty laptop fails.' },
@@ -1813,31 +1954,90 @@
           benefits: [
             { icon: 'insight', lead: 'Extract. Verify. Record.', text: 'Amy reads documents, extracts data and creates verified entries.' },
             { icon: 'clock', lead: 'Save 6–10 Hours / Day', text: 'Automate data entry and reconciliation.' },
-            { icon: 'lock', lead: 'Zero Data Retention', text: 'Your data is never stored. Ever.' }
+            { icon: 'lock', lead: 'Private Memory', text: 'Amy learns your operations — and only yours. Isolated per organization, never shared.' }
           ]
         },
-        head: { name: 'AMY', team: 'Logistics', role: 'Dock Operator' },
-        msgs: {
-          time: '09:14', photo: 'bol-photo',
-          out: 'Truck MH-12 arrived. Unloaded 50 cartons, 2 damaged.',
-          proc: 'Validating and syncing securely',
-          doc: { kind: 'pdf', name: 'Gate-Pass-MH12.pdf', meta: 'PDF Document · 1 page' },
-          reply: 'Digital gate pass issued. Inventory record updated.',
-          time2: '09:18',
-          out2: 'Raise a return for the 2 damaged cartons.',
-          proc2: 'Adjusting stock & raising debit note',
-          doc2: { kind: 'pdf', name: 'Debit-Note-0044.pdf', meta: 'Return · 2 cartons' },
-          reply2: 'Stock adjusted to 48 units. Debit note DN-0044 raised; supplier notified.'
-        },
-        erp: {
-          title: 'Stock Entry', count: '3,981', add: 'Add Stock Entry',
-          grid: '14px 1.1fr 1fr 0.55fr auto', cols: ['Stock Entry', 'Item', 'Qty'],
-          rows: [
-            { id: 'MAT-STE-0091', cells: ['Cartons · MH-09', '120'], ind: { cls: 'green', label: 'Submitted' } },
-            { id: 'MAT-STE-0092', cells: ['Cartons · KA-04', '88'], ind: { cls: 'green', label: 'Submitted' } }
-          ],
-          live: { id: 'MAT-STE-0093', cells: ['Cartons · MH-12', '50'], ind: { cls: 'green', label: 'Submitted' } },
-          update: { cells: ['Cartons · MH-12', '48'], ind: { cls: 'orange', label: 'Adjusted' } }
+        tabs: [
+          { id: 'bank', label: 'Bank Statements' },
+          { id: 'billing', label: 'Booking & Billing' },
+          { id: 'expenses', label: 'Expenses' }
+        ],
+        scenarios: {
+          bank: {
+            head: { name: 'AMY', team: 'Logistics', role: 'Dock Operator' },
+            msgs: {
+              time: '09:05', photo: null,
+              out: "Sharing yesterday's HDFC bank statement — please reconcile and post the entries.",
+              proc: 'Reading statement & matching',
+              doc: { kind: 'pdf', name: 'HDFC-Statement.pdf', meta: 'Statement · 18 txns' },
+              reply: 'Statement read. 17 of 18 matched. Payment voucher PE-0231 created for ₹2.4L.',
+              time2: '09:09',
+              out2: 'The unmatched ₹40k is the MH-12 freight — book it against that supplier.',
+              proc2: 'Posting accounting voucher',
+              doc2: { kind: 'pdf', name: 'Voucher-PE-0232.pdf', meta: 'Payment · ₹40k' },
+              reply2: 'Voucher PE-0232 posted to the freight supplier. Bank fully reconciled.'
+            },
+            erp: {
+              title: 'Stock Entry', count: '3,981', add: 'Add Stock Entry',
+              grid: '14px 1.1fr 1fr 0.55fr auto', cols: ['Stock Entry', 'Item', 'Qty'],
+              rows: [
+                { id: 'MAT-STE-0091', cells: ['Cartons · MH-09', '120'], ind: { cls: 'green', label: 'Submitted' } },
+                { id: 'MAT-STE-0092', cells: ['Cartons · KA-04', '88'], ind: { cls: 'green', label: 'Submitted' } }
+              ],
+              live: { id: 'MAT-STE-0093', cells: ['Cartons · MH-12', '50'], ind: { cls: 'orange', label: 'Unpaid' } },
+              update: { cells: ['Cartons · MH-12', '50'], ind: { cls: 'green', label: 'Reconciled' } }
+            }
+          },
+          billing: {
+            head: { name: 'AMY', team: 'Logistics', role: 'Dock Operator' },
+            msgs: {
+              time: '09:14', photo: 'bol-photo',
+              out: 'Truck MH-12 arrived with 50 cartons against PO-7741. Issue the gate pass.',
+              proc: 'Validating and syncing securely',
+              doc: { kind: 'pdf', name: 'Gate-Pass-MH12.pdf', meta: 'PDF Document · 1 page' },
+              reply: 'Digital gate pass issued. Inventory record updated with 50 cartons.',
+              time2: '09:18',
+              out2: 'Goods match the PO — generate the purchase invoice.',
+              proc2: 'Generating purchase invoice',
+              doc2: { kind: 'pdf', name: 'PINV-0188.pdf', meta: 'Invoice · ₹3.2L' },
+              reply2: 'Purchase invoice PINV-0188 created for ₹3.2L, linked to PO-7741.'
+            },
+            erp: {
+              title: 'Stock Entry', count: '3,981', add: 'Add Stock Entry',
+              grid: '14px 1.1fr 1fr 0.55fr auto', cols: ['Stock Entry', 'Item', 'Qty'],
+              rows: [
+                { id: 'MAT-STE-0091', cells: ['Cartons · MH-09', '120'], ind: { cls: 'green', label: 'Submitted' } },
+                { id: 'MAT-STE-0092', cells: ['Cartons · KA-04', '88'], ind: { cls: 'green', label: 'Submitted' } }
+              ],
+              live: { id: 'MAT-STE-0093', cells: ['Cartons · MH-12', '50'], ind: { cls: 'green', label: 'Submitted' } },
+              update: { cells: ['Cartons · MH-12', '50'], ind: { cls: 'blue', label: 'Invoiced' } }
+            }
+          },
+          expenses: {
+            head: { name: 'AMY', team: 'Logistics', role: 'Dock Operator' },
+            msgs: {
+              time: '09:14', photo: 'bol-photo',
+              out: 'Inspection done on MH-12 — 2 of the 50 cartons are damaged.',
+              proc: 'Logging damaged goods',
+              doc: { kind: 'pdf', name: 'Damage-Report-MH12.pdf', meta: 'QC report · 2 cartons' },
+              reply: 'Damage logged against MH-12. 2 cartons quarantined.',
+              time2: '09:18',
+              out2: 'Raise a return for the 2 damaged cartons.',
+              proc2: 'Adjusting stock & raising debit note',
+              doc2: { kind: 'pdf', name: 'Debit-Note-0044.pdf', meta: 'Return · 2 cartons' },
+              reply2: 'Stock adjusted to 48 units. Debit note DN-0044 raised; supplier notified.'
+            },
+            erp: {
+              title: 'Stock Entry', count: '3,981', add: 'Add Stock Entry',
+              grid: '14px 1.1fr 1fr 0.55fr auto', cols: ['Stock Entry', 'Item', 'Qty'],
+              rows: [
+                { id: 'MAT-STE-0091', cells: ['Cartons · MH-09', '120'], ind: { cls: 'green', label: 'Submitted' } },
+                { id: 'MAT-STE-0092', cells: ['Cartons · KA-04', '88'], ind: { cls: 'green', label: 'Submitted' } }
+              ],
+              live: { id: 'MAT-STE-0093', cells: ['Cartons · MH-12', '50'], ind: { cls: 'green', label: 'Submitted' } },
+              update: { cells: ['Cartons · MH-12', '48'], ind: { cls: 'orange', label: 'Adjusted' } }
+            }
+          }
         },
         attrs: [
           { label: 'Data Entry Friction', cls: 'warn', pill: 'Critical', text: 'High-velocity updates required to keep logistics moving.' },
@@ -1848,10 +2048,11 @@
       }
     };
 
-    function renderPhone() { phoneScreen.innerHTML = (activeChan === 'telegram' ? tgPhone : waPhone)(AGENTS[activeAgent]); }
+    function curScenario() { return AGENTS[activeAgent].scenarios[activeScenario]; }
+    function renderPhone() { phoneScreen.innerHTML = (activeChan === 'telegram' ? tgPhone : waPhone)(curScenario()); }
     function renderErp() {
       var fn = activeView === 'sheets' ? sheetsHTML : activeView === 'tally' ? tallyHTML : erpHTML;
-      erpScreen.innerHTML = fn(AGENTS[activeAgent]);
+      erpScreen.innerHTML = fn(curScenario());
     }
     function renderInfo() { if (!infoEl) return; infoEl.innerHTML = infoHTML(AGENTS[activeAgent]); }
 
@@ -1865,7 +2066,7 @@
     }
     /* Exchange 2: update the ERP live row's cells + indicator in place, with a flash. */
     function applyErpUpdate() {
-      var u = AGENTS[activeAgent].erp.update;
+      var u = curScenario().erp.update;
       if (!u) return;
       var liveRow = erpScreen.querySelector('.db-row-live');
       if (!liveRow) return;
@@ -1907,15 +2108,34 @@
       if (reduceMotion || paused) return;
       autoTimer = setTimeout(advance, ADVANCE_MS);
     }
+    /* Cycle through the current agent's scenarios first; only after the last one move to the next agent. */
     function advance() {
-      var i = AGENT_ORDER.indexOf(activeAgent);
-      selectAgent(AGENT_ORDER[(i + 1) % AGENT_ORDER.length]);
+      var tabs = AGENTS[activeAgent].tabs;
+      var si = tabs.map(function (t) { return t.id; }).indexOf(activeScenario);
+      if (si > -1 && si < tabs.length - 1) {
+        selectScenario(tabs[si + 1].id);
+      } else {
+        var i = AGENT_ORDER.indexOf(activeAgent);
+        selectAgent(AGENT_ORDER[(i + 1) % AGENT_ORDER.length]);
+      }
     }
 
     function selectAgent(id) {
       activeAgent = id;
+      activeScenario = AGENTS[id].tabs[0].id;
       agentTabs.forEach(function (t) { t.setAttribute('aria-selected', String(t.getAttribute('data-agent') === id)); });
       renderPhone(); renderErp(); renderInfo();
+      playAnimation(); scheduleAdvance();
+    }
+    /* Swap only the phone conversation + system-of-record; the info column stays put. */
+    function selectScenario(id) {
+      activeScenario = id;
+      if (infoEl) {
+        Array.prototype.slice.call(infoEl.querySelectorAll('.scn-btn')).forEach(function (b) {
+          b.setAttribute('aria-pressed', String(b.getAttribute('data-scn') === id));
+        });
+      }
+      renderPhone(); renderErp();
       playAnimation(); scheduleAdvance();
     }
     function selectChan(c) {
@@ -1935,6 +2155,14 @@
     chanBtns.forEach(function (b) { b.addEventListener('click', function () { selectChan(b.getAttribute('data-chan')); }); });
     viewBtns.forEach(function (b) { b.addEventListener('click', function () { selectView(b.getAttribute('data-view')); }); });
 
+    /* Sub-tab pills are re-rendered with the info column, so delegate the click from infoEl. */
+    if (infoEl) {
+      infoEl.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('.scn-btn') : null;
+        if (btn && infoEl.contains(btn)) selectScenario(btn.getAttribute('data-scn'));
+      });
+    }
+
     /* Pause auto-rotation while the user is hovering the tabs or the demo, so it doesn't change mid-read/click. */
     [document.querySelector('.agent-tabs'), flow, infoEl].forEach(function (el) {
       if (!el) return;
@@ -1942,6 +2170,7 @@
       el.addEventListener('mouseleave', function () { paused = false; scheduleAdvance(); });
     });
 
+    activeScenario = AGENTS[activeAgent].tabs[0].id;
     renderPhone(); renderErp(); renderInfo();
     playAnimation(); scheduleAdvance();
   }

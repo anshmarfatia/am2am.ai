@@ -1772,16 +1772,16 @@
           pre: {
             head: { name: 'AMY', team: 'Revenue', role: 'Field Sales Rep' },
             msgs: {
-              time: '07:02', photo: null,
-              out: 'Prep me for the Acme Corp meeting at 11 — pull their account history and decision makers.',
-              proc: 'Compiling account briefing',
-              doc: { kind: 'record', name: 'Acme-Brief.pdf', meta: 'Briefing · 4 pages' },
-              reply: 'Briefing ready: 2 open tickets, last order ₹8L, renewal due. Key contact: VP Ops.',
-              time2: '07:05',
-              out2: 'Great — give me 3 talking points to open with.',
-              proc2: 'Drafting talking points',
-              doc2: { kind: 'record', name: 'Talking-Points.pdf', meta: 'Notes · 3 points' },
-              reply2: 'Sent. Lead with their downtime issue, then ROI, then the renewal discount.'
+              time: '09:14', photo: null,
+              out: 'Meeting with ABC Corp tomorrow, 10 AM. Help me prep.',
+              proc: 'Pulling account intelligence',
+              doc: { kind: 'record', name: 'ABC-Corp-Brief.pdf', meta: 'Meeting brief · 6 sections' },
+              reply: 'Ready: ERP modernization deal, $250K open, watch the SAP integration concern.',
+              time2: '09:15',
+              out2: "Grab the docs I'll need too.",
+              proc2: 'Gathering documents',
+              doc2: { kind: 'zip', name: 'ABC-Meeting-Pack.zip', meta: 'Brochure · SAP guide · case study' },
+              reply2: '3 documents attached and ready to share.'
             },
             erp: {
               title: 'Opportunity', count: '142', add: 'Add Opportunity',
@@ -1790,23 +1790,23 @@
                 { id: 'CRM-OPP-0039', cells: ['Globex', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
                 { id: 'CRM-OPP-0041', cells: ['Initech', 'Proposal'], ind: { cls: 'orange', label: 'Replied' } }
               ],
-              live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
-              update: { cells: ['Acme Corp', 'Qualification'], ind: { cls: 'orange', label: 'Meeting Set' } }
+              live: { id: 'CRM-OPP-0042', cells: ['ABC Corp', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
+              update: { cells: ['ABC Corp', 'Meeting Scheduled'], ind: { cls: 'orange', label: 'Prep Done' } }
             }
           },
           during: {
             head: { name: 'AMY', team: 'Revenue', role: 'Field Sales Rep' },
             msgs: {
-              time: '09:14', photo: null,
-              out: 'Met Acme Corp — verbal yes on the ₹12L annual plan. Move stage to Negotiation, close target Friday.',
-              proc: 'Updating CRM securely',
-              doc: { kind: 'record', name: 'CRM-OPP-0042', meta: 'Opportunity · Negotiation' },
-              reply: 'Opportunity updated. Follow-up reminder set for Friday.',
-              time2: '09:18',
-              out2: 'They mentioned evaluating a competitor — log it and set a callback for tomorrow.',
-              proc2: 'Logging note & reminder',
-              doc2: { kind: 'record', name: 'Call-Note-0042', meta: 'Activity · Callback' },
-              reply2: 'Competitor note saved. Callback reminder set for 10 AM tomorrow.'
+              time: '11:05', photo: null,
+              out: "Show me similar projects we've delivered.",
+              proc: 'Searching project repository',
+              doc: { kind: 'record', name: 'Top-References.pdf', meta: '5 matches · best: Metro Business Park' },
+              reply: '5 strong references — Metro Business Park is the closest match.',
+              time2: '11:08',
+              out2: 'Send the latest solutions brochure.',
+              proc2: 'Retrieving from SharePoint',
+              doc2: { kind: 'pdf', name: 'Solutions-Brochure.pdf', meta: 'Approved · latest version' },
+              reply2: 'Latest approved brochure retrieved and ready to share.'
             },
             erp: {
               title: 'Opportunity', count: '142', add: 'Add Opportunity',
@@ -1815,23 +1815,23 @@
                 { id: 'CRM-OPP-0039', cells: ['Globex', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
                 { id: 'CRM-OPP-0041', cells: ['Initech', 'Proposal'], ind: { cls: 'orange', label: 'Replied' } }
               ],
-              live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'blue', label: 'Open' } },
-              update: { cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'orange', label: 'Callback Set' } }
+              live: { id: 'CRM-OPP-0042', cells: ['ABC Corp', 'Demo'], ind: { cls: 'blue', label: 'Open' } },
+              update: { cells: ['ABC Corp', 'Presentation'], ind: { cls: 'orange', label: 'Assets Sent' } }
             }
           },
           post: {
             head: { name: 'AMY', team: 'Revenue', role: 'Field Sales Rep' },
             msgs: {
-              time: '09:18', photo: null,
-              out: 'They want 10% off to sign today — can you send a revised quote?',
-              proc: 'Drafting revised quote',
-              doc: { kind: 'record', name: 'Quote-Acme-Rev1.pdf', meta: 'Quotation · ₹10.8L' },
-              reply: 'Revised quote sent at ₹10.8L. Stage moved to Proposal Sent.',
-              time2: '09:24',
-              out2: 'Perfect — share the e-sign link and set a reminder to follow up Monday.',
-              proc2: 'Sending e-sign link',
-              doc2: { kind: 'record', name: 'eSign-Acme.pdf', meta: 'Contract · Sent' },
-              reply2: 'E-sign link sent. Follow-up reminder set for Monday 9 AM.'
+              time: '15:30', photo: null,
+              out: 'Meeting done. They want a budgetary proposal + 3 references.',
+              proc: 'Updating CRM',
+              doc: { kind: 'record', name: 'CRM-OPP-0042', meta: 'Opportunity · Proposal Prep' },
+              reply: 'Stage → Proposal Preparation. Requirement and references logged.',
+              time2: '15:33',
+              out2: 'Set the follow-up and raise the estimate request.',
+              proc2: 'Logging follow-up & estimate',
+              doc2: { kind: 'record', name: 'Estimate-Req-0118', meta: 'Pending estimation review' },
+              reply2: 'Follow-up set for Thursday; estimate request raised.'
             },
             erp: {
               title: 'Opportunity', count: '142', add: 'Add Opportunity',
@@ -1840,8 +1840,8 @@
                 { id: 'CRM-OPP-0039', cells: ['Globex', 'Qualification'], ind: { cls: 'blue', label: 'Open' } },
                 { id: 'CRM-OPP-0041', cells: ['Initech', 'Proposal'], ind: { cls: 'orange', label: 'Replied' } }
               ],
-              live: { id: 'CRM-OPP-0042', cells: ['Acme Corp', 'Negotiation'], ind: { cls: 'blue', label: 'Open' } },
-              update: { cells: ['Acme Corp', 'Proposal Sent'], ind: { cls: 'orange', label: 'Quote Sent' } }
+              live: { id: 'CRM-OPP-0042', cells: ['ABC Corp', 'Negotiation'], ind: { cls: 'blue', label: 'Open' } },
+              update: { cells: ['ABC Corp', 'Proposal Prep'], ind: { cls: 'orange', label: 'Proposal' } }
             }
           }
         },

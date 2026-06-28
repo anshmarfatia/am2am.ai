@@ -432,7 +432,8 @@
   /* Per-agent scenario sub-tabs (smaller sibling of the channel toggle).
      Single row, full column width; scrolls horizontally instead of wrapping when tight. */
   .scn-toggle {
-    display: flex; flex-wrap: nowrap; gap: 3px; padding: 3px; border-radius: 9px; width: 100%;
+    display: flex; flex-wrap: nowrap; gap: 3px; padding: 3px; border-radius: 9px;
+    width: fit-content; max-width: 100%; /* hug the pills, left-aligned, but never exceed the column */
     background: var(--paper); border: 1px solid var(--rule-strong);
     box-shadow: 0 2px 8px -3px rgba(42,21,5,.18);
     overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; /* hidden-scrollbar safety net for very narrow mobile only */

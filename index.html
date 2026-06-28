@@ -435,13 +435,14 @@
     display: flex; flex-wrap: nowrap; gap: 3px; padding: 3px; border-radius: 9px; width: 100%;
     background: var(--paper); border: 1px solid var(--rule-strong);
     box-shadow: 0 2px 8px -3px rgba(42,21,5,.18);
-    overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+    overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; /* scroll only as a narrow-width fallback */
   }
   .scn-toggle::-webkit-scrollbar { display: none; }
   .scn-btn {
     flex: 0 0 auto; white-space: nowrap; cursor: pointer; border: 0;
-    padding: .3rem .55rem; border-radius: 7px; background: transparent;
-    font-family: var(--font-body); font-size: .7rem; font-weight: 600; color: var(--muted);
+    padding: .3rem .5rem; border-radius: 7px; background: transparent;
+    font-family: var(--font-body); font-size: .72rem; font-weight: 600; letter-spacing: -.01em;
+    color: var(--muted);
     transition: background .25s var(--ease), color .25s var(--ease), box-shadow .25s var(--ease);
   }
   .scn-btn:hover { color: var(--ink); }

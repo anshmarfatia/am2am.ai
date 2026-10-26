@@ -991,67 +991,6 @@
     .faq-chevron { transition: none; }
   }
 
-  /* ---------- Consultation modal ---------- */
-  .cm-overlay {
-    position: fixed; inset: 0; z-index: 60; display: none;
-    align-items: center; justify-content: center; padding: 1rem;
-    background: rgba(26,11,5,.55); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
-  }
-  .cm-overlay.is-open { display: flex; }
-  .cm-dialog {
-    position: relative; width: 100%; max-width: 560px;
-    max-height: calc(100vh - 2rem); overflow-y: auto;
-    background: var(--paper); border: 1px solid var(--rule-strong);
-    border-radius: 13px; padding: 2rem 1.75rem 1.75rem;
-    box-shadow: 0 40px 80px -30px rgba(42,21,5,.6);
-    animation: cmIn .35s var(--ease);
-  }
-  .cm-dialog::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: var(--grad-h); border-radius: 13px 13px 0 0;
-  }
-  @keyframes cmIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  .cm-close {
-    position: absolute; top: .85rem; right: .85rem; width: 34px; height: 34px;
-    display: inline-flex; align-items: center; justify-content: center;
-    border: 0; border-radius: 8px; background: transparent; cursor: pointer;
-    color: var(--muted); transition: color .25s var(--ease), background .25s var(--ease);
-  }
-  .cm-close:hover { color: var(--ink); background: rgba(42,21,5,.05); }
-  .cm-close svg { width: 18px; height: 18px; }
-  .cm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
-  .cm-field { display: flex; flex-direction: column; gap: .35rem; }
-  .cm-field.cm-full { grid-column: 1 / -1; }
-  .cm-label {
-    font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .14em;
-    font-size: var(--fs-label); font-weight: 500; color: var(--muted);
-  }
-  .cm-req { color: var(--rust); }
-  .cm-dialog .lead-input { transition: border-color .25s var(--ease), box-shadow .25s var(--ease); }
-  .cm-dialog .lead-input:focus { border-color: var(--sun); box-shadow: 0 0 0 1px var(--sun); outline: none; }
-  .cm-dialog .lead-input[aria-invalid="true"] { border-color: var(--sun-deep); }
-  .cm-dialog textarea.lead-input { resize: vertical; min-height: 84px; }
-  .cm-dialog select.lead-input { appearance: none; cursor: pointer; }
-  .cm-err { display: none; }
-  .cm-err.is-shown { display: block; }
-  .cm-hp {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-  }
-  .cm-success { text-align: center; padding: 1.5rem .5rem .5rem; }
-  .cm-success-ic {
-    width: 46px; height: 46px; margin: 0 auto 1rem; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(22,163,74,.12); color: var(--ok);
-  }
-  .cm-success-ic svg { width: 22px; height: 22px; }
-  @media (max-width: 480px) {
-    .cm-grid { grid-template-columns: 1fr; }
-    .cm-dialog { padding: 1.6rem 1.15rem 1.35rem; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .cm-dialog { animation: none; }
-  }
 </style>
 </head>
 
@@ -1125,8 +1064,7 @@
       </div>
 
       <div class="ml-auto flex items-center gap-2.5">
-        <a href="https://cal.com/am2am-demo" class="btn btn-sm btn-ghost hidden sm:inline-flex">Book a Demo</a>
-        <a href="https://cal.com/am2am-demo" class="btn btn-sm btn-sun hidden sm:inline-flex">Schedule Consultation</a>
+        <a href="/get-started" class="btn btn-sm btn-sun hidden sm:inline-flex">Get Started</a>
         <button id="menuBtn" aria-label="Open menu" aria-expanded="false"
           class="flex h-[38px] w-[38px] items-center justify-center rounded-[6px] border border-line bg-paper text-inksoft transition-colors hover:text-ink lg:hidden">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -1139,8 +1077,7 @@
     <nav aria-label="Mobile" class="mx-auto flex w-full max-w-[1440px] flex-col gap-1 px-5 py-3 sm:px-8">
       <a href="#use-cases" class="nav-link !px-3 !py-3">How It Works</a>
       <a href="#faq" class="nav-link !px-3 !py-3">FAQ</a>
-      <a href="https://cal.com/am2am-demo" class="btn btn-sm btn-ghost mt-2">Book a Demo</a>
-      <a href="https://cal.com/am2am-demo" class="btn btn-sm btn-sun mt-1">Schedule Consultation</a>
+      <a href="/get-started" class="btn btn-sm btn-sun mt-1">Get Started</a>
     </nav>
   </div>
 </div>
@@ -1178,8 +1115,8 @@
         </div>
 
         <div class="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-          <a href="https://cal.com/am2am-demo" class="btn btn-sun group">
-            Schedule Consultation
+          <a href="/get-started" class="btn btn-sun group">
+            Get Started
             <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
           <a href="#use-cases" class="btn btn-ghost group">
@@ -1419,7 +1356,7 @@
         <p class="mt-5 max-w-[42ch] text-inksoft" style="font-size:var(--fs-body-lg);font-weight:500;line-height:1.6">
           How your AI Strategist works, what she connects to, and what it takes to launch.
         </p>
-        <a href="https://cal.com/am2am-demo" class="btn btn-ghost group mt-8">
+        <a href="/get-started" class="btn btn-ghost group mt-8">
           Still have questions? Talk to us
           <svg class="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--rust)"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
@@ -1568,7 +1505,7 @@
         </div>
         <div class="flex flex-col gap-5">
           <h3 class="label text-muted">Company</h3>
-          <a href="https://cal.com/am2am-demo" class="ulink text-sm text-inksoft">Schedule a consultation</a>
+          <a href="/get-started" class="ulink text-sm text-inksoft">Get started</a>
         </div>
         <div class="flex flex-col gap-5">
           <h3 class="label text-muted">Contact</h3>
@@ -1584,87 +1521,7 @@
 </footer>
 
 <!-- Floating CTA -->
-<a id="floatCta" href="https://cal.com/am2am-demo" class="btn btn-sm btn-sun fixed bottom-6 right-6 z-40 hidden">Schedule Consultation</a>
-
-<!-- Consultation modal -->
-<div id="cmOverlay" class="cm-overlay" hidden>
-  <div class="cm-dialog" role="dialog" aria-modal="true" aria-labelledby="cmTitle">
-    <button type="button" class="cm-close" id="cmClose" aria-label="Close">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </button>
-
-    <div id="cmFormWrap">
-      <p class="eyebrow">Consultation</p>
-      <h2 id="cmTitle" class="head text-2xl mt-3">Let&rsquo;s map your operations</h2>
-      <p class="text-inksoft text-sm mt-2 leading-relaxed">Tell us where your records live and what&rsquo;s slowing your team down. An AI Strategist will get back to you to set up a time.</p>
-
-      <form id="cmForm" novalidate class="mt-6">
-        <div class="cm-grid">
-          <div class="cm-field">
-            <label class="cm-label" for="cmFirstName">First name <span class="cm-req">*</span></label>
-            <input class="lead-input" id="cmFirstName" name="firstName" type="text" autocomplete="given-name" maxlength="80" />
-            <p class="lead-err cm-err" data-err-for="firstName"></p>
-          </div>
-          <div class="cm-field">
-            <label class="cm-label" for="cmLastName">Last name <span class="cm-req">*</span></label>
-            <input class="lead-input" id="cmLastName" name="lastName" type="text" autocomplete="family-name" maxlength="80" />
-            <p class="lead-err cm-err" data-err-for="lastName"></p>
-          </div>
-          <div class="cm-field">
-            <label class="cm-label" for="cmEmail">Work email <span class="cm-req">*</span></label>
-            <input class="lead-input" id="cmEmail" name="email" type="email" autocomplete="email" maxlength="200" />
-            <p class="lead-err cm-err" data-err-for="email"></p>
-          </div>
-          <div class="cm-field">
-            <label class="cm-label" for="cmCompany">Company <span class="cm-req">*</span></label>
-            <input class="lead-input" id="cmCompany" name="company" type="text" autocomplete="organization" maxlength="160" />
-            <p class="lead-err cm-err" data-err-for="company"></p>
-          </div>
-          <div class="cm-field cm-full">
-            <label class="cm-label" for="cmPhone">Phone or WhatsApp</label>
-            <input class="lead-input" id="cmPhone" name="phone" type="tel" autocomplete="tel" maxlength="60" />
-          </div>
-          <div class="cm-field cm-full">
-            <label class="cm-label" for="cmSystems">Where do your records live today?</label>
-            <select class="lead-input" id="cmSystems" name="systems">
-              <option value="">Select one</option>
-              <option>Tally</option>
-              <option>ERPNext</option>
-              <option>SAP</option>
-              <option>Oracle</option>
-              <option>Zoho</option>
-              <option>Google Sheets</option>
-              <option>Spreadsheets and paper</option>
-              <option>Something else</option>
-            </select>
-          </div>
-          <div class="cm-field cm-full">
-            <label class="cm-label" for="cmNotes">What should Amy handle first?</label>
-            <textarea class="lead-input" id="cmNotes" name="notes" rows="3" maxlength="2000"></textarea>
-          </div>
-        </div>
-
-        <div class="cm-hp" aria-hidden="true">
-          <label for="cmWebsite">Website</label>
-          <input id="cmWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
-        </div>
-
-        <button type="submit" id="cmSubmit" class="btn btn-sun w-full mt-6">Request consultation</button>
-        <p class="lead-err cm-err mt-2" id="cmFormErr" role="alert"></p>
-        <p class="text-xs text-muted mt-3">We&rsquo;ll only use these details to contact you about am2am.ai.</p>
-      </form>
-    </div>
-
-    <div id="cmSuccess" class="cm-success" hidden>
-      <div class="cm-success-ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>
-      </div>
-      <h2 class="head text-xl">Request received</h2>
-      <p class="text-inksoft text-sm mt-2 leading-relaxed">Thanks &mdash; an AI Strategist will reach out shortly to schedule your consultation.</p>
-      <button type="button" class="btn btn-ghost mt-6" id="cmDone">Close</button>
-    </div>
-  </div>
-</div>
+<a id="floatCta" href="/get-started" class="btn btn-sm btn-sun fixed bottom-6 right-6 z-40 hidden">Get Started</a>
 
 <script>
 (function () {
@@ -2354,159 +2211,5 @@
 })();
 </script>
 
-
-<script>
-(function () {
-  var overlay = document.getElementById('cmOverlay');
-  var dialog = overlay && overlay.querySelector('.cm-dialog');
-  var form = document.getElementById('cmForm');
-  if (!overlay || !dialog || !form) return;
-
-  var formWrap = document.getElementById('cmFormWrap');
-  var success = document.getElementById('cmSuccess');
-  var submitBtn = document.getElementById('cmSubmit');
-  var formErr = document.getElementById('cmFormErr');
-  var closeBtn = document.getElementById('cmClose');
-  var doneBtn = document.getElementById('cmDone');
-  var lastTrigger = null;
-  var submitting = false;
-
-  var FIELDS = ['firstName', 'lastName', 'email', 'company', 'phone', 'systems', 'notes', 'website'];
-  var REQUIRED = {
-    firstName: 'Please enter your first name.',
-    lastName: 'Please enter your last name.',
-    email: 'Please enter your work email.',
-    company: 'Please enter your company.'
-  };
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-  function field(name) { return form.elements[name]; }
-  function errNode(name) { return form.querySelector('[data-err-for="' + name + '"]'); }
-
-  function setError(name, message) {
-    var input = field(name);
-    var node = errNode(name);
-    if (input) input.setAttribute('aria-invalid', message ? 'true' : 'false');
-    if (node) {
-      node.textContent = message || '';
-      node.classList.toggle('is-shown', !!message);
-    }
-  }
-
-  function clearErrors() {
-    Object.keys(REQUIRED).forEach(function (name) { setError(name, ''); });
-    formErr.textContent = '';
-    formErr.classList.remove('is-shown');
-  }
-
-  function validate() {
-    var firstBad = null;
-    Object.keys(REQUIRED).forEach(function (name) {
-      var value = (field(name).value || '').trim();
-      var message = '';
-      if (!value) message = REQUIRED[name];
-      else if (name === 'email' && !EMAIL_RE.test(value)) message = 'Please enter a valid email address.';
-      setError(name, message);
-      if (message && !firstBad) firstBad = field(name);
-    });
-    if (firstBad) firstBad.focus();
-    return !firstBad;
-  }
-
-  function focusables() {
-    return Array.prototype.filter.call(
-      dialog.querySelectorAll('a[href], button:not([disabled]), input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])'),
-      function (el) { return el.tabIndex !== -1 && (el.offsetWidth > 0 || el.offsetHeight > 0 || el === document.activeElement); }
-    );
-  }
-
-  function onKeydown(e) {
-    if (e.key === 'Escape') { e.preventDefault(); close(); return; }
-    if (e.key !== 'Tab') return;
-    var items = focusables();
-    if (!items.length) return;
-    var first = items[0];
-    var last = items[items.length - 1];
-    if (e.shiftKey && (document.activeElement === first || !dialog.contains(document.activeElement))) {
-      e.preventDefault(); last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault(); first.focus();
-    }
-  }
-
-  function open(trigger) {
-    lastTrigger = trigger || null;
-    overlay.hidden = false;
-    overlay.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-    document.addEventListener('keydown', onKeydown, true);
-    var target = success.hidden ? field('firstName') : doneBtn;
-    if (target) target.focus();
-  }
-
-  function close() {
-    if (submitting) return;
-    overlay.classList.remove('is-open');
-    overlay.hidden = true;
-    document.body.style.overflow = '';
-    document.removeEventListener('keydown', onKeydown, true);
-    if (lastTrigger && typeof lastTrigger.focus === 'function') lastTrigger.focus();
-    lastTrigger = null;
-  }
-
-  Array.prototype.forEach.call(document.querySelectorAll('a[href^="https://cal.com/"]'), function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      open(link);
-    });
-  });
-
-  closeBtn.addEventListener('click', close);
-  if (doneBtn) doneBtn.addEventListener('click', close);
-  overlay.addEventListener('mousedown', function (e) { if (e.target === overlay) close(); });
-
-  Object.keys(REQUIRED).forEach(function (name) {
-    field(name).addEventListener('input', function () { setError(name, ''); });
-  });
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (submitting) return;
-    formErr.textContent = '';
-    formErr.classList.remove('is-shown');
-    if (!validate()) return;
-
-    var payload = {};
-    FIELDS.forEach(function (name) {
-      var input = field(name);
-      payload[name] = input ? (input.value || '').trim() : '';
-    });
-
-    submitting = true;
-    submitBtn.disabled = true;
-    var originalLabel = submitBtn.textContent;
-    submitBtn.textContent = 'Sending…';
-
-    fetch('/api/consultation', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function (res) {
-      if (!res.ok) throw new Error('Request failed with status ' + res.status);
-      formWrap.hidden = true;
-      success.hidden = false;
-      clearErrors();
-      if (doneBtn) doneBtn.focus();
-    })['catch'](function () {
-      formErr.textContent = 'That request didn’t go through. Try again, or email hello@am2am.ai directly.';
-      formErr.classList.add('is-shown');
-    }).then(function () {
-      submitting = false;
-      submitBtn.disabled = false;
-      submitBtn.textContent = originalLabel;
-    });
-  });
-})();
-</script>
 </body>
 </html>
